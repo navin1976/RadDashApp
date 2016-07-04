@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ucabaur/RadDashApp#readme",
   "dependencies": {
+    "bootstrap": "^3.3.6",
+    "express": "^4.14.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-router": "^2.5.2"
