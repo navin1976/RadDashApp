@@ -5,7 +5,7 @@ var App = React.createClass({
 		return(
 		<div>
 			<h1>Hello world from React!</h1>
-			<div>webpack on live reload</div>
+			<div>Bath - odnt know what to do! fhdjfhksdfhksd</div>
 		</div>
 		);
 	}
