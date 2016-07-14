@@ -1,7 +1,12 @@
-import * as React from 'react';
-var ReactDOM = require('react-dom');
-var App = require('./components/app');
+import React from 'react';
+import {render} from 'react-dom';
+import {Router, browserHistory} from 'react-router';
+
+import routes from './routes';
+
+import App from './components/App';
 
 console.log('Hey Dev');
 
-ReactDOM.render(<App />, document.getElementById('react-container'));
+render(<App />, document.getElementById('react-container'));
+//render(<Router history={browserHistory} routes={routes} />,document.getElementById('react-container'));
