@@ -3,7 +3,7 @@
  navigation, header , footer, etc...*/
 
 import React, {PropTypes} from 'react';
-import Header from './common/Header';
+import Header from './Common/Header';
 
 class App extends React.Component{
 	render(){
