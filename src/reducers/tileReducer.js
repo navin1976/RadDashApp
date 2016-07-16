@@ -1,3 +1,4 @@
+/*
 import * as types from '../actions/actionTypes';
 
 export default function tileReducer(state = [],action){
@@ -8,3 +9,5 @@ export default function tileReducer(state = [],action){
 			return state;
 	}
 }
+
+*/

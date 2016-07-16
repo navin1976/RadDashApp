@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux';
+import {connect} from 'react-redux';
 import ReactGridLayout from 'react-grid-layout';
 /*
 import {Responsive, WidthProvider} from 'react-grid-layout';
@@ -45,7 +45,7 @@ class Dashboard extends React.Component{
 		);
 	}*/
 }
-
+/*
 function mapStateToProps(state,ownProps){
 	return{
 		layout: state.layout
@@ -56,5 +56,7 @@ Dashboard.PropTypes = {
 	dispatch: PropTypes.func.isRequired,
 	layout: PropTypes.array.isRequired
 };
+*/
 
-export default connect(mapStateToProps)(Dashboard);
+//export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

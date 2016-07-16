@@ -59,12 +59,15 @@ class HomePage extends React.Component{
 	}
 }
 
+/*
 function mapStateToProps(state,ownProps){
 	return{};
 }
 
-CoursesPage.propTypes = {
-	dispatch: PropTypes.func.isRequired,
+HomePage.PropTypes = {
+	dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(HomePage);
+*/
+export default HomePage;
