@@ -8,9 +8,13 @@ import Header from './Common/Header';
 class App extends React.Component{
 	render(){
 		return(
-			<div className="container-fluid">
+			<div id="wrapper">
 				<Header />
-				{this.props.children}
+					<div id="page-content-wrapper">
+						<div className="container-fluid">
+							{this.props.children}
+						</div>
+					</div>
 			</div>
 		);
 	}
