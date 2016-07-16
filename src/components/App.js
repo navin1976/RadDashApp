@@ -24,4 +24,6 @@ App.propTypes = {
 	children: PropTypes.object.isRequired
 };
 
+App.contextTypes = { store: React.PropTypes.object };
+
 export default App;

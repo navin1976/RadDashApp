@@ -21,6 +21,7 @@ class CoursesPage extends React.Component{
 
 	onClickSave(){
 		this.props.dispatch(courseActions.createCourse(this.state.course));
+		console.log(this.context.store.getState());
 	}
 
 	courseRow(course, index){
@@ -50,5 +51,7 @@ CoursesPage.propTypes = {
 	dispatch: PropTypes.func.isRequired,
 	courses: PropTypes.array.isRequired
 };
+
+//CoursesPage.contextTypes = { store: React.PropTypes.object };
 
 export default connect(mapStateToProps)(CoursesPage);
