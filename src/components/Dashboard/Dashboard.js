@@ -5,8 +5,6 @@ import ReactGridLayout from 'react-grid-layout';
 import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 */
-
-
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
@@ -17,7 +15,7 @@ class Dashboard extends React.Component{
 
 	render(){
 		let layout = [
-			{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
+			{i: 'a', x: 0, y: 0, w: 1, h: 2},
 			{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
 			{i: 'c', x: 4, y: 0, w: 1, h: 2}
 		];
@@ -48,4 +46,15 @@ class Dashboard extends React.Component{
 	}*/
 }
 
-export default Dashboard;
+function mapStateToProps(state,ownProps){
+	return{
+		layout: state.layout
+	};
+}
+
+Dashboard.PropTypes = {
+	dispatch: PropTypes.func.isRequired,
+	layout: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(Dashboard);
