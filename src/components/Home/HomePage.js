@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-//import * as dashboardActions from '../../actions/dashboardActions';
+import * as dashboardActions from '../../actions/dashboardActions';
 
 class HomePage extends React.Component{
 
 	constructor(props,context){
 		super(props,context);
 		this.state = {
-			dsh:{title:"",width:0,height:0}
+			dsh:{title:"",width:0,height:0,counter:0}
 		};
 
 		this.addDashboard = this.addDashboard.bind(this);
@@ -19,7 +19,8 @@ class HomePage extends React.Component{
 	}
 
 	addDashboard(){
-		//this.props.dispatch(dashboardActions.createTile(this.state.dsh));
+		console.log(this.state.dsh);
+		this.props.dispatch(dashboardActions.createTile(this.state.dsh));
 	}
 
 	onTitleChange(event){
@@ -30,13 +31,13 @@ class HomePage extends React.Component{
 
 	onWidthChange(event){
 		const w = this.state.dsh;
-		w.width = event.target.value;
+		w.width = parseInt(event.target.value);
 		this.setState({dsh:w});
 	}
 
 	onHeightChange(event){
 		const h = this.state.dsh;
-		h.height = event.target.value;
+		h.height = parseInt(event.target.value);
 		this.setState({dsh:h});
 	}
 
@@ -59,15 +60,13 @@ class HomePage extends React.Component{
 	}
 }
 
-/*
+
 function mapStateToProps(state,ownProps){
 	return{};
 }
 
 HomePage.PropTypes = {
-	dispatch: PropTypes.func.isRequired
+	dispatch: React.PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(HomePage);
-*/
-export default HomePage;

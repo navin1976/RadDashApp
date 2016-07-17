@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ReactGridLayout from 'react-grid-layout';
+
 /*
 import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 */
+
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
@@ -28,8 +30,23 @@ class Dashboard extends React.Component{
 			</ReactGridLayout>
 		);
 	}
+}
 
-	/*render(){
+function mapStateToProps(state,ownProps){
+	return{
+		layout: state.layout
+	};
+}
+
+Dashboard.propTypes = {
+	layout: React.PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(Dashboard);
+
+
+
+/*render(){
 		const layout = {
 		lg :[
 			{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
@@ -44,16 +61,3 @@ class Dashboard extends React.Component{
 			</ResponsiveReactGridLayout>
 		);
 	}*/
-}
-
-function mapStateToProps(state,ownProps){
-	return{
-		layout: state.layout
-	};
-}
-
-Dashboard.propTypes = {
-	layout: React.PropTypes.array.isRequired
-};
-
-export default connect(mapStateToProps)(Dashboard);
