@@ -8,23 +8,23 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
-		this.state = {
-		
-		};
+		this.state = {};
 	}
-
+	
+	tileEntry(tile, index){
+		return <div key={tile.l.i} className="testCard">{tile.c + " " +tile.n}</div>;
+	}
+	
 	render(){
-		let layout = [
-			{i: 'a', x: 0, y: 0, w: 1, h: 2},
-			{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-			{i: 'c', x: 4, y: 0, w: 1, h: 2}
-		];
+		//retrieve layouts from the layout object
+		let displayLayout = [];
+		for(let i = 0; i<this.props.layout.length;i++){
+			displayLayout.push(this.props.layout[i].l);
+		}
 
 		return (
-			<ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-				<div key={'a'} className="testCard">a</div>
-				<div key={'b'} className="testCard">b</div>
-				<div key={'c'} className="testCard">c</div>
+			<ReactGridLayout className="layout" layout={displayLayout} cols={12} rowHeight={40} width={1500}>
+				{this.props.layout.map(this.tileEntry)}
 			</ReactGridLayout>
 		);
 	}
@@ -45,18 +45,15 @@ class Dashboard extends React.Component{
 		);
 	}*/
 }
-/*
+
 function mapStateToProps(state,ownProps){
 	return{
 		layout: state.layout
 	};
 }
 
-Dashboard.PropTypes = {
-	dispatch: PropTypes.func.isRequired,
-	layout: PropTypes.array.isRequired
+Dashboard.propTypes = {
+	layout: React.PropTypes.array.isRequired
 };
-*/
 
-//export default connect(mapStateToProps)(Dashboard);
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);

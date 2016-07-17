@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import * as dashboardActions from '../../actions/dashboardActions';
+//import * as dashboardActions from '../../actions/dashboardActions';
 
 class HomePage extends React.Component{
 
@@ -19,7 +19,7 @@ class HomePage extends React.Component{
 	}
 
 	addDashboard(){
-		this.props.dispatch(dashboardActions.createTile(this.state.dsh));
+		//this.props.dispatch(dashboardActions.createTile(this.state.dsh));
 	}
 
 	onTitleChange(event){

@@ -21,7 +21,6 @@ class CoursesPage extends React.Component{
 
 	onClickSave(){
 		this.props.dispatch(courseActions.createCourse(this.state.course));
-		console.log(this.context.store.getState());
 	}
 
 	courseRow(course, index){
@@ -52,6 +51,7 @@ CoursesPage.propTypes = {
 	courses: PropTypes.array.isRequired
 };
 
+//Use to reference this context and access the store illegally Mouahahaha.
 //CoursesPage.contextTypes = { store: React.PropTypes.object };
 
 export default connect(mapStateToProps)(CoursesPage);
