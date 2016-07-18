@@ -23,7 +23,7 @@ module.exports = {
         }
       ]
     };
-    res.type('application/json');
+    res.type('application/json',null, 2);
     res.status(201);
     return res.send(JSON.stringify(dashboardCreated));
   },
@@ -72,7 +72,7 @@ module.exports = {
     ];
     res.status(200);
     res.type('application/json');
-    return res.send(JSON.stringify(dashboards));
+    return res.send(JSON.stringify(dashboards, null, 2));
   },
   update: function (req, res) {
     res.status(205);
