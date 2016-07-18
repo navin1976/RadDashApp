@@ -32,9 +32,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  '/': {view: 'homepage'},
+  'GET /dashboards': {controller: 'DashboardController', action: 'find'},
+  'POST /dashboards': {controller: 'DashboardController', action: 'create'},
+  'PUT /dashboard/:id': {controller: 'DashboardController', action: 'update'},
+  'DELETE /dashboard/:id': {controller: 'DashboardController', action: 'delete'}
 
   /***************************************************************************
   *                                                                          *
