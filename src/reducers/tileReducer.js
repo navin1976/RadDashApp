@@ -7,8 +7,14 @@ export default function tileReducer(state=[],action){
 				l:{i: 'd', x: 0, y: 0, w: action.tile.width, h: action.tile.height},
 				c: action.tile.counter,
 				n: action.tile.title
-			}
+			};
 			return [...state,Object.assign({},res)];
+		}
+		case types.INCREMENT_TILE:{
+			return state;
+		}
+		case types.DECREMENT_TILE:{
+			return state;
 		}
 		default:
 			return state;

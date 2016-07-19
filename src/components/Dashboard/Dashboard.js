@@ -14,7 +14,7 @@ class Dashboard extends React.Component{
 	}
 	
 	tileEntry(tile, index){
-		return <div key={tile.l.i} className="testCard">{tile.c + " " +tile.n}</div>;
+		return <div key={tile.l.i} className="testCard">{tile.n + " - counter: " +tile.c}</div>;
 	}
 	
 	render(){

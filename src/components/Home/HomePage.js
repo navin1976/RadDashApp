@@ -19,7 +19,6 @@ class HomePage extends React.Component{
 	}
 
 	addDashboard(){
-		console.log(this.state.dsh);
 		this.props.dispatch(dashboardActions.createTile(this.state.dsh));
 	}
 

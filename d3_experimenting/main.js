@@ -118,7 +118,7 @@ var monthlySales = [
 	{"month":100 , "sales":7}
 ];
 
-var lineFun = d3.line()
+var lineFun = d3.svg.line()
 	.x(function(d){return d.month*2; })
 	.y(function(d){return d.sales;});
 
