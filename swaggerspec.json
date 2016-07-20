@@ -5,17 +5,11 @@
     "version": "1.0.0",
     "title": "Radiology Dashboard API",
     "contact": {
-      "name": "API Team",
-      "url": "http://wordnik.com",
-      "email": "apiteam@wordnik.com"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "name": "Melinda Fekete",
+      "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "api.peachdashboardcom:443",
-  "basePath": "/api",
+  "host": "http://ec2-52-202-141-251.compute-1.amazonaws.com:1337",
   "tags": [
     {
       "name": "Dashboard",

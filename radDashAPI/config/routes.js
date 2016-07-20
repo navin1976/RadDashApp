@@ -33,10 +33,34 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {view: 'homepage'},
+  /**Dashboard Routes**/
   'GET /dashboards': {controller: 'DashboardController', action: 'find'},
   'POST /dashboards': {controller: 'DashboardController', action: 'create'},
   'PUT /dashboard/:id': {controller: 'DashboardController', action: 'update'},
-  'DELETE /dashboard/:id': {controller: 'DashboardController', action: 'delete'}
+  'DELETE /dashboard/:id': {controller: 'DashboardController', action: 'delete'},
+  'POST /dashboards/default': {controller: 'DashboardController', action: 'default'},
+
+  /**Users Routes**/
+  'GET /users': {controller: 'UserController', action: 'find'},
+  'GET /users/:userId': {controller: 'UserController', action: 'find'},
+
+  /**RolePermission Routes**/
+  'GET /roles': {controller: 'RolePermissionController', action: 'findRole'},
+  'GET /permissions': {controller: 'RolePermissionController', action: 'findPermission'},
+  'PUT /roles/assign': {controller: 'RolePermissionController', action: 'assignRole'},
+  'PUT /permissions/assign': {controller: 'RolePermissionController', action: 'assignPermission'},
+
+  /**Data Routes**/
+  'GET /data/activity/metric': {controller: 'ActivityController', action: 'metric'},
+  'GET /data/attendance': {controller: 'AttendanceController', action: 'find'},
+  'GET /data/attendance/metric': {controller: 'AttendanceController', action: 'metric'},
+  'GET /data/datasource': {controller: 'DatasourceController', action: 'find'},
+  'GET /data/departments': {controller: 'DepartmentController', action: 'find'},
+  'GET /data/exam': {controller: 'ExamController', action: 'find'},
+  'GET /data/exam/metric': {controller: 'ExamController', action: 'metric'},
+  'GET /data/report': {controller: 'ReportController', action: 'find'},
+  'GET /data/request': {controller: 'RequestController', action: 'find'},
+  'GET /data/scanners': {controller: 'ScannerController', action: 'find'}
 
   /***************************************************************************
   *                                                                          *

@@ -81,5 +81,9 @@ module.exports = {
   delete: function (req, res) {
     res.status(205);
     return res.send();
+  },
+  default: function (req, res) {
+    res.status(205);
+    return res.send();
   }
 }
