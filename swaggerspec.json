@@ -22,7 +22,7 @@
       "description": "Creating and modifying default and custom dashboards"
     },
     {
-      "name": "Exams",
+      "name": "Exam",
       "description": "Operations about exams"
     },
     {
@@ -38,7 +38,7 @@
       "description": "Error handling"
     },
     {
-      "name": "Roles",
+      "name": "Role",
       "description": "Assigning roles to users and specifying permissions belonging to the roles"
     },
     {
@@ -64,6 +64,14 @@
     {
       "name": "Attendance",
       "description": "Data and metrics related to attendances (appointments)"
+    },
+    {
+      "name": "User",
+      "description": "Operations about users"
+    },
+    {
+      "name": "Permission",
+      "description": "Operations about permissions"
     }
   ],
   "schemes": [
@@ -85,14 +93,21 @@
         }
       }
     },
-    "/activity/median/referraltoexam/{dateRange}": {
+    "/activity/median/referraltoexam": {
       "get": {
         "tags": [
           "Activity"
         ],
         "consumes": [],
         "produces": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "dateRange",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -150,7 +165,7 @@
         "tags": [
           "Cancellation"
         ],
-        "summary": "Retrieve Cancellation",
+        "summary": "Cancellation Retrieval",
         "description": "Retrieves a list of cancelled attendances (appointments) when cancellation is independent from the patient (different to DNA, which is patient not attending)",
         "consumes": [],
         "produces": [
@@ -166,12 +181,6 @@
                 "$ref": "#/definitions/Cancellation"
               }
             }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         }
       }
@@ -181,7 +190,7 @@
         "tags": [
           "Cancellation"
         ],
-        "summary": "Retrieve DNA",
+        "summary": "DNA retrieval",
         "description": "Retrieves a list of DNA cases for a given time period",
         "consumes": [],
         "produces": [
@@ -213,12 +222,6 @@
               "items": {
                 "$ref": "#/definitions/DNA"
               }
-            }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -260,56 +263,8 @@
           "205": {
             "description": "The default dashboard is successfully created, please refresh content"
           },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/dashboard/default/{roleId}": {
-      "get": {
-        "tags": [
-          "Roles"
-        ],
-        "summary": "Datasource Retrieval for Role",
-        "description": "Retrieves a list of all data sources for a given role",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "Unique identifier associated with a given role",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "Status",
-            "in": "query",
-            "description": "Should be either \"completed\" or \"requested\"",
-            "required": true,
-            "type": "string",
-            "x-example": "completed"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Data sources successfully retrieved",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Datasource"
-              }
-            }
-          },
-          "400": {
-            "description": "Error 400",
+          "403": {
+            "description": "User is not authorised to create a new default dashboard",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -327,9 +282,7 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -351,12 +304,6 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully updated, please refresh content."
-          },
-          "400": {
-            "description": "Dashboard could not be updates due to error in request.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         }
       },
@@ -367,9 +314,7 @@
         "summary": "Dashboard Deletion",
         "description": "Deletes an existing dashboard.",
         "consumes": [],
-        "produces": [
-          "application/json"
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -383,12 +328,6 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully deleted (not enabled), please refresh content."
-          },
-          "400": {
-            "description": "The dashboard could not be deleted due to an error in the request.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         }
       }
@@ -466,8 +405,8 @@
         "tags": [
           "Data"
         ],
-        "summary": "Exams / 1 Scanner",
-        "description": "Retrieves the list of exams completed by a given scanner over a given period of time",
+        "summary": "Exams / Scanner",
+        "description": "Retrieves the list of exams completed by a given scanner or scanners over a given period of time",
         "consumes": [],
         "produces": [
           "application/json"
@@ -476,7 +415,7 @@
           {
             "name": "scannerId",
             "in": "query",
-            "description": "Unique identifier associated with a scanner",
+            "description": "Unique identifier associated with a scanner, if not given, all scanners will be added",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -485,11 +424,10 @@
           {
             "name": "dateRange",
             "in": "query",
-            "description": "",
-            "required": true,
+            "description": "ISO 8607 string with a start and end, if not given, all historic data will be added",
+            "required": false,
             "type": "string",
-            "format": "date",
-            "x-example": "ISO 8607 Start and end, such as \"2007-03-01T13:00:00Z/2008-05-11T15:30:00Z\""
+            "x-example": "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"
           }
         ],
         "responses": {
@@ -501,51 +439,40 @@
                 "$ref": "#/definitions/ExamsCompleted"
               }
             }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         }
       }
     },
-    "/data/productivity/examScanner{dateRange}": {
+    "/data/role": {
       "get": {
         "tags": [
           "Data"
         ],
-        "summary": "Exams/ All Scanners",
-        "description": "Retrieves the list of exams completed for all scanners for a given date range",
+        "summary": "Datasource Retrieval for Role",
+        "description": "Retrieves a list of all data sources for a given role",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "dateRange",
-            "in": "path",
-            "description": "ISO8601: time interval with start and end, such as: \"2007-03-01T13:00:00Z/2008-05-11T15:30:00Z\"",
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role",
             "required": true,
-            "type": "string",
-            "format": "date"
+            "type": "integer",
+            "format": "int32",
+            "x-example": 123
           }
         ],
         "responses": {
           "200": {
-            "description": "List of exams successfully retrieved",
+            "description": "Data sources successfully retrieved",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ExamsCompleted"
+                "$ref": "#/definitions/Datasource"
               }
-            }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -579,9 +506,9 @@
     "/exams/scanners": {
       "get": {
         "tags": [
-          "Exams"
+          "Exam"
         ],
-        "summary": "Retrieve All Scanners",
+        "summary": "Scanner Retrieval",
         "description": "Retrieves a list of all scanners",
         "consumes": [],
         "produces": [
@@ -597,9 +524,65 @@
                 "$ref": "#/definitions/Scanner"
               }
             }
+          }
+        }
+      }
+    },
+    "/permissions": {
+      "get": {
+        "tags": [
+          "Permission"
+        ],
+        "summary": "Permissions retrieval",
+        "description": "Retrieves a list of permissions",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "description": "Specifies a search term when retrieving permissions",
+            "required": false,
+            "type": "string",
+            "x-example": "view"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/permissions/assign": {
+      "put": {
+        "tags": [
+          "Permission"
+        ],
+        "summary": "Permission Assignment and Modification",
+        "description": "Assigns new permissions to roles or modifies existing ones.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
+            }
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "The update was successful, please refresh content."
           },
-          "400": {
-            "description": "Error 400",
+          "405": {
+            "description": "The user is not authorised to make this request",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -640,14 +623,33 @@
     "/roles": {
       "get": {
         "tags": [
-          "Roles"
+          "Role"
         ],
-        "description": "Retrieves the list of all roles, so that the admin can then specify which role the default dashboard is for",
+        "summary": "Roles Retrieval",
+        "description": "Retrieves the list of all roles",
         "consumes": [],
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "description": "Search parameter that the admin can specify when retrieving all roles",
+            "required": false,
+            "type": "string",
+            "x-example": "manager"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Integer value limiting the number of roles returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 20
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of roles successfully retrieved",
@@ -659,7 +661,13 @@
             }
           },
           "400": {
-            "description": "Error 400",
+            "description": "Query parameters must match - searchTerm: String, limit: Integer - both optional",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "The user is not authorised to access this information",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -668,52 +676,11 @@
       }
     },
     "/roles/assign": {
-      "get": {
-        "tags": [
-          "Roles"
-        ],
-        "summary": "User and Role Information",
-        "description": "The request retrieves an list of users and roles. The admin is given the possibility of specifying a search term and limit when retrieving users.",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "searchTerm",
-            "in": "query",
-            "description": "The admin may specify a searchTerm that will be used to filer user ids, and eventually usernames.",
-            "required": false,
-            "type": "string",
-            "x-example": "Andrew"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "By specifying a limit, the admin can restrict the amount of maximum results that show up when",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 20
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of roles successfully retrieved"
-          },
-          "403": {
-            "description": "Error 403",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
-          "Roles"
+          "Role"
         ],
-        "summary": "Role and Permission Update",
+        "summary": "Role Update",
         "description": "The request is sent when a role is changed for a particular user.",
         "consumes": [],
         "produces": [
@@ -743,8 +710,8 @@
           "205": {
             "description": "The update was successful, content should be refreshed"
           },
-          "400": {
-            "description": "Error 400",
+          "403": {
+            "description": "The user is not authorised to make this request",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -752,13 +719,63 @@
         }
       }
     },
-    "/roles/permissions": {
+    "/users": {
       "get": {
         "tags": [
-          "Roles"
+          "User"
         ],
-        "summary": "Roles and Permissions Retrieval",
-        "description": "Retrieves all available roles with their associated permissions and a list of all permissions",
+        "summary": "Users (List) Retrieval",
+        "description": "Retrieve a list of all users",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "departmentId",
+            "in": "query",
+            "description": "Unique identifier for a department",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 234
+          },
+          {
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of all users was successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "403": {
+            "description": "The user is not authorised to access this information",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User (1) Retrieval",
+        "description": "Retrieves a particular user's data",
         "consumes": [],
         "produces": [
           "application/json"
@@ -766,50 +783,13 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of all roles with their assigned permissions",
+            "description": "User information successfully retrieved",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RolePermission"
-              }
+              "$ref": "#/definitions/User"
             }
           },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Roles"
-        ],
-        "summary": "Permission Assignment and Modification",
-        "description": "Assigns new permissions to roles or modifies existing ones.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RolePermission"
-            }
-          }
-        ],
-        "responses": {
-          "205": {
-            "description": "The update was successful, please refresh content."
-          },
-          "400": {
-            "description": "Error 400",
+          "403": {
+            "description": "The user is not authorised to access this information",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -835,12 +815,6 @@
             "schema": {
               "$ref": "#/definitions/ExamsCompleted"
             }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         }
       }
@@ -865,12 +839,6 @@
               "items": {
                 "$ref": "#/definitions/ExamsRequested"
               }
-            }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1213,13 +1181,26 @@
     "Role": {
       "type": "object",
       "required": [
+        "permissionIds",
         "roleId"
       ],
       "properties": {
+        "permissionIds": {
+          "type": "array",
+          "description": "A list of all associated permissionIds",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "roleId": {
           "type": "integer",
           "format": "int32",
           "description": "Unique identifier for a role"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "The name of the role"
         }
       },
       "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
