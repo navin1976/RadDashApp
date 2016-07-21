@@ -30,7 +30,7 @@ class Table extends React.Component{
 
 	render(){
 		return(
-			<div>
+			<div className="info-context">
 				<h1>Table format!</h1>
 				{this.props.layout.map(this.displayRows)}
 			</div>

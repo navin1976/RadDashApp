@@ -64,7 +64,7 @@ function mapStateToProps(state,ownProps){
 	return{};
 }
 
-HomePage.PropTypes = {
+HomePage.propTypes = {
 	dispatch: React.PropTypes.func.isRequired
 };
 

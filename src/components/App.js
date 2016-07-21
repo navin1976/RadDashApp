@@ -10,9 +10,11 @@ class App extends React.Component{
 		return(
 			<div id="wrapper">
 				<Header />
-					<div id="page-content-wrapper">
-						<div className="container-fluid">
-							{this.props.children}
+					<div id="content-area">
+						<div id="page-content-wrapper">
+							<div className="container-fluid layout">
+								{this.props.children}
+							</div>
 						</div>
 					</div>
 			</div>

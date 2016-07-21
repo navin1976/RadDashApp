@@ -29,7 +29,7 @@ class CoursesPage extends React.Component{
 
 	render(){
 		return(
-			<div>
+			<div className="info-context">
 				<h1>Courses</h1>
 				{this.props.courses.map(this.courseRow)}
 				<h2>Add course</h2>
