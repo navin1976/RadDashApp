@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReactGridLayout from 'react-grid-layout';
 
+import {BarChart} from 'react-d3-components';
+
 /*
 import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -14,7 +16,19 @@ class Dashboard extends React.Component{
 	}
 	
 	tileEntry(tile, index){
-		return <div key={tile.l.i} className="card">{tile.n + " - counter: " +tile.c}</div>;
+		let data = [{
+    		label: 'somethingA',
+    		values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+		}];
+		return(
+			<div key={tile.l.i} className="card">
+				<BarChart
+        			data={data}
+        			width={400}
+        			height={400}
+        			margin={{top: 10, bottom: 50, left: 50, right: 10}}/>
+			</div>
+		);
 	}
 	
 	render(){
