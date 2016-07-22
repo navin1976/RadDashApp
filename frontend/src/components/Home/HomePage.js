@@ -41,8 +41,7 @@ class HomePage extends React.Component{
 	}
 
 	render(){
-    console.log(this.context.store.getState());
-    return(
+		return(
 			<div>
 				<div className = "jumbotron">
 					<h1>Radiology Dashboard application</h1>
@@ -68,7 +67,5 @@ function mapStateToProps(state,ownProps){
 HomePage.propTypes = {
 	dispatch: React.PropTypes.func.isRequired
 };
-
-HomePage.contextTypes = { store: React.PropTypes.object };
 
 export default connect(mapStateToProps)(HomePage);

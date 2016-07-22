@@ -14,7 +14,7 @@ class Dashboard extends React.Component{
 		super(props,context);
 		this.state = {};
 	}
-
+	
 	tileEntry(tile, index){
 		let data = [{
     		label: 'somethingA',
@@ -23,21 +23,21 @@ class Dashboard extends React.Component{
 		return(
 			<div key={tile.l.i} className="card">
 				<BarChart
-          data={data}
-          width={400}
-          height={400}
-          margin={{top: 10, bottom: 50, left: 50, right: 10}}/>
-      </div>
+        			data={data}
+        			width={400}
+        			height={400}
+        			margin={{top: 10, bottom: 50, left: 50, right: 10}}/>
+			</div>
 		);
 	}
-
+	
 	render(){
 		//retrieve layouts from the layout object
 		let displayLayout = [];
 		for(let i = 0; i<this.props.layout.length;i++){
 			displayLayout.push(this.props.layout[i].l);
 		}
-    console.log(this.props);
+
 		return (
 			<ReactGridLayout className="layout" layout={displayLayout} cols={12} rowHeight={40} width={1500}>
 				{this.props.layout.map(this.tileEntry)}
