@@ -9,225 +9,42 @@
       "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "http://ec2-52-202-141-251.compute-1.amazonaws.com:1337",
+  "host": "ec2-52-202-141-251.compute-1.amazonaws.com:1337",
+
   "tags": [
     {
-      "name": "Dashboard",
-      "description": "Creating and modifying default and custom dashboards"
+      "name": "Default",
+      "description": "Default section"
     },
     {
-      "name": "Exam",
-      "description": "Operations about exams"
+      "name": "Dashboards",
+      "description": ""
     },
     {
-      "name": "Request",
-      "description": "Operations about requests"
-    },
-    {
-      "name": "Report",
-      "description": "Operations about reports"
-    },
-    {
-      "name": "Error",
-      "description": "Error handling"
-    },
-    {
-      "name": "Role",
-      "description": "Assigning roles to users and specifying permissions belonging to the roles"
+      "name": "Roles and Permissions",
+      "description": ""
     },
     {
       "name": "Data",
-      "description": "Accessing data sources"
+      "description": ""
     },
     {
-      "name": "Volume",
-      "description": "Retrieving metrics and data related to the volume of activity"
-    },
-    {
-      "name": "Department",
-      "description": "Operations related to retrieving departmental information"
-    },
-    {
-      "name": "Cancellation",
-      "description": "Data and metrics related to cancellations (patient and doctor)"
-    },
-    {
-      "name": "Activity",
-      "description": "Data and metrics related to departmental activity"
-    },
-    {
-      "name": "Attendance",
-      "description": "Data and metrics related to attendances (appointments)"
-    },
-    {
-      "name": "User",
-      "description": "Operations about users"
-    },
-    {
-      "name": "Permission",
-      "description": "Operations about permissions"
+      "name": "Users",
+      "description": ""
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
-    "/activity/median/examtoreport{dateRange}": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/activity/median/referraltoexam": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "dateRange",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/activity/percentage/examtoreport{dateRange}": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/activity/percentage/referraltoexam{dateRange}": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/attendance": {
-      "get": {
-        "tags": [
-          "Attendance"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/cancellation/cancel{departmentId}{dateRange}": {
-      "get": {
-        "tags": [
-          "Cancellation"
-        ],
-        "summary": "Cancellation Retrieval",
-        "description": "Retrieves a list of cancelled attendances (appointments) when cancellation is independent from the patient (different to DNA, which is patient not attending)",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "List of cancellations successfully retrieved",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Cancellation"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cancellation/dna/{departmentId}{dateRange}": {
-      "get": {
-        "tags": [
-          "Cancellation"
-        ],
-        "summary": "DNA retrieval",
-        "description": "Retrieves a list of DNA cases for a given time period",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "departmentId",
-            "in": "path",
-            "description": "Unique identifier associated with a department",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "dateRange",
-            "in": "path",
-            "description": "Timestamp date range in ISO8601 format, with a start and end, such as 2007-03-01T13:00:00Z/2008-05-11T15:30:00Z",
-            "required": true,
-            "type": "string",
-            "format": "date"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of DNA cases successfully retrieved",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DNA"
-              }
-            }
-          }
-        }
-      }
-    },
     "/dashboard/default": {
       "post": {
         "tags": [
-          "Dashboard"
+          "Dashboards"
         ],
-        "summary": "Default Dashboard Creation",
+        "summary": "Creates a new default dashboard for a given role",
         "description": "Creates a new default dashboard for a given role",
+        "operationId": "postDashboardDefault",
         "consumes": [
           "application/json"
         ],
@@ -249,7 +66,7 @@
             "name": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/Dashboard Create"
+              "$ref": "#/definitions/DashboardCreate"
             }
           }
         ],
@@ -269,10 +86,11 @@
     "/dashboard/{dashboardId}": {
       "put": {
         "tags": [
-          "Dashboard"
+          "Dashboards"
         ],
-        "summary": "Dashboard Update",
+        "summary": "Updates an existing dashboard.",
         "description": "Updates an existing dashboard.",
+        "operationId": "putDashboardDashboardId",
         "consumes": [
           "application/json"
         ],
@@ -291,7 +109,7 @@
             "name": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/Dashboard Update"
+              "$ref": "#/definitions/DashboardUpdate"
             }
           }
         ],
@@ -303,10 +121,11 @@
       },
       "delete": {
         "tags": [
-          "Dashboard"
+          "Dashboards"
         ],
-        "summary": "Dashboard Deletion",
+        "summary": "Deletes an existing dashboard.",
         "description": "Deletes an existing dashboard.",
+        "operationId": "deleteDashboardDashboardId",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -329,10 +148,11 @@
     "/dashboards": {
       "get": {
         "tags": [
-          "Dashboard"
+          "Dashboards"
         ],
-        "summary": "Dashboard Retrieval",
+        "summary": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. The response includes the configuration which specifies all display-related information.",
         "description": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. The response includes the configuration which specifies all display-related information.",
+        "operationId": "getDashboards",
         "consumes": [],
         "produces": [
           "application/json"
@@ -358,10 +178,11 @@
       },
       "post": {
         "tags": [
-          "Dashboard"
+          "Dashboards"
         ],
-        "summary": "Dashboard Creation",
+        "summary": "The Dashboard Creation endpoint is used when creating a new dashboard.",
         "description": "The Dashboard Creation endpoint is used when creating a new dashboard.",
+        "operationId": "postDashboards",
         "consumes": [
           "application/json"
         ],
@@ -374,7 +195,7 @@
             "name": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/Dashboard Create"
+              "$ref": "#/definitions/DashboardCreate"
             }
           }
         ],
@@ -394,56 +215,14 @@
         }
       }
     },
-    "/data/productivity/examScanner": {
+    "/data/datasource": {
       "get": {
         "tags": [
           "Data"
         ],
-        "summary": "Exams / Scanner",
-        "description": "Retrieves the list of exams completed by a given scanner or scanners over a given period of time",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "scannerId",
-            "in": "query",
-            "description": "Unique identifier associated with a scanner, if not given, all scanners will be added",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 234
-          },
-          {
-            "name": "dateRange",
-            "in": "query",
-            "description": "ISO 8607 string with a start and end, if not given, all historic data will be added",
-            "required": false,
-            "type": "string",
-            "x-example": "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "All exams successfully retrieved",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ExamsCompleted"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/data/role": {
-      "get": {
-        "tags": [
-          "Data"
-        ],
-        "summary": "Datasource Retrieval for Role",
-        "description": "Retrieves a list of all data sources for a given role",
+        "summary": "Retrieves a list of all data sources for a given role",
+        "description": "Retrieves a list of all data sources for a given role to present the user with a list of available datasources, and filters and metrics associated with these datasources",
+        "operationId": "getDataDatasource",
         "consumes": [],
         "produces": [
           "application/json"
@@ -472,51 +251,69 @@
         }
       }
     },
-    "/departments": {
-      "get": {
+    "/data/entities": {
+      "post": {
         "tags": [
-          "Department"
+          "Data"
         ],
-        "summary": "Department Retrieval",
-        "description": "Retrieves a list of all departments",
-        "consumes": [],
+        "summary": "Retrieves a list of entities",
+        "description": "Retrieves a list of entities given certain search parameters",
+        "operationId": "getDataDepartments",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RequestEntity"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "List of departments successfully retrieved",
+            "description": "Entities successfully retrieved",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Department"
-              }
+              "type": "file",
+              "description": "JSON Object describing an entity, made of key value pairs"
             }
           }
         }
       }
     },
-    "/exams/scanners": {
-      "get": {
+    "/data/timeseries": {
+      "post": {
         "tags": [
-          "Exam"
+          "Default"
         ],
-        "summary": "Scanner Retrieval",
-        "description": "Retrieves a list of all scanners",
-        "consumes": [],
+        "summary": "Retrieve Timeseries Data",
+        "description": "Retrieves data for a metric about a datasource, for example: number of exams per scanner per day",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RequestTimeseries"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Scanners successfully retrieved",
+            "description": "Metric computed for the given datasource using the given filters and granularity",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Scanner"
-              }
+              "$ref": "#/definitions/Metric"
             }
           }
         }
@@ -525,10 +322,11 @@
     "/permissions": {
       "get": {
         "tags": [
-          "Permission"
+          "Roles and Permissions"
         ],
-        "summary": "Permissions retrieval",
-        "description": "Retrieves a list of permissions",
+        "summary": "Retrieves a list of all available permissions",
+        "description": "Retrieves a list of all available permissions",
+        "operationId": "getPermissions",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -551,10 +349,11 @@
     "/permissions/assign": {
       "put": {
         "tags": [
-          "Permission"
+          "Roles and Permissions"
         ],
-        "summary": "Permission Assignment and Modification",
+        "summary": "Assigns new permissions to roles or modifies existing ones.",
         "description": "Assigns new permissions to roles or modifies existing ones.",
+        "operationId": "putPermissionsAssign",
         "consumes": [
           "application/json"
         ],
@@ -575,7 +374,7 @@
           "205": {
             "description": "The update was successful, please refresh content."
           },
-          "405": {
+          "401": {
             "description": "The user is not authorised to make this request",
             "schema": {
               "$ref": "#/definitions/Error"
@@ -584,66 +383,19 @@
         }
       }
     },
-    "/report": {
-      "get": {
-        "tags": [
-          "Report"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/request": {
-      "get": {
-        "tags": [
-          "Request"
-        ],
-        "consumes": [],
-        "produces": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/roles": {
       "get": {
         "tags": [
-          "Role"
+          "Roles and Permissions"
         ],
-        "summary": "Roles Retrieval",
+        "summary": "Retrieves the list of all roles",
         "description": "Retrieves the list of all roles",
+        "operationId": "getRoles",
         "consumes": [],
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "searchTerm",
-            "in": "query",
-            "description": "Search parameter that the admin can specify when retrieving all roles",
-            "required": false,
-            "type": "string",
-            "x-example": "manager"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Integer value limiting the number of roles returned",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 20
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "List of roles successfully retrieved",
@@ -654,13 +406,7 @@
               }
             }
           },
-          "400": {
-            "description": "Query parameters must match - searchTerm: String, limit: Integer - both optional",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "403": {
+          "401": {
             "description": "The user is not authorised to access this information",
             "schema": {
               "$ref": "#/definitions/Error"
@@ -672,10 +418,11 @@
     "/roles/assign": {
       "put": {
         "tags": [
-          "Role"
+          "Roles and Permissions"
         ],
-        "summary": "Role Update",
+        "summary": "The request is sent when a role is changed for a particular user.",
         "description": "The request is sent when a role is changed for a particular user.",
+        "operationId": "putRolesAssign",
         "consumes": [],
         "produces": [
           "application/json"
@@ -716,10 +463,11 @@
     "/users": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
-        "summary": "Users (List) Retrieval",
+        "summary": "Retrieve a list of all users",
         "description": "Retrieve a list of all users",
+        "operationId": "getUsers",
         "consumes": [],
         "produces": [
           "application/json"
@@ -766,10 +514,11 @@
     "/users/{userId}": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
-        "summary": "User (1) Retrieval",
+        "summary": "Retrieves a particular user's data",
         "description": "Retrieves a particular user's data",
+        "operationId": "getUsersUserId",
         "consumes": [],
         "produces": [
           "application/json"
@@ -790,116 +539,9 @@
           }
         }
       }
-    },
-    "/volume/exam/complete": {
-      "get": {
-        "tags": [
-          "Volume"
-        ],
-        "summary": "Exams Completed",
-        "description": "Retrieves a list of all exams completed",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Completed exams successfully retrieved",
-            "schema": {
-              "$ref": "#/definitions/ExamsCompleted"
-            }
-          }
-        }
-      }
-    },
-    "/volume/exam/requested": {
-      "get": {
-        "tags": [
-          "Volume"
-        ],
-        "summary": "Exams Requested",
-        "description": "Retrieves a list of all exams that have been requested but not completed",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "List of requested exams successfully retrieved",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ExamsRequested"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "Cancellation": {
-      "type": "object",
-      "required": [
-        "attendanceId",
-        "patientId",
-        "userId"
-      ],
-      "properties": {
-        "attendanceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier associated with the attendance for which the cancellation was made"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location associated with the attendance"
-        },
-        "patientId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of the patient"
-        },
-        "userId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of the practitioner associated with the cancellation"
-        }
-      },
-      "description": "Cancellation case, different to DNA, where patient does not attent"
-    },
-    "DNA": {
-      "type": "object",
-      "required": [
-        "attendanceId",
-        "patientId",
-        "userId"
-      ],
-      "properties": {
-        "attendanceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier associated with an attendance (appointment)"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the attendance"
-        },
-        "patientId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier associated with a patient"
-        },
-        "userId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "unique identifier associated with the practitioner due to carry out the exam"
-        }
-      },
-      "description": "Do Not Attend case - patient-side cancellation"
-    },
     "Dashboard": {
       "type": "object",
       "required": [
@@ -937,7 +579,7 @@
       },
       "description": "Dashboard object"
     },
-    "Dashboard Create": {
+    "DashboardCreate": {
       "type": "object",
       "required": [
         "configuration",
@@ -969,7 +611,7 @@
       },
       "description": "Dashboard object used when creating dashboards, if the Dashboard object is missing an id, it is identified as a new dashboard"
     },
-    "Dashboard Update": {
+    "DashboardUpdate": {
       "type": "object",
       "properties": {
         "configuration": {
@@ -998,10 +640,34 @@
     "Datasource": {
       "type": "object",
       "required": [
+        "availableFilters",
+        "availableGranularity",
+        "availableMetrics",
         "datasourceId",
         "datasourceTitle"
       ],
       "properties": {
+        "availableFilters": {
+          "type": "array",
+          "description": "Filters available for a particular data dource",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "availableGranularity": {
+          "type": "array",
+          "description": "Available granularity for requesting the data, such as daily, weekly, monthly, yearly",
+          "items": {
+            "$ref": "#/definitions/Granularity"
+          }
+        },
+        "availableMetrics": {
+          "type": "array",
+          "description": "An array of metrics available on the data source (such as: 'total number')",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
         "datasourceId": {
           "type": "integer",
           "format": "int32",
@@ -1013,30 +679,6 @@
         }
       },
       "description": "A segment of data within the database"
-    },
-    "Department": {
-      "type": "object",
-      "required": [
-        "departmentId",
-        "departmentLocation",
-        "departmentName"
-      ],
-      "properties": {
-        "departmentId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a department"
-        },
-        "departmentLocation": {
-          "type": "string",
-          "description": "The location of the department"
-        },
-        "departmentName": {
-          "type": "string",
-          "description": "Name of the department as identified by staff, such as A&E"
-        }
-      },
-      "description": "Department object, which is a representation of departments within the hospital - currently includes A&E, OPR, OPU and IP"
     },
     "Error": {
       "type": "object",
@@ -1053,99 +695,91 @@
       },
       "description": "Describes the error in case of a bad request."
     },
-    "ExamToReport": {
-      "type": "object",
-      "description": "Time between exam and report"
-    },
-    "ExamsCompleted": {
+    "Filter": {
       "type": "object",
       "required": [
-        "dateOfExam",
-        "dateOfRequest",
-        "examId",
-        "patientId",
-        "userId"
+        "filterId",
+        "filterName",
+        "filterValueType"
       ],
       "properties": {
-        "dateOfExam": {
+        "filterId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a filter"
+        },
+        "filterName": {
           "type": "string",
-          "format": "date",
-          "description": "Timestamp data of when the exam was completed"
+          "description": "Name of the filter"
         },
-        "dateOfRequest": {
+        "filterValueEnum": {
+          "type": "array",
+          "description": "Choices only available for a set of predefined fields",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterValueType": {
           "type": "string",
-          "format": "date",
-          "description": "Timestamp format indicating the time the request for the exam was made"
-        },
-        "examId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for an exam"
-        },
-        "patientId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of patient participating in the exam"
-        },
-        "scannerId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a scanner"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the exam (for example: chest x-ray)"
-        },
-        "userId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of employee who completed the scan"
+          "description": "Value type of filter, can be String, Int, TimeRange,  array, ENUM if ENUM, then filter value ENUM contains all possibilities"
         }
       },
-      "description": "Exams that have already been completed"
+      "description": "Filters available for a given data source"
     },
-    "ExamsRequested": {
+    "Granularity": {
       "type": "object",
       "required": [
-        "examId"
+        "granularityId",
+        "granularityName"
       ],
       "properties": {
-        "dateOfExam": {
+        "granularityId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id of the granularity"
+        },
+        "granularityName": {
           "type": "string",
-          "format": "date",
-          "description": "Timestamp representation of the date the exam is to happen"
-        },
-        "dateOfRequest": {
-          "type": "string",
-          "format": "date",
-          "description": "Timestamp identifier of when the exam was requested"
-        },
-        "examId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a scanner"
-        },
-        "patientId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of patient whom the exam is requested for"
-        },
-        "scannerId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a scanner"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the exam (for example: chest x-ray)"
-        },
-        "userId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier of the employee carrying out the exam"
+          "description": "Name of the granularity"
         }
       },
-      "description": "Exams that have been requested but not completed"
+      "description": "Granularity of the request"
+    },
+    "Metric": {
+      "type": "object",
+      "required": [
+        "metricId",
+        "metricName"
+      ],
+      "properties": {
+        "metricId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the id of the metric"
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric"
+        }
+      },
+      "description": "Represents a metric used for timeseries\n{ \"metricId\": 1, \"metricName\" : \"total number\" },\n{ \"metricId\": 2, \"metricName\" : \"median\" },\n{ \"metricId\": 3, \"metricName\" : \"mean\" },"
+    },
+    "MetricData": {
+      "type": "object",
+      "required": [
+        "metric"
+      ],
+      "properties": {
+        "metric": {
+          "type": "array",
+          "description": "The metric requested,",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "description": "Any metric that can be represented with a double. It is an array that is returned according to the granularity as requested. If single element, then it is over the complete period. for e.g\n{ \"metric\" : [10, 20, 30, 40 , 10, 10] }"
     },
     "PermissionIds": {
       "type": "object",
@@ -1168,9 +802,80 @@
       "type": "object",
       "description": "Specifies what data and actions the user has access to based on their role."
     },
-    "ReferralToExam": {
+    "RequestEntity": {
       "type": "object",
-      "description": "Time between referral to exam"
+      "required": [
+        "dataSourceId",
+        "filters"
+      ],
+      "properties": {
+        "dataSourceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the datasource"
+        },
+        "filters": {
+          "type": "array",
+          "description": "Filters to filter by",
+          "items": {
+            "$ref": "#/definitions/RequestFilter"
+          }
+        }
+      },
+      "description": "Request to retrieve entities"
+    },
+    "RequestFilter": {
+      "type": "object",
+      "required": [
+        "filterId",
+        "filterValue"
+      ],
+      "properties": {
+        "filterId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the filter"
+        },
+        "filterValue": {
+          "description": "Value to filter with, can be string, int, double or an array.",
+          "$ref": "#/definitions/RequestFilterValue"
+        }
+      },
+      "description": "Object to represent a filter in a request"
+    },
+    "RequestTimeseries": {
+      "type": "object",
+      "required": [
+        "dataSourceId",
+        "filters",
+        "granularityId",
+        "metricId"
+      ],
+      "properties": {
+        "dataSourceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the datasource"
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters to filter by",
+          "items": {
+            "$ref": "#/definitions/RequestFilter"
+          }
+        },
+        "granularityId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the granularity to use in the query"
+        },
+        "metricId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the metric requested"
+        }
+      },
+      "description": "Request for a timeseries metric"
     },
     "Role": {
       "type": "object",
@@ -1221,30 +926,6 @@
         }
       },
       "description": "Roles with assigned permissions"
-    },
-    "Scanner": {
-      "type": "object",
-      "required": [
-        "scannerId",
-        "scannerLocation",
-        "scannerName"
-      ],
-      "properties": {
-        "scannerId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a scanner"
-        },
-        "scannerLocation": {
-          "type": "string",
-          "description": "The location of the scanner"
-        },
-        "scannerName": {
-          "type": "string",
-          "description": "The name or identification number of the scanner, as known by the staff"
-        }
-      },
-      "description": "Representation of a scanner object used in hospitals to complete exams"
     },
     "User": {
       "type": "object",
@@ -1300,7 +981,7 @@
       },
       "description": "A section of a dashboard"
     },
-    "Widget Create": {
+    "WidgetCreate": {
       "type": "object",
       "required": [
         "configuration",
@@ -1324,7 +1005,7 @@
       },
       "description": "Widget object used when creating new widgets. If the widget is missing an id, it is identified as a new widget."
     },
-    "Widget Update": {
+    "WidgetUpdate": {
       "type": "object",
       "properties": {
         "configuration": {
