@@ -51,16 +51,9 @@ module.exports.routes = {
   'PUT /permissions/assign': {controller: 'RolePermissionController', action: 'assignPermission'},
 
   /**Data Routes**/
-  'GET /data/activity/metric': {controller: 'ActivityController', action: 'metric'},
-  'GET /data/attendance': {controller: 'AttendanceController', action: 'find'},
-  'GET /data/attendance/metric': {controller: 'AttendanceController', action: 'metric'},
   'GET /data/datasource': {controller: 'DatasourceController', action: 'find'},
-  'GET /data/departments': {controller: 'DepartmentController', action: 'find'},
-  'GET /data/exam': {controller: 'ExamController', action: 'find'},
-  'GET /data/exam/metric': {controller: 'ExamController', action: 'metric'},
-  'GET /data/report': {controller: 'ReportController', action: 'find'},
-  'GET /data/request': {controller: 'RequestController', action: 'find'},
-  'GET /data/scanners': {controller: 'ScannerController', action: 'find'}
+  'POST /data/entities': {controller: 'DataentitiesController', action: 'find'},
+  'POST /data/timeseries': {controller: 'TimeseriesController', action: 'find'}
 
   /***************************************************************************
   *                                                                          *

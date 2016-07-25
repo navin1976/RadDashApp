@@ -10,7 +10,6 @@
     }
   },
   "host": "ec2-52-202-141-251.compute-1.amazonaws.com:1337",
-
   "tags": [
     {
       "name": "Default",
@@ -150,8 +149,8 @@
         "tags": [
           "Dashboards"
         ],
-        "summary": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. The response includes the configuration which specifies all display-related information.",
-        "description": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. The response includes the configuration which specifies all display-related information.",
+        "summary": "The Dashboard Retrieval endpoint",
+        "description": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. \nThe response includes the configuration which specifies all display-related information.",
         "operationId": "getDashboards",
         "consumes": [],
         "produces": [
@@ -289,7 +288,7 @@
     "/data/timeseries": {
       "post": {
         "tags": [
-          "Default"
+          "Data"
         ],
         "summary": "Retrieve Timeseries Data",
         "description": "Retrieves data for a metric about a datasource, for example: number of exams per scanner per day",
@@ -547,8 +546,7 @@
       "required": [
         "configuration",
         "isEnabled",
-        "title",
-        "widgets"
+        "title"
       ],
       "properties": {
         "configuration": {
@@ -568,13 +566,6 @@
         "title": {
           "type": "string",
           "description": "The title of a dashboard."
-        },
-        "widgets": {
-          "type": "array",
-          "description": "Represents the array of widgets belonging to the dashboard",
-          "items": {
-            "$ref": "#/definitions/Widget"
-          }
         }
       },
       "description": "Dashboard object"
@@ -584,8 +575,7 @@
       "required": [
         "configuration",
         "isEnabled",
-        "title",
-        "widgets"
+        "title"
       ],
       "properties": {
         "configuration": {
@@ -600,13 +590,6 @@
         "title": {
           "type": "string",
           "description": "The title of the dashboard."
-        },
-        "widgets": {
-          "type": "array",
-          "description": "The array of widgets associated with the dashboard",
-          "items": {
-            "$ref": "#/definitions/Widget"
-          }
         }
       },
       "description": "Dashboard object used when creating dashboards, if the Dashboard object is missing an id, it is identified as a new dashboard"
@@ -626,13 +609,6 @@
         "title": {
           "type": "string",
           "description": "The title of a dashboard, not required if it remains the same when modifying the dashboard."
-        },
-        "widgets": {
-          "type": "array",
-          "description": "The array of widgets belonging to the dashboard. Not required if it remains the same when modifying the dashboard.",
-          "items": {
-            "$ref": "#/definitions/Widget"
-          }
         }
       },
       "description": "Dashboard object for modifying existing dashboards, if the id property is given, it indicates that the dashboard already exists and will be updated in accordance with the specified parameters. For creating new dashboards, see Dashboard Create"
@@ -950,84 +926,6 @@
         }
       },
       "description": "The user of the system who topically is an employee at the hospital."
-    },
-    "Widget": {
-      "type": "object",
-      "required": [
-        "configuration",
-        "id",
-        "isEnabled",
-        "title"
-      ],
-      "properties": {
-        "configuration": {
-          "type": "string",
-          "description": "JSON string representing the client-side display related logic."
-        },
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier representing a specific widget for a given dashboard."
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether the widget is visible on the dashboard.",
-          "default": false
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the widget."
-        }
-      },
-      "description": "A section of a dashboard"
-    },
-    "WidgetCreate": {
-      "type": "object",
-      "required": [
-        "configuration",
-        "isEnabled",
-        "title"
-      ],
-      "properties": {
-        "configuration": {
-          "type": "string",
-          "description": "The client-side, display related logic stored as a JSON sting."
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether the widget is visible on the dashboard.",
-          "default": false
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the widget."
-        }
-      },
-      "description": "Widget object used when creating new widgets. If the widget is missing an id, it is identified as a new widget."
-    },
-    "WidgetUpdate": {
-      "type": "object",
-      "properties": {
-        "configuration": {
-          "type": "string",
-          "description": "The client-side, display related logic stored as a JSON string."
-        },
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The id of the widget."
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether the widget is visible on the dashboard or not.",
-          "default": false
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the widget."
-        }
-      },
-      "description": "Widget object used when updating an existing widget. If the id property is given, it indicates that the widget already exists and will be updated in accordance with the specified parameters. If an existing widget's id is missing it will be deleted from the dashboard. For creating new widgets, see Widget Create."
     }
   }
 }
