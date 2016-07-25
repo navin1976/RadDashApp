@@ -52,7 +52,7 @@ module.exports.routes = {
 
   /**Data Routes**/
   'GET /data/datasource': {controller: 'DatasourceController', action: 'find'},
-  'POST /data/entities': {controller: 'DataEntitiesController', action: 'find'}
+  'POST /data/entities': {controller: 'DataentitiesController', action: 'find'}
 
   /***************************************************************************
   *                                                                          *
