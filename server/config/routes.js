@@ -53,7 +53,7 @@ module.exports.routes = {
   /**Data Routes**/
   'GET /data/datasource': {controller: 'DatasourceController', action: 'find'},
   'POST /data/entities': {controller: 'DataentitiesController', action: 'find'},
-  'POST /data/entities': {controller: 'TimeseriesController', action: 'find'}
+  'POST /data/timeseries': {controller: 'TimeseriesController', action: 'find'}
 
   /***************************************************************************
   *                                                                          *

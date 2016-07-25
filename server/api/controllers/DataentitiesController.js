@@ -3,21 +3,30 @@
  */
 module.exports = {
   find: function (req, res) {
-    var dataEntity = {
-      "dataSourceId": 1,
-      "filters": [
-        {
-          "filterId": 3,
-          "filterValue": "1000"
-        },
-        {
-          "filterId": 6,
-          "filterValue": [1, 3, 4]
-        }
-    ]
-    }
+    var dataEntities = [
+      {
+        "examId": 1,
+        "examType": "CT",
+        "timestamp": "2016-01-01 00:00"
+      },
+      {
+        "examId": 2,
+        "examType": "CT",
+        "timestamp": "2016-01-01 00:00"
+      },
+      {
+        "examId": 3,
+        "examType": "CT",
+        "timestamp": "2016-01-01 00:00"
+      },
+      {
+        "examId": 4,
+        "examType": "CT",
+        "timestamp": "2016-01-01 00:00"
+      }
+    ];
     res.type('application/json',null, 2);
     res.status(200);
-    return res.send(JSON.stringify(dataEntity));
+    return res.send(JSON.stringify(dataEntities));
   }
 }
