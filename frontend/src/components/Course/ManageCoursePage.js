@@ -7,17 +7,43 @@ import CourseForm from './CourseForm';
 class ManageCoursePage extends React.Component{
 	constructor(props,context){
 		super(props,context);
-
+		//makes deep copy of props.course and binds it ot the state(doesnt polute store)
 		this.state = {
 			course: Object.assign({},props.course),
 			errors: {}
 		};
+
+		this.updateCourseState = this.updateCourseState.bind(this);
+		this.saveCourse = this.saveCourse.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(this.props.course.id != nextProps.course.id){
+			//needed to populate state again once page refreshes and previous props is cleared otu
+			this.setState({course: Object.assign({},nextProps.course)});
+		}
+	}
+
+	updateCourseState(event){
+		const field = event.target.name;
+		let course = this.state.course;
+		course[field] = event.target.value;
+		return this.setState({course:course});
+	}
+
+	//Save dispatchs action passed down as props
+	saveCourse(event){
+		event.preventDefault();
+		this.props.actions.saveCourse(this.state.course);
+		this.context.router.push('/courses');
 	}
 
 	render(){
 		return(
 			<CourseForm
 				allAuthors={this.props.authors}
+				onChange={this.updateCourseState}
+				onSave={this.saveCourse}
 				course={this.state.course}
 				errors={this.state.errors}
 			/>
@@ -30,20 +56,41 @@ ManageCoursePage.propTypes = {
 	authors: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state, ownProps){
-	let course = {id:'', watchHref:'',title:'',authorId:'', length:'',category:''};
-	const authorsFormattedForDropdown = state.authors.map(author => {
-		return{
-			value:author.id,
-			text: author.firstName + ' ' + author.lastName
-		};
-	});
-	return {
-		course: course,
-		authors : authorsFormattedForDropdown
-	};
+ManageCoursePage.contextTypes = {
+	router: PropTypes.object
+};
+
+//filter only returns an array
+function getCourseById(courses,id){
+	const course = courses.filter(course => course.id == id);
+	if(course) return course[0];
+	return null;
 }
 
+
+//OwnProps reference to components props
+function mapStateToProps(state, ownProps){
+	const courseId = ownProps.params.id; // from the path '/course/id'
+
+	let course = {id:'', watchHref:'',title:'',authorId:'', length:'',category:''};
+	if(courseId && state.course.length > 0){
+		course = getCourseById(state.courses,courseId);
+	}else{
+		const authorsFormattedForDropdown = state.authors.map(author => {
+			return{
+				value:author.id,
+				text: author.firstName + ' ' + author.lastName
+			};
+		});
+		return {
+			course: course,
+			authors : authorsFormattedForDropdown
+		};
+
+	}
+}
+
+//All of the course actions are now made available through this.props.actions
 function mapDispatchToProps(dispatch){
 	return{
 		actions: bindActionCreators(courseActions,dispatch)

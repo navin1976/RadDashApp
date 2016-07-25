@@ -1,11 +1,11 @@
 #app {
 	min-width: 550px;
 	margin:0 auto;
-    background-color: #aaa;
 }
 
-a.active{
-	color:orange;
+.active{
+	color:white;
+    background: rgba(255,255,255,0.2);
 }
 
 nav{
@@ -19,6 +19,7 @@ nav{
  */
 html, body, #app{
     height: 100%;
+    background-color: #aaa;
 }
  body {
     overflow-x: hidden;
@@ -85,21 +86,23 @@ html, body, #app{
     line-height: 40px;
 }
 
-.sidebar-nav li  {
+.sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
 }
 
-.sidebar-nav li :hover {
+.sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
+    color: grey;
     background: rgba(255,255,255,0.2);
 }
 
-.sidebar-nav li :active,
-.sidebar-nav li :focus {
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
     text-decoration: none;
+    outline: none;
+    color: white;
 }
 
 .sidebar-nav > .sidebar-brand {
