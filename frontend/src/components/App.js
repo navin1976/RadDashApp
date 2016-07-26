@@ -4,12 +4,13 @@
 
 import React, {PropTypes} from 'react';
 import Header from './Common/Header';
+import {connect} from 'react-redux';
 
 class App extends React.Component{
 	render(){
 		return(
 			<div id="wrapper">
-				<Header />
+				<Header loading={this.props.loading} />
 					<div id="content-area">
 						<div id="page-content-wrapper">
 							<div className="container-fluid layout">
@@ -23,9 +24,17 @@ class App extends React.Component{
 }
 
 App.propTypes = {
-	children: PropTypes.object.isRequired
+	children: PropTypes.object.isRequired,
+	loading: PropTypes.bool.isRequired
 };
+
+function mapStateToProps(state, ownProps){
+	console.log(state);
+	return {
+		loading: state.ajaxCallsInProgress > 0
+	};
+}
 
 App.contextTypes = { store: React.PropTypes.object };
 
-export default App;
+export default connect(mapStateToProps)(App);

@@ -3,14 +3,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
+import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component{
 	constructor(props,context){
 		super(props,context);
 		//makes deep copy of props.course and binds it ot the state(doesnt polute store)
 		this.state = {
-			course: Object.assign({},props.course),
-			errors: {}
+			course: Object.assign({},this.props.course),
+			errors: {},
+			saving: false
 		};
 
 		this.updateCourseState = this.updateCourseState.bind(this);
@@ -34,7 +36,19 @@ class ManageCoursePage extends React.Component{
 	//Save dispatchs action passed down as props
 	saveCourse(event){
 		event.preventDefault();
-		this.props.actions.saveCourse(this.state.course);
+		this.setState({saving:true});
+		
+		this.props.actions.saveCourse(this.state.course)
+			.then(()=>this.redirect())
+			.catch(error => {
+				toastr.error(error);
+				this.setState({saving:false});
+			});
+	}
+
+	redirect(){
+		this.setState({saving:false});
+		toastr.success('Course saved');
 		this.context.router.push('/courses');
 	}
 
@@ -46,6 +60,7 @@ class ManageCoursePage extends React.Component{
 				onSave={this.saveCourse}
 				course={this.state.course}
 				errors={this.state.errors}
+				saving={this.state.saving}
 			/>
 		);
 	}
@@ -71,23 +86,23 @@ function getCourseById(courses,id){
 //OwnProps reference to components props
 function mapStateToProps(state, ownProps){
 	const courseId = ownProps.params.id; // from the path '/course/id'
-
 	let course = {id:'', watchHref:'',title:'',authorId:'', length:'',category:''};
-	if(courseId && state.course.length > 0){
+	
+	if(courseId && state.courses.length > 0){
 		course = getCourseById(state.courses,courseId);
-	}else{
-		const authorsFormattedForDropdown = state.authors.map(author => {
-			return{
-				value:author.id,
-				text: author.firstName + ' ' + author.lastName
-			};
-		});
-		return {
-			course: course,
-			authors : authorsFormattedForDropdown
-		};
-
 	}
+
+	const authorsFormattedForDropdown = state.authors.map(author => {
+		return{
+			value:author.id,
+			text: author.firstName + ' ' + author.lastName
+		};
+	});
+	
+	return {
+		course: course,
+		authors : authorsFormattedForDropdown
+	};
 }
 
 //All of the course actions are now made available through this.props.actions

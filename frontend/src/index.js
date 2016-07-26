@@ -20,6 +20,7 @@ import {loadAuthors} from './actions/authorActions';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/react-grid-layout/css/styles.css';
+import '../node_modules/toastr/build/toastr.min.css';
 
 
 const store = configureStore(getInitialData());
