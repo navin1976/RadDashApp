@@ -4,6 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import Header from './Common/Header';
+//import Toolbar from './Common/Toolbar';
 import {connect} from 'react-redux';
 
 class App extends React.Component{

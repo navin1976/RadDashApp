@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReactGridLayout from 'react-grid-layout';
 
+import AddButton from '../Common/AddButton';
+
 import {BarChart} from 'react-d3-components';
 
 /*
@@ -39,9 +41,12 @@ class Dashboard extends React.Component{
 		}
 
 		return (
-			<ReactGridLayout className="layout" layout={displayLayout} cols={12} rowHeight={40} width={1500}>
-				{this.props.layout.map(this.tileEntry)}
-			</ReactGridLayout>
+			<div>	
+				<ReactGridLayout className="layout" layout={displayLayout} cols={12} rowHeight={40} width={1500}>
+					{this.props.layout.map(this.tileEntry)}
+				</ReactGridLayout>
+				<AddButton />
+			</div>
 		);
 	}
 }

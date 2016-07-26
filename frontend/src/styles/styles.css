@@ -79,6 +79,7 @@ html, body, #app{
     margin: 0;
     padding: 0;
     list-style: none;
+    z-index: 3;
 }
 
 .sidebar-nav li {
@@ -106,9 +107,9 @@ html, body, #app{
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
+    height: 50px;
     font-size: 18px;
-    line-height: 60px;
+    line-height: 45px;
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -162,4 +163,35 @@ html, body, #app{
     padding: 15px;
     padding-right: 25px;
     padding-left: 25px;
+}
+
+#brand{
+    height: 100%;
+    width: 100%;
+    background-color: orange;
+    color:white;
+    margin-left: -20px;
+}
+
+.toolbar{
+    width:100%;
+    height: 50px;
+    background-color: white;
+}
+
+#addWidgetButton{
+    position: fixed;
+    font-size: 52px;
+    bottom: 15px;
+    right: 15px;
+    width: 76px;
+    height: 76px;
+    color:white;
+    border-radius: 38px;
+    background-color: rgba(0,90,0,0.6);
+    border:none;
+}
+
+#addWidgetButton:hover{
+    background-color: rgba(0,90,0,1);
 }

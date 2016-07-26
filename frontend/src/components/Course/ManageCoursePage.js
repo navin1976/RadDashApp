@@ -54,6 +54,7 @@ class ManageCoursePage extends React.Component{
 
 	render(){
 		return(
+			<div className="info-context">
 			<CourseForm
 				allAuthors={this.props.authors}
 				onChange={this.updateCourseState}
@@ -62,6 +63,7 @@ class ManageCoursePage extends React.Component{
 				errors={this.state.errors}
 				saving={this.state.saving}
 			/>
+			</div>
 		);
 	}
 }
