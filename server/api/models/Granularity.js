@@ -4,19 +4,20 @@
 module.exports = {
   connection: 'radiology_dashboard',
   attributes: {
-    // e.g., "Daily"
-    granularityName: {
-      type: 'string',
-      size: 50
-      //columnName: 'granularity_name' - maybe smart enough to convert **
-    },
-
     //e.g., 1
     granularityId: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
       primaryKey: true
+      //columnName: 'granularity_id'
+    },
+
+    // e.g., "Daily"
+    granularityName: {
+      type: 'string',
+      size: 50
+      //columnName: 'granularity_name'
     }
   }
 }
