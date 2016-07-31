@@ -2,36 +2,46 @@
  * Created by BlackLinden on 29/07/2016.
  */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    dashboardId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'dashboard_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
     // e.g., "Scanner performance"
-    dashboardTitle: {
+    title: {
       type: 'string',
-      size: 50
-      //columnName: 'dashboard_title'
+      columnName: 'title'
     },
 
     // e.g., "true" -> is  the dashboard displayed for the user?
     isEnabled: {
       type: 'boolean',
-      size: 1
-      //columnName: 'is_enabled'
+      size: 1,
+      columnName: 'is_enabled'
     },
 
     // e.g., "Scanner performance"
-    dashboardConfiguration: {
+    configuration: {
       type: 'string',
-      size: 500
-      //columnName: 'dashboard_configuration'
+      size: 500,
+      columnName: 'configuration'
+    },
+
+    users: {
+      collection: 'user',
+      via: 'dashboard',
+      through: 'userdashboard'
+    },
+
+    roles:{
+      collection: 'role',
+      via: 'dashboard',
+      through: 'roledashboard'
     }
   }
 }

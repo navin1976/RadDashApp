@@ -1,26 +1,47 @@
 /**
  * Created by BlackLinden on 26/07/2016.
  */
-/**
- * Created by BlackLinden on 26/07/2016.
- */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    datasourceId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'datasource_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
     // e.g., "Exams"
-    datasourceTitle: {
+    name: {
       type: 'string',
-      size: 50
-      //columnName: 'datasource_title'
+      size: 50,
+      columnName: 'name'
+    },
+
+    roles:{
+      collection: 'role',
+      via: 'datasource',
+      through: 'roledatasource'
+    },
+
+    granularities:{
+      collection: 'granularity',
+      via: 'datasource',
+      through: 'granularitydatasource'
+    },
+
+    filters:{
+      collection: 'filter',
+      via: 'datasource',
+      through: 'filterdatasource'
+    },
+
+    metrics:{
+      collection: 'role',
+      via: 'datasource',
+      through: 'metricdatasource'
     }
+
   }
 }

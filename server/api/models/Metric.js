@@ -2,21 +2,27 @@
  * Created by BlackLinden on 26/07/2016.
  */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    metricId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      columnName: 'id'
     },
 
     // e.g., "count"
-    metricName: {
+    name: {
       type: 'string',
-      size: 50
-      //columnName: 'metric_name'
+      size: 50,
+      columnName: 'name'
+    },
+
+    datasources:{
+      collection: 'datasource',
+      via: 'metric',
+      through: 'metricdatasource'
     }
   }
 }

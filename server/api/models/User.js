@@ -3,35 +3,39 @@
  */
 
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    roleId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'user_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
     //Dr Smith
-    roleDescription: {
+    name: {
       type: 'string',
-      size: 50
-      //columnName: 'user_title'
+      size: 50,
+      columnName: 'name'
     },
 
     //2
-    role_id: {
-      type: 'string',
-      size: 50
-      //columnName: 'user_title'
+    roleId: {
+      columnName: 'role_id',
+      model: 'role'
     },
 
     hashpass: {
       type: 'string',
-      size: 50
-      //columnName: 'hashpass'
+      size: 50,
+      columnName: 'hashpass'
+    },
+
+    dashboards: {
+      collection: 'dashboard',
+      via: 'user',
+      through: 'userdashboard'
     }
   }
 }
