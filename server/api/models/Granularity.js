@@ -2,22 +2,27 @@
  * Created by BlackLinden on 26/07/2016.
  */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    granularityId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'granularity_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
     // e.g., "Daily"
-    granularityName: {
+    name: {
       type: 'string',
-      size: 50
-      //columnName: 'granularity_name'
+      size: 50,
+      columnName: 'name'
+    },
+
+    datasources:{
+      collection: 'datasource',
+      via: 'granularity',
+      through: 'granularitydatasource'
     }
   }
 }

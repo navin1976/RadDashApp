@@ -2,22 +2,27 @@
  * Created by BlackLinden on 26/07/2016.
  */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    filterId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'filter_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
-  // e.g., "Scanner17"
-  filterName: {
-    type: 'string',
-    size: 50
-    //columnName: 'filter_name'
-  }
+    // e.g., "Scanner17"
+    name: {
+      type: 'string',
+      size: 50,
+      columnName: 'name'
+    },
+
+    datasources:{
+      collection: 'datasource',
+      via: 'filter',
+      through: 'filterdatasource'
+    }
   }
 }

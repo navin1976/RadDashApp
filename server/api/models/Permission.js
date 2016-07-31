@@ -3,22 +3,27 @@
  * Created by BlackLinden on 26/07/2016.
  */
 module.exports = {
-  connection: 'radiology_dashboard',
   attributes: {
     //e.g., 1
-    permissionId: {
+    id: {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
-      //columnName: 'permission_id'
+      primaryKey: true,
+      columnName: 'id'
     },
 
     //Can view radiologist data
-    permissionDescription: {
+    description: {
       type: 'string',
-      size: 50
-      //columnName: 'permission_description'
+      size: 50,
+      columnName: 'description'
+    },
+
+    roles:{
+      collection: 'role',
+      via: 'permission',
+      through: 'rolepermission'
     }
   }
 }
