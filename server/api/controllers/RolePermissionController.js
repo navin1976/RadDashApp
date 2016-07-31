@@ -38,7 +38,7 @@ module.exports = {
   },
 
   assignPermission: function (req, res) {
-    console.log(req.body)
+    console.log(req.body);
     idUpdate = req.body.roleId;
     permissionIds = req.body.permissionIds;
     console.log(idUpdate, permissionIds);
