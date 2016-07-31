@@ -3,7 +3,10 @@
  */
 module.exports = {
   find: function (req, res) {
-    res.status(200);
-    return res.send();
+    User.find({}).exec(function (error, records) {
+      res.status(200);
+      res.type('application/json');
+      return res.send(JSON.stringify(records, null, 2));
+    });
   }
 }
