@@ -16,6 +16,9 @@ export default function tileReducer(state=[],action){
 		case types.DECREMENT_TILE:{
 			return state;
 		}
+		case types.UPDATE_TILE:{
+			return action.newLayout;
+		}
 		default:
 			return state;
 	}

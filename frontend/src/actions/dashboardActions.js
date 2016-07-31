@@ -11,3 +11,7 @@ export function incrementCtr(k){
 export function decrementCtr(k){
 	return {type: types.DECREMENT_TILE,k};
 }
+
+export function updateLayout(newLayout){
+	return {type: types.UPDATE_TILE, newLayout};
+}
