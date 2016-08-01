@@ -48,6 +48,17 @@ module.exports.connections = {
      database: 'radiology_dashboard' //optional
    },
 
+  sqlServer: {
+    adapter: 'sails-sqlserver',
+    user: 'mfeket23',
+    password: 'Grimbergen92',
+    host: 'dashboarddatabase.database.windows.net', // azure database
+    database: 'DashboardDatabase',
+    port: 1433,
+    options: {
+      encrypt: true   // use this for Azure databases
+    }
+  },
   /***************************************************************************
   *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
@@ -89,4 +100,4 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
 
-};
+}
