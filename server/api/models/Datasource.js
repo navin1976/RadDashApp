@@ -40,7 +40,7 @@ module.exports = {
     },
 
     metrics:{
-      collection: 'role',
+      collection: 'metric',
       via: 'datasource',
       through: 'metricdatasource'
     }
