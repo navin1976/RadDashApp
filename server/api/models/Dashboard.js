@@ -28,7 +28,7 @@ module.exports = {
     // e.g., "Scanner performance"
     configuration: {
       type: 'string',
-      size: 500,
+      size: 65000,
       columnName: 'configuration'
     },
 

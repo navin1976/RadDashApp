@@ -47,7 +47,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
-  origin: 'http://localhost:8000,http://ec2-52-202-141-251.compute-1.amazonaws.com:8000',
+  origin: 'http://localhost:8000,http://localhost:1235,http://ec2-52-202-141-251.compute-1.amazonaws.com:8000,http://dashboardapi.northeurope.cloudapp.azure.com:8000',
 
   /***************************************************************************
   *                                                                          *
