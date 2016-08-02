@@ -9,7 +9,7 @@
       "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "ec2-52-202-141-251.compute-1.amazonaws.com:1337",
+  "host": "dashboardapi.northeurope.cloudapp.azure.com:1337",
   "tags": [
     {
       "name": "Default",
@@ -47,9 +47,7 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "roleId",
@@ -278,8 +276,7 @@
           "200": {
             "description": "Entities successfully retrieved",
             "schema": {
-              "type": "file",
-              "description": "JSON Object describing an entity, made of key value pairs"
+              "type": "file"
             }
           }
         }
@@ -292,6 +289,7 @@
         ],
         "summary": "Retrieve Timeseries Data",
         "description": "Retrieves data for a metric about a datasource, for example: number of exams per scanner per day",
+        "operationId": "postDataTimeseries",
         "consumes": [
           "application/json"
         ],
@@ -328,19 +326,13 @@
         "operationId": "getPermissions",
         "consumes": [],
         "produces": [],
-        "parameters": [
-          {
-            "name": "searchTerm",
-            "in": "query",
-            "description": "Specifies a search term when retrieving permissions",
-            "required": false,
-            "type": "string",
-            "x-example": "view"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Permissions"
+            }
           }
         }
       }
@@ -356,9 +348,7 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": [],
         "parameters": [
           {
             "in": "body",
@@ -423,9 +413,7 @@
         "description": "The request is sent when a role is changed for a particular user.",
         "operationId": "putRolesAssign",
         "consumes": [],
-        "produces": [
-          "application/json"
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "roleId",
@@ -499,35 +487,6 @@
               "items": {
                 "$ref": "#/definitions/User"
               }
-            }
-          },
-          "403": {
-            "description": "The user is not authorised to access this information",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/users/{userId}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Retrieves a particular user's data",
-        "description": "Retrieves a particular user's data",
-        "operationId": "getUsersUserId",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "User information successfully retrieved",
-            "schema": {
-              "$ref": "#/definitions/User"
             }
           },
           "403": {
@@ -776,6 +735,21 @@
     },
     "Permissions": {
       "type": "object",
+      "required": [
+        "description",
+        "id"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the permission, such as \"view radiology data\""
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a permission"
+        }
+      },
       "description": "Specifies what data and actions the user has access to based on their role."
     },
     "RequestEntity": {
@@ -813,8 +787,8 @@
           "description": "ID of the filter"
         },
         "filterValue": {
-          "description": "Value to filter with, can be string, int, double or an array.",
-          "$ref": "#/definitions/RequestFilterValue"
+          "type": "string",
+          "description": "Value to filter with, can be string, int, double or an array."
         }
       },
       "description": "Object to represent a filter in a request"
