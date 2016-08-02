@@ -13,6 +13,7 @@ module.exports = {
     res.status(201);
     return res.send(JSON.stringify(dashboardCreated));
   },
+
   find: function (req, res) {
     Dashboard.find({}).exec(function(error, records) {
       res.status(200);
@@ -20,13 +21,25 @@ module.exports = {
       return res.send(JSON.stringify(records, null, 2));
     });
   },
+
   update: function (req, res) {
+    console.log(req.params, req.body);
+
     res.status(205);
     return res.send();
   },
+
   delete: function (req, res) {
-    res.status(205);
-    return res.send();
+    console.log(req.params);
+    id = req.params.id;
+    console.log(id);
+    Dashboard.destroy({id: id}).exec(function (error) {
+      if (error) {
+          return res.negotiate(error);
+      }
+      res.status(205);
+      return res.send();
+    });
   },
   default: function (req, res) {
     console.log(req.body);
@@ -44,9 +57,20 @@ module.exports = {
       }
       res.status(205);
       res.type('application/json');
-      return res.send()
+      return res.send(JSON.stringify(records, null, 2));
     });
   }
 }
 
+/**
+ * User.update({name:'Walter Jr'},{name:'Flynn'}).exec(function afterwards(err, updated){
+
+  if (err) {
+    // handle error here- e.g. `res.serverError(err);`
+    return;
+  }
+
+  console.log('Updated user to have name ' + updated[0].name);
+});
+ */
 

@@ -5,7 +5,7 @@ module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
-    granularity:{
+    metric:{
       model:'metric'
     },
     datasource: {
