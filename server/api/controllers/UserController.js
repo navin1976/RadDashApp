@@ -8,8 +8,9 @@ module.exports = {
       res.type('application/json');
       return res.send(JSON.stringify(records, null, 2));
     });
-  },
+  }
 
+  /** - for now, there is no use case for this route
   findOne: function (res, req) {
     console.log(req.params);
     id = req.params.userId;
@@ -27,6 +28,7 @@ module.exports = {
       return res.send(JSON.stringify(records, null, 2));
     });
   }
+  */
 }
 
 

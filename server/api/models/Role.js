@@ -3,6 +3,8 @@
  */
 
 module.exports = {
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     //e.g., 1
     id: {

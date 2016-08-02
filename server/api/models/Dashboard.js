@@ -2,6 +2,8 @@
  * Created by BlackLinden on 29/07/2016.
  */
 module.exports = {
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     //e.g., 1
     id: {
