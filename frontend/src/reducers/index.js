@@ -2,14 +2,16 @@ import {combineReducers} from 'redux';
 
 import courses from './courseReducer';
 import authors from './authorReducer';
-import layout from './tileReducer';
+import layout from './layoutReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
+import dashboards from './dashboardReducer';
 
 const rootReducer = combineReducers({
 	courses,
 	authors,
 	layout,
-	ajaxCallsInProgress
+	ajaxCallsInProgress,
+	dashboards
 });
 
 export default rootReducer;

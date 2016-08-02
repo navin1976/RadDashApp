@@ -16,6 +16,8 @@ import routes from './routes';
 
 import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
+import {loadDashboards} from './actions/dashboardActions';
+import {loadLayout} from './actions/layoutActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +28,8 @@ import '../node_modules/toastr/build/toastr.min.css';
 const store = configureStore(getInitialData());
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
+store.dispatch(loadDashboards());
+store.dispatch(loadLayout());
 
 render(
 	<Provider store={store}>

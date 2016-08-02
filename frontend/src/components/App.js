@@ -11,7 +11,7 @@ class App extends React.Component{
 	render(){
 		return(
 			<div id="wrapper">
-				<Header loading={this.props.loading} />
+				<Header loading={this.props.loading}/>
 					<div id="content-area">
 						<div id="page-content-wrapper">
 							<div className="container-fluid layout">

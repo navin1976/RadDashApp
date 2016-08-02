@@ -203,3 +203,7 @@ html, body, #app{
 .clear-fixing{
     clear:both;
 }
+
+.dashChoice{
+    background: rgba(30,30,30,1);
+}

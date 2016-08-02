@@ -7,7 +7,7 @@ import ReactGridLayout from 'react-grid-layout';
 
 import AddButton from '../Common/AddButton';
 
-import {BarChart,PieChart,BarStackChart} from 'react-d3-components';
+import {BarChart,PieChart,BarStackChart,LineChart} from 'react-d3-basic';
 
 /*
 import {Responsive, WidthProvider} from 'react-grid-layout';
@@ -23,41 +23,87 @@ class Dashboard extends React.Component{
 	}
 	
 	tileEntry(tile, index){
-		let data = [{
-			label: 'somethingA',
-			values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
-		}];
+		let chartSeries = [
+    		{
+     			 field: 'frequency',
+     			 name: 'Frequency',
+      			style: {
+        			'fillOpacity': .5
+      			}
+   			 }
+  		];
 
-		const width = (tile.l.w)*(1500/12);
-		const height = (tile.l.h)*(40);
+  		let data=[
+  			{letter:"A",frequency:"0.08167"},
+  			{letter:"B",frequency:"0.06167"},
+  			{letter:"C",frequency:"0.03167"},
+  			{letter:"D",frequency:"0.04267"},
+  			{letter:"E",frequency:"0.01267"},
+  			{letter:"F",frequency:"0.01967"},
+  			{letter:"G",frequency:"0.05567"},
+  		];
 
-		let value = function(d){
-			return +d.population;
-		};
+  		let x = function(d) {
+   		 return d.letter;
+  		};
 
-		let name = function(d){
-			return d.age;
-		};
-		const chartSeries = [
-			{"field":"<5","name":"less than 5"},
-			{"field":"5-13","name":"5 to 13"},
-			{"field":"14-17","name":"14 to 17"}
-		];
+  		let xScale = "ordinal";
 
-		const dataPie = [
-			{age:"<5",population:"27000"},
-			{age:"5-13",population:"13000"},
-			{age:"14-17",population:"19000"}
-		];
+  		let y = function(d){
+  			return +d;
+  		};
+
+  		let data2 = [
+  			{age:"<5",population:"27000"},
+  			{age:"5-13",population:"16000"},
+  			{age:"14-17",population:"19000"},
+  			{age:"18-24",population:"22000"},
+  			{age:"25-44",population:"9000"}
+  		];
+
+  		let chartSeries2 = [
+  			{
+  				"field":"<5",
+  				"name": "less than 5",
+  				"color":"red"
+  			},{
+  				"field":"5-13",
+  				"name": "5 to 13",
+  				"color":"green"
+  			},{
+  				"field":"14-17",
+  				"name": "14 to 17",
+  				"color":"yellow"
+  			},{
+  				"field":"18-24",
+  				"name": "18 to 24",
+  				"color":"blue"
+  			},{
+  				"field":"25-44",
+  				"name": "25 to 44",
+  				"color":"orange"
+  			}
+  		];
+
+  		let value = function(d){
+  			return +d.population;
+  		};
+
+  		let name = function(d){
+  			return d.age;
+  		};
 
 		let entry = null;
 
 		switch(tile.type){
 			case 'BAR_CHART':
-				entry = <BarChart data={data} width={width} height={height} margin={{top: 10, bottom: 50, left: 50, right: 10}}/>;
+				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
+				break;
+			case 'LINE_CHART':
+				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
 				break;
 			case 'PIE_CHART':
-				entry = <BarChart data={data} width={width} height={height} margin={{top: 10, bottom: 50, left: 50, right: 10}}/>;
+				entry = <PieChart data={data2} chartSeries={chartSeries2} value={value} name={name} width={350} height={300}/>
 				break;
 			default:
 				console.log("Chart type doesnt exist");
@@ -84,7 +130,7 @@ class Dashboard extends React.Component{
 
 		return (
 			<div>	
-				<ReactGridLayout className="layout" layout={displayLayout} cols={12} rowHeight={40} width={1500} onLayoutChange={this.update}>
+				<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
 					{this.props.layout.map(this.tileEntry)}
 				</ReactGridLayout>
 				<AddButton />

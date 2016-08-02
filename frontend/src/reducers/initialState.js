@@ -1,5 +1,7 @@
 export default {
 	authors: [],
 	courses: [],
-	ajaxCallsInProgress:0
+	ajaxCallsInProgress:0,
+	dashboards:[],
+	layout:[]
 };
