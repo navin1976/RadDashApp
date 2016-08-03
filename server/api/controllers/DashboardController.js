@@ -52,8 +52,7 @@ module.exports = {
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[roleId]}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
-        res.status(404);
-        return res.send();
+        return res.negotiate(error);
       }
       res.status(205);
       res.type('application/json');
@@ -62,15 +61,4 @@ module.exports = {
   }
 }
 
-/**
- * User.update({name:'Walter Jr'},{name:'Flynn'}).exec(function afterwards(err, updated){
-
-  if (err) {
-    // handle error here- e.g. `res.serverError(err);`
-    return;
-  }
-
-  console.log('Updated user to have name ' + updated[0].name);
-});
- */
 
