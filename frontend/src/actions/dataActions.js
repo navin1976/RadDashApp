@@ -1,10 +1,15 @@
 import * as types from './actionTypes';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import DataApi from  '../api/mockDataApi';
 
 
 //Needs a loadCoursesFailure/Error action to dispatch
 export function loadDataSuccess(data){
 	return {type: types.LOAD_DATA_SUCCESS, data};
+}
+
+export function loadDataForWidget(id,data){
+	return {type: types.LOAD_DATA_WIDGET_SUCCESS,id,data};
 }
 /*
 Dispatch necessary for react-thunk. Arrow functions need to include several
@@ -45,6 +50,17 @@ function loadGenData(url,method,payload){
 		}).then(data => {
 			dispatch(loadDataSuccess(data));
 		}).catch(error=>{
+			throw(error);
+		});
+	};
+}
+
+export function loadDataForWidget(id){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return DataApi.getData(id).then(data=>{
+			dispatch(loadDataSuccessFor(id,data));
+		}).catch(error => {
 			throw(error);
 		});
 	};

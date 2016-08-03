@@ -6,6 +6,9 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 		case types.LOAD_DASHBOARD_SUCCESS:{
 			return action.dashboards;
 		}
+		case types.LOAD_DATA_WIDGET_SUCCESS:{
+			
+		}
 		default:
 			return state;
 	}
