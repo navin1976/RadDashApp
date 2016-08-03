@@ -12,8 +12,7 @@ module.exports = {
     User.update({id: idUpdate}, {roleId: roleId}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
-        res.status(404);
-        return res.send();
+        return res.negotiate(error);
       }
       res.status(205);
       res.type('application/json');
@@ -45,8 +44,7 @@ module.exports = {
     Role.update({id: idUpdate}, {permissions: permissionIds}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
-        res.status(404);
-        return res.send();
+        return res.negotiate(error);
       }
       res.status(205);
       res.type('application/json');

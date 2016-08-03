@@ -72,6 +72,7 @@ module.exports = {
 
       } else {
         res.status(404);
+        // return res.negotiate(error);
         res.send()
       }
     });
