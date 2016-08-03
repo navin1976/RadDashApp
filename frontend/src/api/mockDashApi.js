@@ -1,9 +1,9 @@
 import delay from './delay';
 
 const dashboards = [
-	{id:'dsh1',name:'Finance imformation', description:'Displays clininc imformation and financial performance'},
-	{id:'dsh2',name:'Health imformation', description:'Displays clininc imformation and health performance'},
-	{id:'dsh3',name:'Political imformation', description:'Displays clininc imformation and political performance'}
+	{id:'dsh1',name:'My dashboard 1', description:'Displays clininc imformation and financial performance'},
+	{id:'dsh2',name:'My dashboard 2', description:'Displays clininc imformation and health performance'},
+	{id:'dsh3',name:'My dashboard 3', description:'Displays clininc imformation and political performance'}
 ];
 
 class DashboardApi{
