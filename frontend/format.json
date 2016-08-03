@@ -1,0 +1,159 @@
+dashboard => {
+	"id":"",
+	"name":"",
+	"description":"",
+	"author":"",
+	"widgets":["id1","id4","id39","etc...3]
+};
+
+widget => {
+	"id":"",
+	"name":"",
+	"description":"",
+	layout:{},
+	type:LINE_CHART,
+	request_info:{
+		url:"azure.......:1337",
+		method:'POST',
+		body:{
+			granularity:...,
+			iacbcbdncbn:...,
+			ruiutztuz:...
+		}
+	}
+};
+
+After the function is loaded on that object
+
+widget => {
+	"id":"",
+	"name":"",
+	"description":"",
+	layout:{},
+	type:LINE_CHART,
+	request_info:{
+		url:"azure.......:1337",
+		method:'POST',
+		body:{
+			granularity:...,
+			iacbcbdncbn:...,
+			ruiutztuz:...
+		}
+	}
+	data:{
+		[
+  {
+    "metric": 34822,
+    "interval": {
+      "start": "2014-02-01T00:00:00.000Z",
+      "end": "2014-03-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 37582,
+    "interval": {
+      "start": "2014-03-01T00:00:00.000Z",
+      "end": "2014-03-31T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 35054,
+    "interval": {
+      "start": "2014-03-31T23:00:00.000Z",
+      "end": "2014-04-30T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 36404,
+    "interval": {
+      "start": "2014-04-30T23:00:00.000Z",
+      "end": "2014-05-31T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 36033,
+    "interval": {
+      "start": "2014-05-31T23:00:00.000Z",
+      "end": "2014-06-30T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 38724,
+    "interval": {
+      "start": "2014-06-30T23:00:00.000Z",
+      "end": "2014-07-31T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 33354,
+    "interval": {
+      "start": "2014-07-31T23:00:00.000Z",
+      "end": "2014-08-31T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 36600,
+    "interval": {
+      "start": "2014-08-31T23:00:00.000Z",
+      "end": "2014-09-30T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 39703,
+    "interval": {
+      "start": "2014-09-30T23:00:00.000Z",
+      "end": "2014-11-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 36038,
+    "interval": {
+      "start": "2014-11-01T00:00:00.000Z",
+      "end": "2014-12-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 34012,
+    "interval": {
+      "start": "2014-12-01T00:00:00.000Z",
+      "end": "2015-01-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 38902,
+    "interval": {
+      "start": "2015-01-01T00:00:00.000Z",
+      "end": "2015-02-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 36099,
+    "interval": {
+      "start": "2015-02-01T00:00:00.000Z",
+      "end": "2015-03-01T00:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  },
+  {
+    "metric": 39666,
+    "interval": {
+      "start": "2015-03-01T00:00:00.000Z",
+      "end": "2015-03-31T23:00:00.000Z",
+      "type": "TIME_RANGE"
+    }
+  }
+]
+	}
+}
