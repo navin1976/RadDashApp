@@ -18,6 +18,7 @@ import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
 import {loadDashboards} from './actions/dashboardActions';
 import {loadLayout} from './actions/layoutActions';
+import {loadData} from './actions/dataActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -30,6 +31,7 @@ store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 store.dispatch(loadDashboards());
 store.dispatch(loadLayout());
+store.dispatch(loadData());
 
 render(
 	<Provider store={store}>
