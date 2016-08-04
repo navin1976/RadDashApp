@@ -3,17 +3,31 @@
  */
 module.exports = {
   create: function (req, res) {
-    var dashboardCreated = {
-      "configuration": "{\r\n  \"subtitle\": \"Scanner dashboard\",\r\n  \"whatever\": \"Fields for dashboard config\",\r\n  \"widgets\": [\r\n  {\r\n    \"layout\": {\r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"width\": 3,\r\n      \"height\": 3\r\n    },\r\n    \"name\": \"Exams per hour on Scanomat2000 for the past week\",\r\n    \"options\": {\r\n      \"canRefresh\": true,\r\n      \"canResize\": false,\r\n      \"canCreateSparkles\": true\r\n    },\r\n    \"type\": \"barChart\",\r\n    \"data\": {\r\n      \"dataSourceId\": 12,\r\n      \"filters\": [\r\n        {\r\n          \"filterId\": 1,\r\n          \"filterValue\": \"now - 1 week\"\r\n        },\r\n        {\r\n          \"filterId\": 5,\r\n          \"filterValue\": \"Scanomat2000\"\r\n        }\r\n      ],\r\n      \"metricId\":2,\r\n      \"granularityId\":1\r\n    }\r\n  }\r\n  ]\r\n}",
-      "id": 1,
-      "is_enabled": true,
-      "title": "Performance Metrics Oncology"
-    };
-    res.type('application/json',null, 2);
-    res.status(201);
-    return res.send(JSON.stringify(dashboardCreated));
+    console.log(req.body);
+    configuration = req.body.configuration;
+    title = req.body.title;
+    isEnabled = req.body.isEnabled;
+    console.log(configuration, title, isEnabled);
+    Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records){
+      if (error) {
+        // handle error here- e.g. `res.serverError(err);`
+        return res.negotiate(error);
+      }
+      res.status(205);
+      res.type('application/json');
+      return res.send();
+    });
   },
 
+/**
+ *
+ * User.create({name:'Finn'}).exec(function (err, finn){
+  if (err) { return res.serverError(err); }
+
+  sails.log('Finn\'s id is:', finn.id);
+  return res.ok();
+});
+ */
   find: function (req, res) {
     Dashboard.find({}).exec(function(error, records) {
       res.status(200);
@@ -24,9 +38,20 @@ module.exports = {
 
   update: function (req, res) {
     console.log(req.params, req.body);
-
-    res.status(205);
-    return res.send();
+    configuration = req.body.configuration;
+    title = req.body.title;
+    isEnabled = req.body.isEnabled;
+    id = req.params.id;
+    console.log(configuration, id, title, isEnabled);
+    Dashboard.update({id: id}, {configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records) {
+      if (error) {
+        // handle error here- e.g. `res.serverError(err);`
+        return res.negotiate(error);
+      }
+      res.status(205);
+      res.type('application/json');
+      return res.send();
+    });
   },
 
   delete: function (req, res) {
@@ -44,19 +69,18 @@ module.exports = {
   default: function (req, res) {
     console.log(req.body);
     console.log(req.query);
+    id = req.query.roleId;
     configuration = req.body.configuration;
     title = req.body.title;
     isEnabled = req.body.isEnabled;
-    roleId = req.query.roleId;
-    console.log(configuration, title, isEnabled);
-    Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[roleId]}).exec(function(error, records){
+    console.log(id, configuration, title, isEnabled);
+    Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[id]}).exec(function(error, records){
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
         return res.negotiate(error);
       }
       res.status(205);
       res.type('application/json');
-      return res.send(JSON.stringify(records, null, 2));
+      return res.send();
     });
   }
 }
