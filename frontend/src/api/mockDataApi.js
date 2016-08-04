@@ -11,10 +11,10 @@ const data = [
 ];
 
 class DataApi{
-	static getData(id){
+	static getData(d,widget){
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				console.log("THIS IS THE ID: "+id);
+				console.log("THIS IS THE ID: "+widget);
 				resolve(Object.assign([], data));
 			}, delay);
 		});

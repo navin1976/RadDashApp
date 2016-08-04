@@ -4,9 +4,6 @@ import DataApi from  '../api/mockDataApi';
 
 
 //Needs a loadCoursesFailure/Error action to dispatch
-export function loadDataSuccess(data){
-	return {type: types.LOAD_DATA_SUCCESS, data};
-}
 
 export function loadDataForWidget(id,data){
 	return {type: types.LOAD_DATA_WIDGET_SUCCESS,id,data};
