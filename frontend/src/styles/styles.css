@@ -208,3 +208,10 @@ html, body, #app{
 .dashChoice{
     background: rgba(30,30,30,1);
 }
+
+.noSelect{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
