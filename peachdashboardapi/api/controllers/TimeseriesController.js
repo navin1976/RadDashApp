@@ -28,9 +28,9 @@ module.exports = {
   find: function (req, res) {
 
     // extract from request
-    datasourceId = req.body.dataSourceId;
-    granularityId = req.body.granularityId;
-    metricId = req.body.metricId;
+    var datasourceId = req.body.dataSourceId;
+    var granularityId = req.body.granularityId;
+    var metricId = req.body.metricId;
 
     // find relevant data source
     Datasource.findOne({id: datasourceId})

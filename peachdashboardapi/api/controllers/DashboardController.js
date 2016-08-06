@@ -3,19 +3,16 @@
  */
 module.exports = {
   create: function (req, res) {
-    console.log(req.body);
-    configuration = req.body.configuration;
-    title = req.body.title;
-    isEnabled = req.body.isEnabled;
-    console.log(configuration, title, isEnabled);
+    var title = req.body.title;
+    var isEnabled = req.body.isEnabled;
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
         return res.negotiate(error);
       }
-      res.status(205);
+      res.status(201);
       res.type('application/json');
-      return res.send();
+      return res.send(JSON.stringify(records));
     });
   },
 
@@ -37,27 +34,21 @@ module.exports = {
   },
 
   update: function (req, res) {
-    console.log(req.params, req.body);
-    configuration = req.body.configuration;
-    title = req.body.title;
-    isEnabled = req.body.isEnabled;
-    id = req.params.id;
-    console.log(configuration, id, title, isEnabled);
+    var configuration = req.body.configuration;
+    var title = req.body.title;
+    var isEnabled = req.body.isEnabled;
+    var id = req.params.id;
     Dashboard.update({id: id}, {configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records) {
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
         return res.negotiate(error);
       }
       res.status(205);
-      res.type('application/json');
       return res.send();
     });
   },
 
   delete: function (req, res) {
-    console.log(req.params);
-    id = req.params.id;
-    console.log(id);
+    var id = req.params.id;
     Dashboard.destroy({id: id}).exec(function (error) {
       if (error) {
           return res.negotiate(error);
@@ -66,20 +57,19 @@ module.exports = {
       return res.send();
     });
   },
+
   default: function (req, res) {
-    console.log(req.body);
-    console.log(req.query);
-    id = req.query.roleId;
-    configuration = req.body.configuration;
-    title = req.body.title;
-    isEnabled = req.body.isEnabled;
-    console.log(id, configuration, title, isEnabled);
+    var id = req.query.roleId;
+    var configuration = req.body.configuration;
+    var title = req.body.title;
+    var isEnabled = req.body.isEnabled;
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[id]}).exec(function(error, records){
       if (error) {
         return res.negotiate(error);
       }
-      res.status(205);
-      return res.send();
+      res.status(201);
+      res.type('application/json');
+      res.send(JSON.stringify(records));
     });
   }
 }
