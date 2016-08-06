@@ -79,7 +79,6 @@ module.exports = {
         return res.negotiate(error);
       }
       res.status(205);
-      res.type('application/json');
       return res.send();
     });
   }
