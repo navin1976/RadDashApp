@@ -23,25 +23,25 @@ module.exports = {
 
     roles:{
       collection: 'role',
-      via: 'datasource',
+      via: 'datasources',
       through: 'roledatasource'
     },
 
     granularities:{
       collection: 'granularity',
-      via: 'datasource',
+      via: 'datasources',
       through: 'granularitydatasource'
     },
 
     filters:{
       collection: 'filter',
-      via: 'datasource',
+      via: 'datasources',
       through: 'filterdatasource'
     },
 
     metrics:{
       collection: 'metric',
-      via: 'datasource',
+      via: 'datasources',
       through: 'metricdatasource'
     }
 

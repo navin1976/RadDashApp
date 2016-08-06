@@ -27,22 +27,22 @@ module.exports = {
       via: 'roleId'
     },
 
+    permissions:{
+      collection: 'permission',
+      via: 'roles',
+      through: 'rolepermission'
+    },
+
     datasources:{
       collection: 'datasource',
-      via: 'role',
+      via: 'roles',
       through: 'roledatasource'
     },
 
     dashboards:{
       collection: 'dashboard',
-      via: 'role',
+      via: 'roles',
       through: 'roledashboard'
-    },
-
-    permissions:{
-      collection: 'permission',
-      via: 'role',
-      through: 'rolepermission'
     }
   }
 }

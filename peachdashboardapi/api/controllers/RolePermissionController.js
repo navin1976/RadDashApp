@@ -41,13 +41,12 @@ module.exports = {
     idUpdate = req.body.roleId;
     permissionIds = req.body.permissionIds;
     console.log(idUpdate, permissionIds);
-    Role.update({id: idUpdate}, {permissions: permissionIds}).exec(function(error, records){
+    Role.update(idUpdate, {permissions:permissionIds, description:"admin"}).exec(function(error, records){
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        return res.negotiate(error);
+        res.negotiate(error);
+        return res.send();
       }
       res.status(205);
-      res.type('application/json');
       return res.send();
     });
   }

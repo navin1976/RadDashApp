@@ -23,7 +23,7 @@ module.exports = {
 
     datasources:{
       collection: 'datasource',
-      via: 'metric',
+      via: 'metrics',
       through: 'metricdatasource'
     }
   }
