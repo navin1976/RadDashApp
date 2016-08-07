@@ -4,7 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import Header from './Common/Header';
-//import Toolbar from './Common/Toolbar';
+import Toolbar from './Common/Toolbar';
 import {connect} from 'react-redux';
 
 class App extends React.Component{
@@ -12,6 +12,7 @@ class App extends React.Component{
 		return(
 			<div id="wrapper">
 				<Header loading={this.props.loading}/>
+				<Toolbar />
 					<div id="content-area">
 						<div id="page-content-wrapper">
 							<div className="container-fluid layout">

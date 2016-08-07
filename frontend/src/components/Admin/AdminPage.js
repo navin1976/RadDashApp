@@ -1,8 +1,19 @@
 import React,{PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import toastr from 'toastr';
+import RoleForm from './RoleForm';
+
 
 class AdminPage extends React.Component{
 	constructor(props,context){
 		super(props,context);
+
+		this.state = {
+			roles: [],
+			errors:{},
+			saving:false
+		};
 	}
 
 	redirectToManageDashboards(){
@@ -19,7 +30,25 @@ class AdminPage extends React.Component{
 
 	render(){
 		return(
-			<div>
+				<RoleForm
+					allRoles={this.state.roles}
+					errors = {this.state.errors}
+					saving = {this.state.saving}
+				/>
+		);
+	}
+	
+}
+
+AdminPage.contextTypes = {
+	router: PropTypes.object
+};
+
+
+export default AdminPage;
+
+/*
+<div>
 				<div className="info-context" onClick={this.redirectToManageDashboards}>
 					<h1>Manage dashboards</h1>
 					<p>Click here to manage the default dashboards for the different roles</p>
@@ -32,15 +61,4 @@ class AdminPage extends React.Component{
 					<h1>Add new role</h1>
 					<p>This will alow you to add new roles</p>
 				</div>
-			</div>
-		);
-	}
-	
-}
-
-AdminPage.contextTypes = {
-	router: PropTypes.object
-};
-
-
-export default AdminPage;
+			</div>*/

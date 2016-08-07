@@ -8,7 +8,13 @@ class Toolbar extends React.Component{
 	render(){
 		return(
 			<div className="toolbar">
-				<p>Toolbar</p>
+				<button id="logout">Logout</button>
+				<div id="toolbarButtonGroup">
+					<button className="toolbarButton">+</button>
+					<button className="toolbarButton">R</button>
+					<button className="toolbarButton">C</button>
+				</div>
+				
 			</div>
 		);
 	}
