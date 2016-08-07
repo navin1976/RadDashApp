@@ -3,6 +3,10 @@
  */
 
 module.exports = {
+
+  constants: {
+    ADMIN_ID: 1
+  },
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {

@@ -21,7 +21,7 @@ module.exports = {
         return res.send();
       }
       if (!id) {
-        return res.notFound('Could not find Finn, sorry.');
+        return res.notFound('Could not find user, sorry.');
       }
       res.status(205);
       res.type('application/json');

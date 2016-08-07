@@ -28,6 +28,19 @@ module.exports.policies = {
 
   // '*': true,
 
+  RolePermissionController: {
+    findRole: 'canGetRoles',
+
+    assignRole: 'canAssignRoles',
+
+    findPermission: 'canGetPermissions',
+
+    assignPermission: 'canAssignPermissions'
+  },
+
+  DashboardController: {
+    'default': 'canCreateDefaultDashboard'
+  }
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
