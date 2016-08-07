@@ -9,11 +9,8 @@ class AdminPage extends React.Component{
 	constructor(props,context){
 		super(props,context);
 
-		this.state = {
-			roles: [],
-			errors:{},
-			saving:false
-		};
+		this.state = {'filter':''};
+		this.changeHandler = this.changeHandler.bind(this);
 	}
 
 	redirectToManageDashboards(){
@@ -28,13 +25,23 @@ class AdminPage extends React.Component{
 		this.context.router.push('/courses');
 	}
 
+	changeHandler(event){
+		this.setState({'filter':event.target.value},()=>{
+			console.log(this.state.filter);
+		});
+	}
+
 	render(){
 		return(
+			<div>
+				<div id="searchBar">
+					<div id="searchIcon" className="inline noSelect">S</div>
+					<input id="searchField" className="inline" type="text" onChange={this.changeHandler}/>
+				</div>
 				<RoleForm
-					allRoles={this.state.roles}
-					errors = {this.state.errors}
-					saving = {this.state.saving}
+					allRoles={this.props.roles}
 				/>
+			</div>
 		);
 	}
 	
@@ -44,8 +51,18 @@ AdminPage.contextTypes = {
 	router: PropTypes.object
 };
 
+AdminPage.propTypes = {
+	roles: PropTypes.array
+};
 
-export default AdminPage;
+function mapStateToProps(state,ownProps){
+	return{
+		roles: state.roles
+	};
+}
+
+
+export default connect(mapStateToProps)(AdminPage);
 
 /*
 <div>

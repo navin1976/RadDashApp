@@ -8,6 +8,7 @@ import CoursesPage from './components/Course/CoursesPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import ManageCoursePage from './components/Course/ManageCoursePage';
 import AdminPage from './components/Admin/AdminPage';
+import PermissionPage from './components/Admin/PermissionPage';
 
 export default (
 	<Route path="/" component={App}>
@@ -19,5 +20,6 @@ export default (
 		<Route path="dashboard" component={Dashboard}/>
 		<Route path="dashboard/:id" component={Dashboard}/>
 		<Route path="admin" component={AdminPage}/>
+		<Route path="permissions/:id" component={PermissionPage}/>
 	</Route>
 );

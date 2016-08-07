@@ -255,3 +255,48 @@ html, body, #app{
     background-color:  rgba(130,30,30,1);
     
 }
+
+.inline{
+    display: inline;
+}
+
+#searchBar{
+    margin-bottom: 25px;
+    display: flex;
+}
+
+#searchIcon{
+    background-color: rgba(0,0,0,1);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+    color:white;
+    float:left;
+    height:35px;
+    width:35px;
+}
+
+#searchField{
+    border:none;
+    padding-left: 7px;
+    height: 35px;
+    font-size: 20px;
+    flex:1;
+}
+
+.tableHead{
+    background-color: rgba(0,0,0,1);
+    color:white;
+}
+
+.tableBody{
+     background-color:white;
+}
+
+.noBold{
+    font-weight: normal;
+}
+
+.roleRow:hover{
+    background-color: rgba(230,230,230,1);
+}

@@ -19,6 +19,9 @@ export const LOAD_LAYOUT_SUCCESS = 'LOAD_LAYOUT_SUCCESS';
 //Dashboard General Actions
 export const LOAD_DASHBOARD_SUCCESS = 'LOAD_DASHBOARD_SUCCESS';
 export const LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS';
-//Data actions
 
+//Data actions
 export const LOAD_DATA_WIDGET_SUCCESS = "LOAD_DATA_WIDGET_SUCCESS";
+
+//Role actions
+export const LOAD_ALL_ROLES_SUCCESS = "LOAD_ALL_ROLES_SUCCESS";
