@@ -36,7 +36,7 @@ module.exports = {
 
     dashboards: {
       collection: 'dashboard',
-      via: 'user',
+      via: 'users',
       through: 'userdashboard'
     }
   }

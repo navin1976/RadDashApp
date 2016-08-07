@@ -42,7 +42,10 @@ module.exports.routes = {
 
   /**Users Routes**/
   'GET /users': {controller: 'UserController', action: 'find'},
+  /**
+   * No current use case matching this route
   'GET /users/:userId': {controller: 'UserController', action: 'find'},
+   */
 
   /**RolePermission Routes**/
   'GET /roles': {controller: 'RolePermissionController', action: 'findRole'},

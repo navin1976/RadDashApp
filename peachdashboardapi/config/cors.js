@@ -46,8 +46,7 @@ module.exports.cors = {
   * "*" to allow all domains CORS access.                                    *
   *                                                                          *
   ***************************************************************************/
-
-  origin: 'http://localhost:8000,http://localhost:3000,http://ec2-52-202-141-251.compute-1.amazonaws.com:8000,http://dashboardapi.northeurope.cloudapp.azure.com:8000',
+  origin: 'http://localhost:3000',
 
   /***************************************************************************
   *                                                                          *

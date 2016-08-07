@@ -3,47 +3,35 @@
  */
 module.exports = {
   find: function (req, res) {
-    var datasource = [
-      {
-        "dataSourceName": "exams",
-        "dataSourceId": 1,
-        "filters": [
-          {
-            "filterId": 1,
-            "filterName": "Date Range",
-            "filterValueType": "dateRange",
-          },
-          {
-            "filterId": 5,
-            "filterName": "Cancellation Type",
-            "filterValueType": "ENUM",
-            "filterValueEnum": ["NDA", "Cancellation"]
+    var roleId = req.query.roleId;
+    Role.find({id: roleId}).populate('datasources').exec(function(error, roles) {
+        if (error) {
+          res.negotiate(error);
+          res.send();
+        }
+        if (roles.length > 0) {
+          console.log(roles);
+          datasourceIds = [];
+          for (var i=0; i < roles[0].datasources.length; i++) {
+            datasourceIds.push(roles[0].datasources[i].id);
           }
-        ],
-        "availableMetrics": [
-          {
-            "metricId": 5,
-            "metricName": "Total Number"
-          },
-          {
-            "metricId": 8,
-            "metricName": "Median Time"
-          }
-        ],
-        "availableGranularity": [
-          {
-            "granularityId": 5,
-            "granularityName": "Daily"
-          },
-          {
-            " granularityId": 1,
-            " granularityName": "All time"
-          }
-        ]
-      }
-    ];
-    res.status(200);
-    res.type('application/json');
-    return res.send(JSON.stringify(datasource, null, 2));
+          Datasource.find({id: datasourceIds})
+            .populate('granularities')
+            .populate('filters')
+            .populate('metrics')
+            .exec(function(error, datasources) {
+              if (error) {
+                res.negotiate(error);
+                res.send();
+              }
+              res.status(200);
+              res.type('application/json');
+              res.send(JSON.stringify(datasources));
+            });
+        } else {
+          res.status(404);
+          res.send();
+        }
+      });
   }
-}
+};

@@ -23,7 +23,7 @@ module.exports = {
 
     datasources:{
       collection: 'datasource',
-      via: 'filter',
+      via: 'filters',
       through: 'filterdatasource'
     }
   }

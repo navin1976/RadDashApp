@@ -1,0 +1,889 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A secure, REST API for real-time data analytics within Project Peach.",
+    "version": "1.0.0",
+    "title": "Radiology Dashboard API",
+    "contact": {
+      "name": "Melinda Fekete",
+      "email": "melinda.fekete.15@ucl.ac.uk"
+    }
+  },
+  "host": "",
+  "tags": [
+    {
+      "name": "Default",
+      "description": "Default section"
+    },
+    {
+      "name": "Dashboards",
+      "description": ""
+    },
+    {
+      "name": "Roles and Permissions",
+      "description": ""
+    },
+    {
+      "name": "Data",
+      "description": ""
+    },
+    {
+      "name": "Users",
+      "description": ""
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/dashboard/default": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "Creates a new default dashboard for a given role",
+        "description": "Creates a new default dashboard for a given role",
+        "operationId": "postDashboardDefault",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 6
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DashboardCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The default dashboard is successfully created, please refresh content"
+          },
+          "403": {
+            "description": "User is not authorised to create a new default dashboard",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/{dashboardId}": {
+      "put": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "Updates an existing dashboard.",
+        "description": "Updates an existing dashboard.",
+        "operationId": "putDashboardDashboardId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "dashboardId",
+            "in": "path",
+            "description": "Refers to the id of the dashboard that is to be updated or deleted.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DashboardUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Dashboard is successfully updated, please refresh content."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "Deletes an existing dashboard.",
+        "description": "Deletes an existing dashboard.",
+        "operationId": "deleteDashboardDashboardId",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "dashboardId",
+            "in": "path",
+            "description": "Refers to the id of the dashboard that is to be updated or deleted.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Dashboard is successfully deleted (not enabled), please refresh content."
+          }
+        }
+      }
+    },
+    "/dashboards": {
+      "get": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "The Dashboard Retrieval endpoint",
+        "description": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. \nThe response includes the configuration which specifies all display-related information.",
+        "operationId": "getDashboards",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of dashboards",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dashboard"
+              }
+            }
+          },
+          "404": {
+            "description": "The given user does not have dashboard data associated with the id",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "The Dashboard Creation endpoint is used when creating a new dashboard.",
+        "description": "The Dashboard Creation endpoint is used when creating a new dashboard.",
+        "operationId": "postDashboards",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DashboardCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Dashboard successfully created, refresh the content.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "400": {
+            "description": "Error 400",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/data/datasource": {
+      "get": {
+        "tags": [
+          "Data"
+        ],
+        "summary": "Retrieves a list of all data sources for a given role",
+        "description": "Retrieves a list of all data sources for a given role to present the user with a list of available datasources, and filters and metrics associated with these datasources",
+        "operationId": "getDataDatasource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 123
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data sources successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Datasource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/entities": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "summary": "Retrieves a list of entities",
+        "description": "Retrieves a list of entities given certain search parameters",
+        "operationId": "getDataDepartments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RequestEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entities successfully retrieved",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/data/timeseries": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "summary": "Retrieve Timeseries Data",
+        "description": "Retrieves data for a metric about a datasource, for example: number of exams per scanner per day",
+        "operationId": "postDataTimeseries",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RequestTimeseries"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metric computed for the given datasource using the given filters and granularity",
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            }
+          }
+        }
+      }
+    },
+    "/permissions": {
+      "get": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Retrieves a list of all available permissions",
+        "description": "Retrieves a list of all available permissions",
+        "operationId": "getPermissions",
+        "consumes": [],
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Permission"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permissions/assign": {
+      "put": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Assigns new permissions to roles or modifies existing ones.",
+        "description": "Assigns new permissions to roles or modifies existing ones.",
+        "operationId": "putPermissionsAssign",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
+            }
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "The update was successful, please refresh content."
+          },
+          "401": {
+            "description": "The user is not authorised to make this request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/roles": {
+      "get": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Retrieves the list of all roles",
+        "description": "Retrieves the list of all roles",
+        "operationId": "getRoles",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of roles successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Role"
+              }
+            }
+          },
+          "401": {
+            "description": "The user is not authorised to access this information",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/roles/assign": {
+      "put": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "The request is sent when a role is changed for a particular user.",
+        "description": "The request is sent when a role is changed for a particular user.",
+        "operationId": "putRolesAssign",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role which is to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 10
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Unique identifier for a particular user",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 1234
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "The update was successful, content should be refreshed"
+          },
+          "403": {
+            "description": "The user is not authorised to make this request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieve a list of all users",
+        "description": "Retrieve a list of all users",
+        "operationId": "getUsers",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The list of all users was successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "403": {
+            "description": "The user is not authorised to access this information",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Dashboard": {
+      "type": "object",
+      "required": [
+        "configuration",
+        "isEnabled",
+        "title"
+      ],
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "JSON string representing the client-side display related logic."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier representing a specific dashboard for a given user. (not required when creating a new dashboard)"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the dashboard is visible on the user's page. This enables the user to hide dashboards without deleting them.",
+          "default": false
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of a dashboard."
+        }
+      },
+      "description": "Dashboard object"
+    },
+    "DashboardCreate": {
+      "type": "object",
+      "required": [
+        "configuration",
+        "isEnabled",
+        "title"
+      ],
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "Client-side, display related logic stored as a JSON string."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the dashboard is shown on the page or not.",
+          "default": false
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the dashboard."
+        }
+      },
+      "description": "Dashboard object used when creating dashboards, if the Dashboard object is missing an id, it is identified as a new dashboard"
+    },
+    "DashboardUpdate": {
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "JSON string representing the client-side display related logic. Not required if it remains the same when modifying the dashboard."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the dashboard is visible on the user's page. This enables the user to hide dashboards without deleting them. Not required if it remains the same when modifying the dashboard.",
+          "default": false
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of a dashboard, not required if it remains the same when modifying the dashboard."
+        }
+      },
+      "description": "Dashboard object for modifying existing dashboards, if the id property is given, it indicates that the dashboard already exists and will be updated in accordance with the specified parameters. For creating new dashboards, see Dashboard Create"
+    },
+    "Datasource": {
+      "type": "object",
+      "required": [
+        "filters",
+        "granularities",
+        "id",
+        "metrics",
+        "name"
+      ],
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "Filters available for a particular data dource",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "granularities": {
+          "type": "array",
+          "description": "Available granularity for requesting the data, such as daily, weekly, monthly, yearly",
+          "items": {
+            "$ref": "#/definitions/Granularity"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a data source"
+        },
+        "metrics": {
+          "type": "array",
+          "description": "An array of metrics available on the data source (such as: 'total number')",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Description of the data source"
+        }
+      },
+      "description": "A segment of data within the database"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for errors"
+        },
+        "message": {
+          "type": "string",
+          "description": "Displays the error message"
+        }
+      },
+      "description": "Describes the error in case of a bad request."
+    },
+    "Filter": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "valueType"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a filter"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the filter"
+        },
+        "valueEnum": {
+          "type": "array",
+          "description": "Choices only available for a set of predefined fields",
+          "items": {
+            "type": "string"
+          }
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Value type of filter, can be String, Int, TimeRange,  array, ENUM if ENUM, then filter value ENUM contains all possibilities"
+        }
+      },
+      "description": "Filters available for a given data source"
+    },
+    "Granularity": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id of the granularity"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the granularity"
+        }
+      },
+      "description": "Granularity of the request"
+    },
+    "Metric": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the id of the metric"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the metric"
+        }
+      },
+      "description": "Represents a metric used for timeseries\n{ \"metricId\": 1, \"metricName\" : \"total number\" },\n{ \"metricId\": 2, \"metricName\" : \"median\" },\n{ \"metricId\": 3, \"metricName\" : \"mean\" },"
+    },
+    "MetricData": {
+      "type": "object",
+      "required": [
+        "metric"
+      ],
+      "properties": {
+        "metric": {
+          "type": "array",
+          "description": "The metric requested,",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "description": "Any metric that can be represented with a double. It is an array that is returned according to the granularity as requested. If single element, then it is over the complete period. for e.g\n{ \"metric\" : [10, 20, 30, 40 , 10, 10] }"
+    },
+    "Permission": {
+      "type": "object",
+      "required": [
+        "description",
+        "id"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the permission, such as \"view radiology data\""
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a permission"
+        }
+      },
+      "description": "Specifies what data and actions the user has access to based on their role."
+    },
+    "PermissionIds": {
+      "type": "object",
+      "required": [
+        "permissionIds"
+      ],
+      "properties": {
+        "permissionIds": {
+          "type": "array",
+          "description": "A list of unique identifiers for permissions related to a role",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "description": "A list of unique identifiers for permissions related to a role"
+    },
+    "RequestEntity": {
+      "type": "object",
+      "required": [
+        "dataSourceId",
+        "filters"
+      ],
+      "properties": {
+        "dataSourceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the datasource"
+        },
+        "filters": {
+          "type": "array",
+          "description": "Filters to filter by",
+          "items": {
+            "$ref": "#/definitions/RequestFilter"
+          }
+        }
+      },
+      "description": "Request to retrieve entities"
+    },
+    "RequestFilter": {
+      "type": "object",
+      "required": [
+        "filterId",
+        "filterValue"
+      ],
+      "properties": {
+        "filterId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the filter"
+        },
+        "filterValue": {
+          "type": "string",
+          "description": "Value to filter with, can be string, int, double or an array."
+        }
+      },
+      "description": "Object to represent a filter in a request"
+    },
+    "RequestTimeseries": {
+      "type": "object",
+      "required": [
+        "dataSourceId",
+        "filters",
+        "granularityId",
+        "metricId"
+      ],
+      "properties": {
+        "dataSourceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the datasource"
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters to filter by",
+          "items": {
+            "$ref": "#/definitions/RequestFilter"
+          }
+        },
+        "granularityId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the granularity to use in the query"
+        },
+        "metricId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the metric requested"
+        }
+      },
+      "description": "Request for a timeseries metric"
+    },
+    "Role": {
+      "type": "object",
+      "required": [
+        "id",
+        "permissionIds"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The name of the role"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a role"
+        },
+        "permissionIds": {
+          "type": "array",
+          "description": "A list of all associated permissionIds",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
+    },
+    "RolePermission": {
+      "type": "object",
+      "required": [
+        "permissionIds",
+        "roleId"
+      ],
+      "properties": {
+        "permissionIds": {
+          "type": "array",
+          "description": "Unique identifiers for permissions",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for roles"
+        }
+      },
+      "description": "Roles with assigned permissions"
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "roleId",
+        "userId"
+      ],
+      "properties": {
+        "roleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier associated with a role"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A unique identifier for the user"
+        },
+        "userTitle": {
+          "type": "string",
+          "description": "**not decided yet**"
+        }
+      },
+      "description": "The user of the system who topically is an employee at the hospital."
+    }
+  }
+}

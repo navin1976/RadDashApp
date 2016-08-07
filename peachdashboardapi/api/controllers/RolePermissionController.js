@@ -6,9 +6,8 @@
  */
 module.exports = {
   assignRole: function (req, res) {
-    console.log(req.query);
-    idUpdate = req.query.userId;
-    roleId = req.query.roleId;
+    var idUpdate = req.query.userId;
+    var roleId = req.query.roleId;
     User.update({id: idUpdate}, {roleId: roleId}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
@@ -37,18 +36,25 @@ module.exports = {
   },
 
   assignPermission: function (req, res) {
-    console.log(req.body);
-    idUpdate = req.body.roleId;
-    permissionIds = req.body.permissionIds;
-    console.log(idUpdate, permissionIds);
-    Role.update({id: idUpdate}, {permissions: permissionIds}).exec(function(error, records){
+    var idUpdate = req.body.roleId;
+    var permissionIds = req.body.permissionIds;
+    RolePermission.destroy({role:idUpdate})
+      .then(function() { return Role.update(idUpdate, {permissions:permissionIds, description:"admin"});})
+      .catch(function(error) { res.negotiate(error); res.send();})
+      .then(function() { res.status(205); res.send();})
+      .catch(function(error) { res.negotiate(error); res.send();});
+    /*
+     RolePermission.destroy({role:idUpdate}).exec(function(error, records) {
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        return res.negotiate(error);
+        ...
       }
-      res.status(205);
-      res.type('application/json');
-      return res.send();
-    });
+      Role.update(idUpdate, {permissions:permissionIds, description:"admin"}).exec(function(error, records) {
+        if (error) {
+          ...
+        }
+        res.send();
+        });
+     });
+     */
   }
-}
+};

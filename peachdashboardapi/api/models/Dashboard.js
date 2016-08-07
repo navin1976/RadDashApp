@@ -36,13 +36,13 @@ module.exports = {
 
     users: {
       collection: 'user',
-      via: 'dashboard',
+      via: 'dashboards',
       through: 'userdashboard'
     },
 
     roles:{
       collection: 'role',
-      via: 'dashboard',
+      via: 'dashboards',
       through: 'roledashboard'
     }
   }

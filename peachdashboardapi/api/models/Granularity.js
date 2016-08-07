@@ -23,7 +23,7 @@ module.exports = {
 
     datasources:{
       collection: 'datasource',
-      via: 'granularity',
+      via: 'granularities',
       through: 'granularitydatasource'
     }
   }

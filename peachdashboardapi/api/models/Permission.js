@@ -24,7 +24,7 @@ module.exports = {
 
     roles:{
       collection: 'role',
-      via: 'permission',
+      via: 'permissions',
       through: 'rolepermission'
     }
   }
