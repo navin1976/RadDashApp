@@ -38,7 +38,8 @@ module.exports.routes = {
   'POST /dashboards': {controller: 'DashboardController', action: 'create'},
   'PUT /dashboard/:id': {controller: 'DashboardController', action: 'update'},
   'DELETE /dashboard/:id': {controller: 'DashboardController', action: 'delete'},
-  'POST /dashboards/default': {controller: 'DashboardController', action: 'default'},
+  'POST /dashboards/default': {controller: 'DashboardController', action: 'createDefault'},
+  'PUT /dashboards/default/:id': {controller: 'DashboardController', action: 'updateDefault'},
 
   /**Users Routes**/
   'GET /users': {controller: 'UserController', action: 'find'},
@@ -54,10 +55,13 @@ module.exports.routes = {
   'PUT /permissions/assign': {controller: 'RolePermissionController', action: 'assignPermission'},
 
   /**Data Routes**/
-  'GET /data/datasource': {controller: 'DatasourceController', action: 'find'},
+  'GET /data/datasource': {controller: 'DatasourceController', action: 'findForCurrentUser'},
   'POST /data/entities': {controller: 'DataentitiesController', action: 'find'},
-  'POST /data/timeseries': {controller: 'TimeseriesController', action: 'find'}
+  'POST /data/timeseries': {controller: 'TimeseriesController', action: 'find'},
 
+  /**Datasources**/
+  'GET /datasources': {controller: 'DatasourceController', action: 'findAll'},
+  'PUT /datasources/assign': {controller: 'DatasourceController', action: 'assign'}
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

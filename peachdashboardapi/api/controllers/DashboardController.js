@@ -38,6 +38,7 @@ module.exports = {
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
     var id = req.params.id;
+    // todo check that the dashboard belongs to the current user
     Dashboard.update({id: id}, {configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records) {
       if (error) {
         return res.negotiate(error);
@@ -58,7 +59,7 @@ module.exports = {
     });
   },
 
-  default: function (req, res) {
+  createDefault: function (req, res) {
     var id = req.query.roleId;
     var configuration = req.body.configuration;
     var title = req.body.title;
@@ -71,7 +72,29 @@ module.exports = {
       res.type('application/json');
       res.send(JSON.stringify(records));
     });
-  }
+  },
+
+  updateDefault: function (req, res) {
+    var configuration = req.body.configuration;
+    var title = req.body.title;
+    var isEnabled = req.body.isEnabled;
+    var id = req.params.id;
+    RoleDashboard.findOne({dashboard:id}).exec(function(error, roledashboard) {
+      if (roledashboard) {
+        Dashboard.update({id: id}, {
+          configuration: configuration,
+          title: title,
+          isEnabled: isEnabled
+        }).exec(function (error, records) {
+          if (error) {
+            return res.negotiate(error);
+          }
+          res.status(205);
+          return res.send();
+        });
+      }
+    });
+  },
 }
 
 
