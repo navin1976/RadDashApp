@@ -3,32 +3,36 @@
  */
 module.exports = {
   find: function (req, res) {
-    User.find({}).exec(function (error, records) {
+    User.find({}).exec(function (error, users) {
+      if (error) {
+        res.negotiate(error);
+        res.send();
+      }
       res.status(200);
       res.type('application/json');
-      return res.send(JSON.stringify(records, null, 2));
+      return res.send(JSON.stringify(users, null, 2));
     });
-  }
+  },
 
-  /** - for now, there is no use case for this route
-  findOne: function (res, req) {
-    console.log(req.params);
-    id = req.params.userId;
-    User.findOne({id: userId}).exec(function(error, records) {
+  info: function (req, res) {
+    var userId = req.info.userId;
+    User.findOne({id: userId}).exec(function (error, user) {
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        res.status(404);
-        return res.send();
+        res.negotiate(error);
+        res.send();
       }
-      if (!id) {
-        return res.notFound('Could not find user, sorry.');
-      }
-      res.status(205);
-      res.type('application/json');
-      return res.send(JSON.stringify(records, null, 2));
+      Role.findOne({id: user.roleId}).exec(function (error, role) {
+        if (error) {
+          res.negotiate(error);
+          res.send();
+        }
+        res.status(200);
+        res.type('application/json');
+        //role?
+        return res.send(JSON.stringify(users, null, 2));
+      });
     });
   }
-  */
 }
 
 

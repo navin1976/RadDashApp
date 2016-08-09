@@ -4,7 +4,7 @@
 module.exports = {
   findForCurrentUser: function (req, res) {
     //userId of the current user
-    var userId = req.info.userId;
+    var userId = parseInt(req.info.userId);
 
     //finding roleId of current user
     User.find({id: userId}).exec(function (error, users){
@@ -69,7 +69,7 @@ module.exports = {
   },
 
   assign: function (req, res) {
-    var idUpdate = req.body.roleId;
+    var idUpdate = parseInt(req.body.roleId);
     var datasourceIds = req.body.datasourceIds;
     RoleDatasource.destroy({role: idUpdate})
       .then(function () { return Role.findOne(idUpdate);})

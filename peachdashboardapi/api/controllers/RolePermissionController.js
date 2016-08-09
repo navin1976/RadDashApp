@@ -36,7 +36,7 @@ module.exports = {
   },
 
   assignPermission: function (req, res) {
-    var idUpdate = req.body.roleId;
+    var idUpdate = parseInt(req.body.roleId);
     var permissionIds = req.body.permissionIds;
 
     RolePermission.destroy({role:idUpdate})

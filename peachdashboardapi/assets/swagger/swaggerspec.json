@@ -560,6 +560,28 @@
           }
         }
       }
+    },
+    "/users/loggedin": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Info of logged in user",
+        "description": "Retrieves information about the user that is logged",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Info of logged in user successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -979,6 +1001,10 @@
         "userId"
       ],
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "**not decided yet**"
+        },
         "roleId": {
           "type": "integer",
           "format": "int32",
@@ -988,10 +1014,6 @@
           "type": "integer",
           "format": "int32",
           "description": "A unique identifier for the user"
-        },
-        "userTitle": {
-          "type": "string",
-          "description": "**not decided yet**"
         }
       },
       "description": "The user of the system who topically is an employee at the hospital."

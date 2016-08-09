@@ -2,35 +2,15 @@ var plywood = require('plywood');
 var ply = plywood.ply;
 var $ = plywood.$;
 
-var granularities = {
-  monthly : {
-    name: 'month',
-    interval: 'P1M'
-  },
-  daily : {
-    name: 'day',
-    interval: 'P1D'
-  },
-  yearly : {
-    name: 'year',
-    interval: 'P1Y'
-  }
-};
-
-var metrics = {
-  count: {
-    metricFn: 'count',
-    name: 'count'
-  }
-};
-
 module.exports = {
   find: function (req, res) {
 
+    // todo validate that the datasources are available to the user
+
     // extract from request
-    var datasourceId = req.body.dataSourceId;
-    var granularityId = req.body.granularityId;
-    var metricId = req.body.metricId;
+    var datasourceId = parseInt(req.body.dataSourceId);
+    var granularityId = parseInt(req.body.granularityId);
+    var metricId = parseInt(req.body.metricId);
 
     // find relevant data source
     Datasource.findOne({id: datasourceId})
@@ -44,8 +24,8 @@ module.exports = {
 
         // prepare the query
         var dataset = datasource.name;
-        var granularity = granularities[datasource.granularities[0].name];
-        var metric = metrics[datasource.metrics[0].name];
+        var granularity = Granularity.constants[datasource.granularities[0].name];
+        var metric = Metric.constants[datasource.metrics[0].name];
 
 
         var context = {};
@@ -65,9 +45,18 @@ module.exports = {
         // send the query to druid
         ex.compute(context).then(function(data) {
           // send the response
+
+          var dataResponse = [];
+          var dataToJS = JSON.parse(JSON.stringify(data.toJS()[0][dataset]));
+          for (var i = 0; i < dataToJS.length; i++) {
+            dataResponse.push({
+              metric: dataToJS[i].metric,
+              date: dataToJS[i].interval.start+"/"+dataToJS[i].interval.end
+            });
+          }
           res.type('application/json');
           res.status(200);
-          res.send(JSON.stringify(data.toJS()[0][dataset], null, 2));
+          res.send(JSON.stringify(dataResponse));
         }).done();
 
       } else {

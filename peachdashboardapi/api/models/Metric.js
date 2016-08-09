@@ -4,6 +4,12 @@
 module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
+  constants: {
+    count: {
+      metricFn: 'count',
+      name: 'count'
+    }
+  },
   attributes: {
     //e.g., 1
     id: {
