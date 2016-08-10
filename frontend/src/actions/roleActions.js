@@ -18,3 +18,13 @@ export function loadAllRoles(){
 		});
 	};
 }
+
+export function logRequest(){
+	return function(dispatch){
+		return fetch("http://peachdashboard.azurewebsites.net/permissions").then(data =>{
+			console.log(data.json());
+		}).catch(error => {
+			throw(error);
+		});
+	}
+}

@@ -19,7 +19,7 @@ import {loadAuthors} from './actions/authorActions';
 import {loadDashboards} from './actions/dashboardActions';
 import {loadLayout} from './actions/layoutActions';
 import {loadData} from './actions/dataActions';
-import {loadAllRoles} from './actions/roleActions';
+import {loadAllRoles,logRequest} from './actions/roleActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -34,6 +34,7 @@ store.dispatch(loadDashboards());
 store.dispatch(loadLayout());
 store.dispatch(loadData());
 store.dispatch(loadAllRoles());
+store.dispatch(logRequest());
 
 render(
 	<Provider store={store}>
