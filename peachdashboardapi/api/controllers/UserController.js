@@ -29,7 +29,14 @@ module.exports = {
         res.status(200);
         res.type('application/json');
         //role?
-        return res.send(JSON.stringify(users, null, 2));
+        var loggedInUser = [];
+        loggedInUser.push({
+          name: user.name,
+          roleId: user.roleId,
+          userId: user.id,
+          roleName: role.description,
+        });
+        return res.send(JSON.stringify(loggedInUser, null, 2));
       });
     });
   }
