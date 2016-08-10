@@ -12,7 +12,7 @@ import PermissionPage from './components/Admin/PermissionPage';
 import ViewPage from './components/Home/ViewPage';
 
 export default (
-	<Route path="/" component={App}>
+	<Route path="/raddash" component={App}>
 		<IndexRoute component={HomePage}/>
 		<Route path="about" component={AboutPage} />
 		<Route path="courses" component={CoursesPage}/>
