@@ -2,6 +2,7 @@
 ES6 features needed for the project to work are not
 functional.*/
 
+/*eslint-disable import/default*/
 import 'babel-polyfill';
 
 import React from 'react';
