@@ -16,6 +16,14 @@ module.exports = {
     yearly : {
       name: 'year',
       interval: 'P1Y'
+    },
+    weekly : {
+      name: 'week',
+      interval: 'P7D'
+    },
+    quarterly : {
+      name: 'quarter',
+      interval: 'P3M'
     }
   },
   attributes: {

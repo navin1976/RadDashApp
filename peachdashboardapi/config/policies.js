@@ -42,7 +42,8 @@ module.exports.policies = {
 
   DashboardController: {
     'createDefault': ['sessionAuth', 'canCreateDefaultDashboard'],
-    'updateDefault': ['sessionAuth', 'canCreateDefaultDashboard']
+    'updateDefault': ['sessionAuth', 'canUpdateDefaultDashboard'],
+    'deleteDefault': ['sessionAuth', 'canDeleteDefaultDashboard']
   },
 
   DatasourceController: {

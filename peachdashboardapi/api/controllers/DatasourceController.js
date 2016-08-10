@@ -70,7 +70,7 @@ module.exports = {
 
   assign: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
-    var datasourceIds = req.body.datasourceIds;
+    var datasourceIds = req.body.datasourceIds.map(Number);
     RoleDatasource.destroy({role: idUpdate})
       .then(function () { return Role.findOne(idUpdate);})
       .then(function (role) {
