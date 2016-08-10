@@ -16,28 +16,22 @@ module.exports = {
 
   info: function (req, res) {
     var userId = req.info.userId;
-    User.findOne({id: userId}).exec(function (error, user) {
+    User.findOne({id: userId}).populate('roleId').exec(function (error, user) {
       if (error) {
         res.negotiate(error);
         res.send();
       }
-      Role.findOne({id: user.roleId}).exec(function (error, role) {
-        if (error) {
-          res.negotiate(error);
-          res.send();
-        }
-        res.status(200);
-        res.type('application/json');
-        //role?
-        var loggedInUser = [];
-        loggedInUser.push({
-          name: user.name,
-          roleId: user.roleId,
-          userId: user.id,
-          roleName: role.description,
-        });
-        return res.send(JSON.stringify(loggedInUser, null, 2));
-      });
+      res.status(200);
+      res.type('application/json');
+
+      console.log(user);
+      var loggedInUser = {
+        name: user.name,
+        roleId: user.roleId.id,
+        userId: user.id,
+        roleName: user.roleId.description
+      };
+      return res.send(JSON.stringify(loggedInUser, null, 2));
     });
   }
 }
