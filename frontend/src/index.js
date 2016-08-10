@@ -2,6 +2,7 @@
 ES6 features needed for the project to work are not
 functional.*/
 
+/*eslint-disable import/default*/
 import 'babel-polyfill';
 
 import React from 'react';
@@ -19,6 +20,7 @@ import {loadAuthors} from './actions/authorActions';
 import {loadDashboards} from './actions/dashboardActions';
 import {loadLayout} from './actions/layoutActions';
 import {loadData} from './actions/dataActions';
+import {loadAllRoles,logRequest} from './actions/roleActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +34,8 @@ store.dispatch(loadAuthors());
 store.dispatch(loadDashboards());
 store.dispatch(loadLayout());
 store.dispatch(loadData());
+store.dispatch(loadAllRoles());
+store.dispatch(logRequest());
 
 render(
 	<Provider store={store}>

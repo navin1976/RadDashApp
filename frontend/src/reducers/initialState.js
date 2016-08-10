@@ -4,5 +4,6 @@ export default {
 	ajaxCallsInProgress:0,
 	dashboards:[],
 	layout:[],
-	data:[]
+	data:[],
+	roles:{}
 };

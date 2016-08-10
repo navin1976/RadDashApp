@@ -22,23 +22,7 @@ class Dashboard extends React.Component{
 		this.update = this.update.bind(this);
 	}
 	
-	tileEntry(tile, index){
-
-		let entry = null;
-
-		switch(tile.type){
-			case 'BAR_CHART':
-				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
-				break;
-			case 'LINE_CHART':
-				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
-				break;
-			case 'PIE_CHART':
-				entry = <PieChart data={data2} chartSeries={chartSeries2} value={value} name={name} width={350} height={300}/>
-				break;
-			default:
-				console.log("Chart type doesnt exist");
-		}
+	widgetMap(widget, index){
 
 		return(
 			<div key={tile.l.i} className="card">
@@ -72,28 +56,13 @@ class Dashboard extends React.Component{
 
 function mapStateToProps(state,ownProps){
 	const dashboardId = ownProps.params.id;
-	let dashLayout = [
-			{
-				l:{i: '1', x: 0, y: 0, w: 4, h: 8},
-				c:2,
-				n:"Dashboard 1",
-				type:"BAR_CHART"
-			},
-			{
-				l:{i: '2', x: 4, y: 0, w: 4, h: 8},
-				c:2,
-				n:"Dashboard 2",
-				type:"BAR_CHART"
-			}
-	];
+	let dasboard;
+
 	
 	if(!dashboardId){
 		dashLayout = state.layout;
 	}
-	
-	console.log(dashLayout);
 	return {
-		layout: dashLayout
 	};
 }
 
@@ -111,7 +80,27 @@ export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
 
 
 
-/*render(){
+/*
+
+
+
+		switch(tile.type){
+			case 'BAR_CHART':
+				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
+				break;
+			case 'LINE_CHART':
+				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
+				break;
+			case 'PIE_CHART':
+				entry = <PieChart data={data2} chartSeries={chartSeries2} value={value} name={name} width={350} height={300}/>
+				break;
+			default:
+				console.log("Chart type doesnt exist");
+		}
+render(){
+
+	
+
 		const layout = {
 		lg :[
 			{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},

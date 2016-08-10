@@ -6,9 +6,10 @@ import HomePage from './components/Home/HomePage';
 import AboutPage from './components/About/AboutPage';
 import CoursesPage from './components/Course/CoursesPage';
 import Dashboard from './components/Dashboard/Dashboard';
-import Table from './components/Table/Table';
 import ManageCoursePage from './components/Course/ManageCoursePage';
 import AdminPage from './components/Admin/AdminPage';
+import PermissionPage from './components/Admin/PermissionPage';
+import ViewPage from './components/Home/ViewPage';
 
 export default (
 	<Route path="/" component={App}>
@@ -19,7 +20,8 @@ export default (
 		<Route path="course/:id" component={ManageCoursePage}/>
 		<Route path="dashboard" component={Dashboard}/>
 		<Route path="dashboard/:id" component={Dashboard}/>
-		<Route path="table" component={Table}/>
 		<Route path="admin" component={AdminPage}/>
+		<Route path="permissions/:id" component={PermissionPage}/>
+		<Route path="demovis" component={ViewPage}/>
 	</Route>
 );
