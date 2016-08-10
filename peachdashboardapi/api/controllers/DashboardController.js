@@ -3,6 +3,7 @@
  */
 module.exports = {
   create: function (req, res) {
+    var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records){
@@ -16,16 +17,8 @@ module.exports = {
     });
   },
 
-/**
- *
- * User.create({name:'Finn'}).exec(function (err, finn){
-  if (err) { return res.serverError(err); }
-
-  sails.log('Finn\'s id is:', finn.id);
-  return res.ok();
-});
- */
   find: function (req, res) {
+    // todo refined to only show user dashboards + default for role
     Dashboard.find({}).exec(function(error, records) {
       res.status(200);
       res.type('application/json');
@@ -37,18 +30,31 @@ module.exports = {
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
-    var id = req.params.id;
-    Dashboard.update({id: id}, {configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records) {
-      if (error) {
-        return res.negotiate(error);
+    var dashboardId = req.params.id;
+    var userId = req.info.userId;
+    UserDashboard.findOne({user:userId, dashboard:dashboardId}).exec(function(error, userDashboard) {
+      if (userDashboard) {
+        Dashboard.update({id: dashboardId}, {configuration: configuration, title: title, isEnabled: isEnabled}).exec(function(error, records) {
+          if (error) {
+            return res.negotiate(error);
+          }
+          res.status(205);
+          return res.send();
+        });
+      } else {
+        if (error) {
+          res.negotiate(error);
+          return res.send();
+        }
+        res.status(403);
+        return res.send();
       }
-      res.status(205);
-      return res.send();
     });
   },
 
   delete: function (req, res) {
     var id = req.params.id;
+    // todo check if dashboard belongs to current user
     Dashboard.destroy({id: id}).exec(function (error) {
       if (error) {
           return res.negotiate(error);
@@ -58,7 +64,7 @@ module.exports = {
     });
   },
 
-  default: function (req, res) {
+  createDefault: function (req, res) {
     var id = req.query.roleId;
     var configuration = req.body.configuration;
     var title = req.body.title;
@@ -71,7 +77,36 @@ module.exports = {
       res.type('application/json');
       res.send(JSON.stringify(records));
     });
-  }
+  },
+
+  updateDefault: function (req, res) {
+    var configuration = req.body.configuration;
+    var title = req.body.title;
+    var isEnabled = req.body.isEnabled;
+    var id = parseInt(req.params.id);
+    RoleDashboard.findOne({dashboard:id}).exec(function(error, roledashboard) {
+      if (roledashboard) {
+        Dashboard.update({id: id}, {
+          configuration: configuration,
+          title: title,
+          isEnabled: isEnabled
+        }).exec(function (error) {
+          if (error) {
+            return res.negotiate(error);
+          }
+          res.status(205);
+          return res.send();
+        });
+      } else {
+        if (error) {
+          res.negotiate(error);
+          return res.send();
+        }
+        res.status(403);
+        return res.send();
+      }
+    });
+  },
 }
 
 

@@ -4,6 +4,20 @@
 module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
+  constants: {
+    monthly : {
+      name: 'month',
+      interval: 'P1M'
+    },
+    daily : {
+      name: 'day',
+      interval: 'P1D'
+    },
+    yearly : {
+      name: 'year',
+      interval: 'P1Y'
+    }
+  },
   attributes: {
     //e.g., 1
     id: {

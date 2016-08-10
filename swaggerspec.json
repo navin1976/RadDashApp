@@ -12,8 +12,8 @@
   "host": "dashboardapi.northeurope.cloudapp.azure.com:1337",
   "tags": [
     {
-      "name": "Default",
-      "description": "Default section"
+      "name": "Datasource",
+      "description": ""
     },
     {
       "name": "Dashboards",
@@ -68,7 +68,7 @@
           }
         ],
         "responses": {
-          "205": {
+          "201": {
             "description": "The default dashboard is successfully created, please refresh content"
           },
           "403": {
@@ -76,6 +76,42 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
+          }
+        }
+      }
+    },
+    "/dashboard/default/{dashboardId}": {
+      "put": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "Default Dashboard Update",
+        "description": "Updates an existing default dashboard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "dashboardId",
+            "in": "path",
+            "description": "Unique identifier for a dashboard",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DashboardUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Default dashboard successfully updated"
           }
         }
       }
@@ -217,24 +253,14 @@
         "tags": [
           "Data"
         ],
-        "summary": "Retrieves a list of all data sources for a given role",
+        "summary": "Retrieves a list of all data sources for the role of the current user",
         "description": "Retrieves a list of all data sources for a given role to present the user with a list of available datasources, and filters and metrics associated with these datasources",
         "operationId": "getDataDatasource",
         "consumes": [],
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "roleId",
-            "in": "query",
-            "description": "Unique identifier for a role",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 123
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Data sources successfully retrieved",
@@ -316,6 +342,59 @@
         }
       }
     },
+    "/datasources": {
+      "get": {
+        "tags": [
+          "Datasource"
+        ],
+        "summary": "Datasource retrieval",
+        "description": "Retrieves a list of all datasources and metrics, filters and granularities associated with the datasource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all datasources and metrics, filters and granularities associated with the datasource successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Datasource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasources/assign": {
+      "put": {
+        "tags": [
+          "Datasource"
+        ],
+        "summary": "Datasource assignment to Role",
+        "description": "Assign datasources to a particular role",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RoleDatasource"
+            }
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Datasources successfully updates for the given role"
+          }
+        }
+      }
+    },
     "/permissions": {
       "get": {
         "tags": [
@@ -331,7 +410,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Permissions"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Permission"
+              }
             }
           }
         }
@@ -459,26 +541,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "departmentId",
-            "in": "query",
-            "description": "Unique identifier for a department",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 234
-          },
-          {
-            "name": "roleId",
-            "in": "query",
-            "description": "Unique identifier for a role",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-example": 3
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The list of all users was successfully retrieved",
@@ -493,6 +556,28 @@
             "description": "The user is not authorised to access this information",
             "schema": {
               "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/users/loggedin": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Info of logged in user",
+        "description": "Retrieves information about the user that is logged",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Info of logged in user successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
         }
@@ -575,40 +660,40 @@
     "Datasource": {
       "type": "object",
       "required": [
-        "availableFilters",
-        "availableGranularity",
-        "availableMetrics",
-        "datasourceId",
-        "datasourceTitle"
+        "filters",
+        "granularities",
+        "id",
+        "metrics",
+        "name"
       ],
       "properties": {
-        "availableFilters": {
+        "filters": {
           "type": "array",
           "description": "Filters available for a particular data dource",
           "items": {
             "$ref": "#/definitions/Filter"
           }
         },
-        "availableGranularity": {
+        "granularities": {
           "type": "array",
           "description": "Available granularity for requesting the data, such as daily, weekly, monthly, yearly",
           "items": {
             "$ref": "#/definitions/Granularity"
           }
         },
-        "availableMetrics": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a data source"
+        },
+        "metrics": {
           "type": "array",
           "description": "An array of metrics available on the data source (such as: 'total number')",
           "items": {
             "$ref": "#/definitions/Metric"
           }
         },
-        "datasourceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for a data source"
-        },
-        "datasourceTitle": {
+        "name": {
           "type": "string",
           "description": "Description of the data source"
         }
@@ -633,28 +718,28 @@
     "Filter": {
       "type": "object",
       "required": [
-        "filterId",
-        "filterName",
-        "filterValueType"
+        "id",
+        "name",
+        "valueType"
       ],
       "properties": {
-        "filterId": {
+        "id": {
           "type": "integer",
           "format": "int32",
           "description": "Unique identifier for a filter"
         },
-        "filterName": {
+        "name": {
           "type": "string",
           "description": "Name of the filter"
         },
-        "filterValueEnum": {
+        "valueEnum": {
           "type": "array",
           "description": "Choices only available for a set of predefined fields",
           "items": {
             "type": "string"
           }
         },
-        "filterValueType": {
+        "valueType": {
           "type": "string",
           "description": "Value type of filter, can be String, Int, TimeRange,  array, ENUM if ENUM, then filter value ENUM contains all possibilities"
         }
@@ -664,16 +749,16 @@
     "Granularity": {
       "type": "object",
       "required": [
-        "granularityId",
-        "granularityName"
+        "id",
+        "name"
       ],
       "properties": {
-        "granularityId": {
+        "id": {
           "type": "integer",
           "format": "int32",
           "description": "id of the granularity"
         },
-        "granularityName": {
+        "name": {
           "type": "string",
           "description": "Name of the granularity"
         }
@@ -683,16 +768,16 @@
     "Metric": {
       "type": "object",
       "required": [
-        "metricId",
-        "metricName"
+        "id",
+        "name"
       ],
       "properties": {
-        "metricId": {
+        "id": {
           "type": "integer",
           "format": "int32",
           "description": "the id of the metric"
         },
-        "metricName": {
+        "name": {
           "type": "string",
           "description": "The name of the metric"
         }
@@ -716,24 +801,7 @@
       },
       "description": "Any metric that can be represented with a double. It is an array that is returned according to the granularity as requested. If single element, then it is over the complete period. for e.g\n{ \"metric\" : [10, 20, 30, 40 , 10, 10] }"
     },
-    "PermissionIds": {
-      "type": "object",
-      "required": [
-        "permissionIds"
-      ],
-      "properties": {
-        "permissionIds": {
-          "type": "array",
-          "description": "A list of unique identifiers for permissions related to a role",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "description": "A list of unique identifiers for permissions related to a role"
-    },
-    "Permissions": {
+    "Permission": {
       "type": "object",
       "required": [
         "description",
@@ -751,6 +819,23 @@
         }
       },
       "description": "Specifies what data and actions the user has access to based on their role."
+    },
+    "PermissionIds": {
+      "type": "object",
+      "required": [
+        "permissionIds"
+      ],
+      "properties": {
+        "permissionIds": {
+          "type": "array",
+          "description": "A list of unique identifiers for permissions related to a role",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "description": "A list of unique identifiers for permissions related to a role"
     },
     "RequestEntity": {
       "type": "object",
@@ -830,13 +915,49 @@
     "Role": {
       "type": "object",
       "required": [
-        "permissionIds",
-        "roleId"
+        "datasourceIds",
+        "id",
+        "permissionIds"
       ],
       "properties": {
+        "datasourceIds": {
+          "type": "array",
+          "description": "A list of unique identifiers for data sources associated with the role",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The name of the role"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for a role"
+        },
         "permissionIds": {
           "type": "array",
           "description": "A list of all associated permissionIds",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
+    },
+    "RoleDatasource": {
+      "type": "object",
+      "required": [
+        "datasourceIds",
+        "roleId"
+      ],
+      "properties": {
+        "datasourceIds": {
+          "type": "array",
+          "description": "A list of unique identifiers for datasources",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -846,13 +967,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Unique identifier for a role"
-        },
-        "roleName": {
-          "type": "string",
-          "description": "The name of the role"
         }
       },
-      "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
+      "description": "A role associated with a list of data sources"
     },
     "RolePermission": {
       "type": "object",
@@ -884,19 +1001,23 @@
         "userId"
       ],
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Username of logged in user"
+        },
         "roleId": {
           "type": "integer",
           "format": "int32",
           "description": "Unique identifier associated with a role"
         },
+        "roleName": {
+          "type": "string",
+          "description": "Name of the role of logged in user"
+        },
         "userId": {
           "type": "integer",
           "format": "int32",
           "description": "A unique identifier for the user"
-        },
-        "userTitle": {
-          "type": "string",
-          "description": "**not decided yet**"
         }
       },
       "description": "The user of the system who topically is an employee at the hospital."

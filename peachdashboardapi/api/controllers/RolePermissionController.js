@@ -20,7 +20,7 @@ module.exports = {
   },
 
   findRole: function (req, res) {
-    Role.find({}).populate('permissions').exec(function(error, records) {
+    Role.find({}).populate('permissions').populate('datasources').exec(function(error, records) {
       res.status(200);
       res.type('application/json');
       return res.send(JSON.stringify(records, null, 2));
@@ -36,10 +36,12 @@ module.exports = {
   },
 
   assignPermission: function (req, res) {
-    var idUpdate = req.body.roleId;
+    var idUpdate = parseInt(req.body.roleId);
     var permissionIds = req.body.permissionIds;
+
     RolePermission.destroy({role:idUpdate})
-      .then(function() { return Role.update(idUpdate, {permissions:permissionIds, description:"admin"});})
+      .then(function() { return Role.findOne(idUpdate);})
+      .then(function(role) { return Role.update(idUpdate, {permissions:permissionIds, description:role.description});})
       .catch(function(error) { res.negotiate(error); res.send();})
       .then(function() { res.status(205); res.send();})
       .catch(function(error) { res.negotiate(error); res.send();});

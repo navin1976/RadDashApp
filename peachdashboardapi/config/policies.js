@@ -28,18 +28,26 @@ module.exports.policies = {
 
   // '*': true,
 
+  '*':'sessionAuth',
+
   RolePermissionController: {
-    findRole: 'canGetRoles',
+    findRole: ['sessionAuth', 'canGetRoles'],
 
-    assignRole: 'canAssignRoles',
+    assignRole: ['sessionAuth', 'canAssignRoles'],
 
-    findPermission: 'canGetPermissions',
+    findPermission: ['sessionAuth', 'canGetPermissions'],
 
-    assignPermission: 'canAssignPermissions'
+    assignPermission: ['sessionAuth', 'canAssignPermissions']
   },
 
   DashboardController: {
-    'default': 'canCreateDefaultDashboard'
+    'createDefault': ['sessionAuth', 'canCreateDefaultDashboard'],
+    'updateDefault': ['sessionAuth', 'canCreateDefaultDashboard']
+  },
+
+  DatasourceController: {
+    'findAll': ['sessionAuth', 'canGetDatasources'],
+    'assign': ['sessionAuth', 'canAssignDatasources']
   }
   /***************************************************************************
   *                                                                          *
