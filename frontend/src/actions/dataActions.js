@@ -15,7 +15,7 @@ LoadCourses returns a promise -> dispatches a Success action / Error action
 */
 export function loadData(){
 	return function(dispatch){
-		let url = "http://localhost:1337/data/timeseries";
+		let url = "/data/timeseries";
 		dispatch(beginAjaxCall());
 		return fetch(url,{
 			method:"POST",
