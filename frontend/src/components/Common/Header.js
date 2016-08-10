@@ -10,7 +10,7 @@ class Header extends React.Component{
 	}
 
 	dashboardInstance(dash,index){
-		const path = "/dashboard/" + dash.id;
+		const path = "/raddash/dashboard/" + dash.id;
 		const title = dash.name;
 		return <li key={index}><Link to={path} className="dashChoice" activeClassName="active">{title}</Link></li>
 	}
@@ -21,12 +21,12 @@ class Header extends React.Component{
 		<div id="sidebar-wrapper">
 			<ul className="sidebar-nav">
 				<li className="sidebar-brand"><img id="brand" src={img}/></li>
-				<li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-				<li><Link to="/about" activeClassName="active">About</Link></li>
-				<li><Link to="/courses" activeClassName="active">Courses</Link></li>
-				<li><Link to="/dashboard" activeClassName="active">Dashboard</Link></li>
+				<li><IndexLink to="/raddash" activeClassName="active">Home</IndexLink></li>
+				<li><Link to="/raddash/about" activeClassName="active">About</Link></li>
+				<li><Link to="/raddash/courses" activeClassName="active">Courses</Link></li>
+				<li><Link to="/raddash/dashboard" activeClassName="active">Dashboard</Link></li>
 				{this.props.dashboards.map(this.dashboardInstance)}
-				<li><Link to="/admin" activeClassName="active">Admin</Link></li>
+				<li><Link to="/raddash/admin" activeClassName="active">Admin</Link></li>
 			</ul>
 		</div>
 		);

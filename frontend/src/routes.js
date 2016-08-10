@@ -14,14 +14,14 @@ import ViewPage from './components/Home/ViewPage';
 export default (
 	<Route path="/raddash" component={App}>
 		<IndexRoute component={HomePage}/>
-		<Route path="about" component={AboutPage} />
-		<Route path="courses" component={CoursesPage}/>
-		<Route path="course" component={ManageCoursePage}/>
-		<Route path="course/:id" component={ManageCoursePage}/>
-		<Route path="dashboard" component={Dashboard}/>
-		<Route path="dashboard/:id" component={Dashboard}/>
-		<Route path="admin" component={AdminPage}/>
-		<Route path="permissions/:id" component={PermissionPage}/>
-		<Route path="demovis" component={ViewPage}/>
+		<Route path="/raddash/about" component={AboutPage} />
+		<Route path="/raddash/courses" component={CoursesPage}/>
+		<Route path="/raddash/course" component={ManageCoursePage}/>
+		<Route path="/raddash/course/:id" component={ManageCoursePage}/>
+		<Route path="/raddash/dashboard" component={Dashboard}/>
+		<Route path="/raddash/dashboard/:id" component={Dashboard}/>
+		<Route path="/raddash/admin" component={AdminPage}/>
+		<Route path="/raddash/permissions/:id" component={PermissionPage}/>
+		<Route path="/raddash/demovis" component={ViewPage}/>
 	</Route>
 );
