@@ -19,11 +19,11 @@ module.exports = {
     },
     weekly : {
       name: 'week',
-      interval: 'P7D'
+      interval: 'P1D'
     },
     quarterly : {
       name: 'quarter',
-      interval: 'P3M'
+      interval: 'P1M'
     }
   },
   attributes: {

@@ -46,7 +46,7 @@ module.exports.cors = {
   * "*" to allow all domains CORS access.                                    *
   *                                                                          *
   ***************************************************************************/
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000, http://localhost:1337',
 
   /***************************************************************************
   *                                                                          *
