@@ -3,7 +3,7 @@ import initialState from './initialState';
 
 export default function actionReducer(state = initialState.data,action){
 	switch(action.type){
-		case types.LOAD_DATA_SUCCESS:{
+		case types.LOAD_DATA_SUCCESS_API:{
 			return action.data;
 		}
 		default:

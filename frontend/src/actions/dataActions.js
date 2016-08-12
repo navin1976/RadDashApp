@@ -8,11 +8,16 @@ import DataApi from  '../api/mockDataApi';
 export function loadDataForWidget(id,data){
 	return {type: types.LOAD_DATA_WIDGET_SUCCESS,id,data};
 }
+
+export function loadDataSuccessAPI(data){
+	return {type:types.LOAD_DATA_SUCCESS_API,data};
+}
 /*
 Dispatch necessary for react-thunk. Arrow functions need to include several
 parameters then put into brackets as such (a,b,c) => {}
 LoadCourses returns a promise -> dispatches a Success action / Error action
 */
+/*
 export function loadData(){
 	return function(dispatch){
 		let url = "http://localhost:1337/data/timeseries";
@@ -30,6 +35,17 @@ export function loadData(){
 		}).then(data => {
 			dispatch(loadDataSuccess(data));
 		}).catch(error=> {
+			throw(error);
+		});
+	};
+}*/
+
+export function LoadData(){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return DataApi.getData().then(data =>{
+			dispatch(loadDataSuccessAPI(data));
+		}).catch(error =>{
 			throw(error);
 		});
 	};
