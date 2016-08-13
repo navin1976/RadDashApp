@@ -23,7 +23,7 @@ module.exports = {
     },
 
     //2
-    roleId: {
+    role: {
       columnName: 'role_id',
       model: 'role'
     },

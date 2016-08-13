@@ -9,7 +9,8 @@
       "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "",
+  "host": "localhost:1337",
+  "basePath": "",
   "tags": [
     {
       "name": "Datasource",
@@ -327,6 +328,38 @@
             "description": "Entities successfully retrieved",
             "schema": {
               "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/data/filter/{filterId}": {
+      "get": {
+        "tags": [
+          "Data"
+        ],
+        "summary": "Get the distinct values for a filter",
+        "description": "Get the distinct values for a filter",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "filterId",
+            "in": "path",
+            "description": "the filter to get the values for",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -876,15 +909,23 @@
           "format": "int32",
           "description": "ID of the datasource"
         },
+        "endTime": {
+          "type": "string",
+          "description": "end time, support ISO but also 'now'"
+        },
         "filters": {
           "type": "array",
           "description": "Filters to filter by",
           "items": {
             "$ref": "#/definitions/RequestFilter"
           }
+        },
+        "startTime": {
+          "type": "string",
+          "description": "start time, supports ISO but also '6 months ago'"
         }
       },
-      "description": "Request to retrieve entities"
+      "description": "Request to retrieve entities, if split by is populated you get the count of entities split by this dimension"
     },
     "RequestFilter": {
       "type": "object",
@@ -909,15 +950,21 @@
       "type": "object",
       "required": [
         "dataSourceId",
+        "endTime",
         "filters",
         "granularityId",
-        "metricId"
+        "metricId",
+        "startTime"
       ],
       "properties": {
         "dataSourceId": {
           "type": "integer",
           "format": "int32",
           "description": "ID of the datasource"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "endTime supports ISO date but also 'now'"
         },
         "filters": {
           "type": "array",
@@ -935,6 +982,15 @@
           "type": "integer",
           "format": "int32",
           "description": "Id of the metric requested"
+        },
+        "splitBy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "splitBy filter ID, each time increment will show the results split by a certain filter"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "startTime, supports ISO date but also '6 months ago' format"
         }
       },
       "description": "Request for a timeseries metric"

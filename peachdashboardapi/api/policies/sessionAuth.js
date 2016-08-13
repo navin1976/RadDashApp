@@ -16,7 +16,7 @@ module.exports = function(req, res, next) {
       .then(function(user) {
         if (user) {
           req.info = {};
-          req.info.roleId = user.roleId;
+          req.info.roleId = user.role;
           console.log(user);
           req.info.userId = userId;
           return next();

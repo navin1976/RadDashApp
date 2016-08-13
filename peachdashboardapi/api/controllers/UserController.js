@@ -27,9 +27,9 @@ module.exports = {
       console.log(user);
       var loggedInUser = {
         name: user.name,
-        roleId: user.roleId.id,
+        roleId: user.role.id,
         userId: user.id,
-        roleName: user.roleId.description
+        roleName: user.role.description
       };
       return res.send(JSON.stringify(loggedInUser, null, 2));
     });

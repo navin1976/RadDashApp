@@ -35,8 +35,7 @@ module.exports = {
 
     filters:{
       collection: 'filter',
-      via: 'datasources',
-      through: 'filterdatasource'
+      via: 'datasource',
     },
 
     metrics:{
