@@ -15,6 +15,8 @@ module.exports = {
   createDataset: function(dataset) {
     return External.fromJS({
       engine: 'druid',
+      allowSelectQueries: true,
+      allowEternity:true,
       source: dataset,  // The datasource name in Druid
       timeAttribute: 'time',  // Druid's anonymous time attribute will be called 'time',
       context: {

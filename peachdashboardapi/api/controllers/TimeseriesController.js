@@ -8,20 +8,35 @@ module.exports = {
     var datasourceId = parseInt(req.body.dataSourceId);
     var granularityId = parseInt(req.body.granularityId);
     var metricId = parseInt(req.body.metricId);
+    var splitBy = parseInt(req.body.splitBy);
+    var startTime = new Date(TimeService.strtotime(req.body.startTime)*1000);
+    var endTime = new Date(TimeService.strtotime(req.body.endTime)*1000);
+    if (!startTime || !endTime) {
+      res.status(405);
+      return res.send();
+    }
 
     // check if user has the permission to access a certain datasource
     RoleDatasource.findOne({role: roleId, datasource: datasourceId}).exec(function (error, roleDatasource) {
       if (roleDatasource) {
         console.log('User can access datasource');
         // find relevant data source
-        Datasource.findOne({id: datasourceId})
+        var query = Datasource.findOne({id: datasourceId})
           .populate("granularities", {id: granularityId})
-          .populate("metrics", {id: metricId})
-          .exec(function(err, datasource) {
+          .populate("metrics", {id: metricId});
+
+        if (splitBy)
+          query.populate("filters", {id: splitBy});
+
+        query.exec(function(err, datasource) {
 
             console.log(err, datasource);
             // check if allowed metric and granularity
-            if (datasource.metrics.length > 0 && datasource.granularities.length > 0) {
+            if (
+              datasource.metrics.length > 0 &&
+              datasource.granularities.length > 0 &&
+              (!splitBy || (splitBy && datasource.filters.length > 0))
+            ) {
               console.log("Preparing the query");
               // prepare the query
               var dataset = datasource.name;
@@ -31,37 +46,34 @@ module.exports = {
               var context = {};
               context[dataset] = DruidService.createDataset(dataset);
 
-              var ex = ply()
-                .apply(dataset,
-                  $(dataset)
+              console.log(startTime);
+              console.log(endTime);
+              var ex = $(dataset)
                     .filter($("time").in(
                       {
-                        start: new Date("2010-09-12T00:00:00Z"),
-                        end: new Date("2015-09-13T00:00:00Z")
+                        start: startTime,
+                        end: endTime
                       }))
-                    .split($('time').timeBucket(granularity.interval, "Europe/London"), 'interval')
-                    .apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+                    .split($('time').timeBucket(granularity.interval, "Europe/London"), 'interval');
+
+              if (splitBy) {
+                ex = ex.apply('split', $(dataset).split($(datasource.filters[0].name), datasource.filters[0].title).apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+              } else {
+                ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
+              }
+
 
               // send the query to druid
               ex.compute(context).then(function(data) {
-                // send the response
-
-                var dataResponse = [];
-                var dataToJS = JSON.parse(JSON.stringify(data.toJS()[0][dataset]));
-                for (var i = 0; i < dataToJS.length; i++) {
-                  dataResponse.push({
-                    metric: dataToJS[i].metric,
-                    date: dataToJS[i].interval.start+"/"+dataToJS[i].interval.end
-                  });
-                }
+                var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
                 res.type('application/json');
                 res.status(200);
-                res.send(JSON.stringify(dataResponse));
+                res.send(JSON.stringify(dataToJS));
               }).done();
 
             } else {
               res.status(404);
-              res.send()
+              res.send('Some parameters did not match');
             }
           });
       }

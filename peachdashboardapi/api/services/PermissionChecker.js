@@ -3,14 +3,14 @@
  */
 module.exports = {
   hasUserPermission: function (userId, permissionId, res, next) {
-    User.find({id: userId}).exec(function (error, users) {
+    User.findOne(userId).exec(function (error, user) {
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
         res.negotiate(error);
         return res.send();
       }
-      if (users.length > 0) {
-        var roleId = users[0].roleId;
+      if (user) {
+        var roleId = user.role;
         RolePermission.find({role: roleId, permission: permissionId}).exec(function(error, rolepermissions){
           if (error) {
             // handle error here- e.g. `res.serverError(err);`
@@ -22,13 +22,13 @@ module.exports = {
           }
           else {
             res.status(401);
-            res.send();
+            res.send('Unauthorized');
           }
         });
       }
       else {
         res.status(401);
-        res.send();
+        res.send('Unauthorized');
       }
     });
   }

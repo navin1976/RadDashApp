@@ -28,7 +28,7 @@ module.exports = {
 
     users: {
       collection: 'user',
-      via: 'roleId'
+      via: 'role'
     },
 
     permissions:{

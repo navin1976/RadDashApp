@@ -13,7 +13,7 @@ module.exports = {
         res.send();
       }
       if (users.length > 0) {
-        var roleId = users[0].roleId;
+        var roleId = users[0].role;
         Role.find({id: roleId}).populate('datasources').exec(function(error, roles){
           if (error) {
             res.negotiate(error);
