@@ -40,6 +40,10 @@ module.exports.policies = {
     assignPermission: ['sessionAuth', 'canAssignPermissions']
   },
 
+  UserController: {
+    find: ['sessionAuth', 'canAssignRoles']
+  },
+
   DashboardController: {
     'createDefault': ['sessionAuth', 'canCreateDefaultDashboard'],
     'updateDefault': ['sessionAuth', 'canUpdateDefaultDashboard'],

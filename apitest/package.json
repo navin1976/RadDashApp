@@ -1,0 +1,19 @@
+{
+  "name": "apitest",
+  "version": "1.0.0",
+  "description": "testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "node mocha.js",
+    "generate": "node index.js"
+  },
+  "author": "Melinda Fekete",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "request": "^2.74.0",
+    "swagger-test-templates": "^1.2.0",
+    "z-schema": "^3.17.0"
+  }
+}

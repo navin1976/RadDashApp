@@ -3,20 +3,28 @@
  */
 module.exports = {
   find: function (req, res) {
-    User.find({}).exec(function (error, users) {
+    User.find({}).populate('role').exec(function (error, users) {
       if (error) {
         res.negotiate(error);
         res.send();
       }
       res.status(200);
       res.type('application/json');
-      return res.send(JSON.stringify(users, null, 2));
+      var usersParsed = users.map(function(user){
+        return {
+          name: user.name,
+          roleId: user.role.id,
+          roleName: user.role.description,
+          userId: user.id
+        };
+      });
+      return res.send(JSON.stringify(usersParsed, null, 2));
     });
   },
 
   info: function (req, res) {
     var userId = req.info.userId;
-    User.findOne({id: userId}).populate('roleId').exec(function (error, user) {
+    User.findOne({id: userId}).populate('role').exec(function (error, user) {
       if (error) {
         res.negotiate(error);
         res.send();
