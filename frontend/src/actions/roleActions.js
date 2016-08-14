@@ -28,3 +28,7 @@ export function logRequest(){
 		});
 	}
 }
+
+export function saveNewRole(newRole){
+	return {type: types.UPLOAD_NEW_ROLE,newRole};
+}

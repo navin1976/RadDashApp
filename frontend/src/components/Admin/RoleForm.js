@@ -5,7 +5,6 @@ const RoleForm = ({allRoles}) => {
 	return(
 		<div>
 			<RoleTable roles={allRoles}/>
-			<button>Add</button>
 		</div>
 	);
 }

@@ -26,3 +26,4 @@ export const LOAD_DATA_SUCCESS_API = "LOAD_DATA_SUCCESS_API";
 
 //Role actions
 export const LOAD_ALL_ROLES_SUCCESS = "LOAD_ALL_ROLES_SUCCESS";
+export const UPLOAD_NEW_ROLE = "UPLOAD_NEW_ROLE";

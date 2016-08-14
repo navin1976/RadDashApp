@@ -6,6 +6,8 @@ import * as dashboardActions from '../../actions/dashboardActions';
 import ReactGridLayout from 'react-grid-layout';
 
 import AddButton from '../Common/AddButton';
+import Wrapper from '../Common/Wrapper';
+import DashboardToolbar from '../Common/Toolbars/DashboardToolbar';
 
 import {BarChart,PieChart,BarStackChart,LineChart} from 'react-d3-basic';
 
@@ -83,12 +85,15 @@ class Dashboard extends React.Component{
 		for(let i=0; i<this.props.dashboard.widgets;i++){
 			displayLayout.push(this.props.dashboard.widgets[i].layout);
 		}
+		const id = (this.props.dashboardId || "default");
 		return (
-			<div>	
-				<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
-					{this.props.dashboard.widgets.map(this.widgetMap)}
-				</ReactGridLayout>
-				<AddButton />
+			<div>
+				<DashboardToolbar id={id} />
+				<Wrapper>
+					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
+						{this.props.dashboard.widgets.map(this.widgetMap)}
+					</ReactGridLayout>
+				</Wrapper>
 			</div>
 		);
 	}
@@ -96,7 +101,6 @@ class Dashboard extends React.Component{
 
 function mapStateToProps(state,ownProps){
 	const dashboardId = ownProps.params.id;
-	let dasboard;
 	return {
 		data:[
 			{
@@ -124,7 +128,8 @@ function mapStateToProps(state,ownProps){
 			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
 			}
 		],
-		dashboard:state.dashboards[0]
+		dashboard:state.dashboards[0],
+		dashboardId: dashboardId
 	};
 }
 
@@ -136,17 +141,27 @@ function mapDispatchToProps(dispatch){
 
 Dashboard.propTypes = {
 	data: React.PropTypes.array.isRequired,
-	dashboard: React.PropTypes.object.isRequired
+	dashboard: React.PropTypes.object.isRequired,
+	dashboardId: React.PropTypes.string
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /*
-
-
-
 		switch(tile.type){
 			case 'BAR_CHART':
 				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
