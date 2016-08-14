@@ -20,13 +20,53 @@ class Dashboard extends React.Component{
 		this.state = {};
 
 		this.update = this.update.bind(this);
+		this.widgetMap = this.widgetMap.bind(this);
 	}
 	
 	widgetMap(widget, index){
+		let data = [
+			{
+			"metric": 108750,
+			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 380650,
+			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 393695,
+			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 418133,
+			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 437033,
+			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 311548,
+			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
+			}
+		];
+		let x = function(d){
+			return d.date;
+		};
+		let y = function(d){
+			return +d;
+		};
+		let chartSeries = [
+			{
+				field:'metric',
+				name:'Metric'
+			}
+		];
+		let xScale = 'ordinal';
 
 		return(
-			<div key={tile.l.i} className="card">
-				{entry}
+			<div key={widget.layout.i} className="card">
+				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={500}/>
 			</div>
 		);
 	}
@@ -38,15 +78,15 @@ class Dashboard extends React.Component{
 	
 	render(){
 		//retrieve layouts from the layout object
+		console.log(this.props.data);
 		let displayLayout = [];
-		for(let i = 0; i<this.props.layout.length;i++){
-			displayLayout.push(this.props.layout[i].l);
+		for(let i=0; i<this.props.dashboard.widgets;i++){
+			displayLayout.push(this.props.dashboard.widgets[i].layout);
 		}
-
 		return (
 			<div>	
 				<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
-					{this.props.layout.map(this.tileEntry)}
+					{this.props.dashboard.widgets.map(this.widgetMap)}
 				</ReactGridLayout>
 				<AddButton />
 			</div>
@@ -57,12 +97,34 @@ class Dashboard extends React.Component{
 function mapStateToProps(state,ownProps){
 	const dashboardId = ownProps.params.id;
 	let dasboard;
-
-	
-	if(!dashboardId){
-		dashLayout = state.layout;
-	}
 	return {
+		data:[
+			{
+			"metric": 108750,
+			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 380650,
+			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 393695,
+			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 418133,
+			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 437033,
+			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 311548,
+			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
+			}
+		],
+		dashboard:state.dashboards[0]
 	};
 }
 
@@ -73,7 +135,8 @@ function mapDispatchToProps(dispatch){
 }
 
 Dashboard.propTypes = {
-	layout: React.PropTypes.array.isRequired
+	data: React.PropTypes.array.isRequired,
+	dashboard: React.PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);

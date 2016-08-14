@@ -40,7 +40,7 @@ export function loadData(){
 	};
 }*/
 
-export function LoadData(){
+export function loadData(){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
 		return DataApi.getData().then(data =>{
