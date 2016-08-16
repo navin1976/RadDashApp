@@ -6,6 +6,7 @@ module.exports = {
   find: function (req, res) {
     var roleId = parseInt(req.info.roleId);// extract from reques
     var datasourceId = parseInt(req.body.dataSourceId);
+    var filters = req.body.filters;
     var startTime = new Date(TimeService.strtotime(req.body.startTime)*1000);
     var endTime = new Date(TimeService.strtotime(req.body.endTime)*1000);
     if (!startTime || !endTime) {
@@ -23,6 +24,8 @@ module.exports = {
         context[dataset] = DruidService.createDataset(dataset);
         // get all the dimensions
         var filterNames = datasource.filters.map(function(e) { return e.name; });
+
+
         // get the time
         filterNames.push('time');
         var ex = $(dataset)
@@ -31,16 +34,23 @@ module.exports = {
                   start: startTime,
                   end: endTime
                 }));
-        // only select the dimensions
-        ex = ex.select.apply(ex, filterNames);
 
-        // send the query to druid
-        ex.compute(context).then(function(data) {
-          // send the response
-          res.type('application/json');
-          res.status(200);
-          res.send(JSON.stringify(data.toJS()));
-        }).done();
+        FilterService.applyFilters($, ex, datasource, filters, function(failed, ex){
+          if (failed) {
+            res.status(403);
+            return res.send('Wrong paramaeters');
+          }
+
+          // only select the dimensions
+          ex = ex.select.apply(ex, filterNames);
+          // send the query to druid
+          ex.compute(context).then(function(data) {
+            // send the response
+            res.type('application/json');
+            res.status(200);
+            res.send(JSON.stringify(data.toJS()));
+          }).done();
+        });
 
       } else if (error) {
         res.negotiate(error);

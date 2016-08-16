@@ -1,6 +1,5 @@
 {
   "swagger": "2.0",
-  "id":"testId",
   "info": {
     "description": "A secure, REST API for real-time data analytics within Project Peach.",
     "version": "1.0.0",
@@ -10,8 +9,6 @@
       "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "",
-  "basePath": "",
   "tags": [
     {
       "name": "Datasource",
@@ -33,9 +30,6 @@
       "name": "Users",
       "description": ""
     }
-  ],
-  "schemes": [
-    "http"
   ],
   "paths": {
     "/dashboard/default": {
@@ -812,7 +806,7 @@
           "format": "int32",
           "description": "Unique identifier for the datasource associated with the filter"
         },
-        "filyerType": {
+        "filterType": {
           "type": "string",
           "description": "Specifies the type of the filter, such as categorical, numerical, etc."
         },
@@ -955,7 +949,7 @@
       "type": "object",
       "required": [
         "filterId",
-        "filterValue"
+        "filterValues"
       ],
       "properties": {
         "filterId": {
@@ -963,9 +957,12 @@
           "format": "int32",
           "description": "ID of the filter"
         },
-        "filterValue": {
-          "type": "string",
-          "description": "Value to filter with, can be string, int, double or an array."
+        "filterValues": {
+          "type": "array",
+          "description": "Value to filter with, can be string, int, double or an array.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Object to represent a filter in a request"
