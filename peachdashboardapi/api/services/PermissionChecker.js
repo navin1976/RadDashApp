@@ -21,13 +21,13 @@ module.exports = {
            next();
           }
           else {
-            res.status(401);
+            res.status(403);
             res.send('Unauthorized');
           }
         });
       }
       else {
-        res.status(401);
+        res.status(403);
         res.send('Unauthorized');
       }
     });

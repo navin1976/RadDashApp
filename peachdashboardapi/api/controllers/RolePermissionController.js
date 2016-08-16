@@ -20,10 +20,18 @@ module.exports = {
   },
 
   findRole: function (req, res) {
-    Role.find({}).populate('permissions').populate('datasources').exec(function(error, records) {
+    Role.find({}).populate('permissions').populate('datasources').exec(function(error, roles) {
+      var rolesParsed = roles.map(function(role){
+        return {
+          datasourceIds: role.datasources.map(function(datasource){return datasource.id;}),
+          description: role.description,
+          id: role.id,
+          permissionIds: role.permissions.map(function(permission){return permission.id;})
+        };
+      });
       res.status(200);
       res.type('application/json');
-      return res.send(JSON.stringify(records, null, 2));
+      return res.send(JSON.stringify(rolesParsed, null, 2));
     });
   },
 

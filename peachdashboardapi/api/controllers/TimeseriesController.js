@@ -9,6 +9,7 @@ module.exports = {
     var granularityId = parseInt(req.body.granularityId);
     var metricId = parseInt(req.body.metricId);
     var splitBy = parseInt(req.body.splitBy);
+    var filters = req.body.filters;
     var startTime = new Date(TimeService.strtotime(req.body.startTime)*1000);
     var endTime = new Date(TimeService.strtotime(req.body.endTime)*1000);
     if (!startTime || !endTime) {
@@ -21,21 +22,25 @@ module.exports = {
       if (roleDatasource) {
         console.log('User can access datasource');
         // find relevant data source
-        var query = Datasource.findOne({id: datasourceId})
+        Datasource.findOne({id: datasourceId})
           .populate("granularities", {id: granularityId})
-          .populate("metrics", {id: metricId});
+          .populate("metrics", {id: metricId})
+          .populate("filters")
+          .exec(function(err, datasource) {
 
-        if (splitBy)
-          query.populate("filters", {id: splitBy});
+            // checking if the split by is allowed
+            splitByCheck = splitBy ? false: true;
+            for (var i = 0; i < datasource.filters.length; i++) {
+              if (datasource.filters[i].id == splitBy) {
+                splitByCheck = true;
+              }
+            }
 
-        query.exec(function(err, datasource) {
-
-            console.log(err, datasource);
-            // check if allowed metric and granularity
+            // check if allowed metric and granularity and split by
             if (
               datasource.metrics.length > 0 &&
               datasource.granularities.length > 0 &&
-              (!splitBy || (splitBy && datasource.filters.length > 0))
+              splitByCheck
             ) {
               console.log("Preparing the query");
               // prepare the query
@@ -46,31 +51,37 @@ module.exports = {
               var context = {};
               context[dataset] = DruidService.createDataset(dataset);
 
-              console.log(startTime);
-              console.log(endTime);
+              // filter the time and bucket by granularity
               var ex = $(dataset)
-                    .filter($("time").in(
-                      {
-                        start: startTime,
-                        end: endTime
-                      }))
-                    .split($('time').timeBucket(granularity.interval, "Europe/London"), 'interval');
+                .filter($("time").in(
+                  {
+                    start: startTime,
+                    end: endTime
+                  }))
+              // filter the rest and execute
+              FilterService.applyFilters($, ex, datasource, filters, function(failed, ex) {
+                if (failed) {
+                  res.status(403);
+                  return res.send('Wrong paramaeters');
+                }
 
-              if (splitBy) {
-                ex = ex.apply('split', $(dataset).split($(datasource.filters[0].name), datasource.filters[0].title).apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
-              } else {
-                ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
-              }
+                ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'interval');
 
+                // split by if necessary
+                if (splitBy) {
+                  ex = ex.apply('split', $(dataset).split($(datasource.filters[0].name), datasource.filters[0].title).apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+                } else {
+                  ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
+                }
 
-              // send the query to druid
-              ex.compute(context).then(function(data) {
-                var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
-                res.type('application/json');
-                res.status(200);
-                res.send(JSON.stringify(dataToJS));
-              }).done();
-
+                // send the query to druid
+                ex.compute(context).then(function(data) {
+                  var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
+                  res.type('application/json');
+                  res.status(200);
+                  res.send(JSON.stringify(dataToJS));
+                }).done();
+              });
             } else {
               res.status(404);
               res.send('Some parameters did not match');

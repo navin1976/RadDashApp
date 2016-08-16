@@ -9,8 +9,6 @@
       "email": "melinda.fekete.15@ucl.ac.uk"
     }
   },
-  "host": "",
-  "basePath": "",
   "tags": [
     {
       "name": "Datasource",
@@ -32,9 +30,6 @@
       "name": "Users",
       "description": ""
     }
-  ],
-  "schemes": [
-    "http"
   ],
   "paths": {
     "/dashboard/default": {
@@ -75,7 +70,7 @@
           "403": {
             "description": "User is not authorised to create a new default dashboard",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -113,6 +108,12 @@
         "responses": {
           "205": {
             "description": "Default dashboard successfully updated"
+          },
+          "403": {
+            "description": "User is not authorized to modify default dashboard",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       },
@@ -137,6 +138,12 @@
         "responses": {
           "205": {
             "description": "Existing default dashboard successfully deleted"
+          },
+          "403": {
+            "description": "User is not authorized to delete default dashboard",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -147,7 +154,7 @@
           "Dashboards"
         ],
         "summary": "Updates User Dashboard",
-        "description": "Updates an existing dashboard.",
+        "description": "Updates an existing dashboard for a user",
         "operationId": "putDashboardDashboardId",
         "consumes": [
           "application/json"
@@ -174,6 +181,12 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully updated, please refresh content."
+          },
+          "403": {
+            "description": "User is not authorized to update the given dashboard",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       },
@@ -199,6 +212,12 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully deleted (not enabled), please refresh content."
+          },
+          "403": {
+            "description": "User is not authorized to delete the given dashboard",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -229,7 +248,7 @@
           "404": {
             "description": "The given user does not have dashboard data associated with the id",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -262,12 +281,6 @@
             "description": "Dashboard successfully created, refresh the content.",
             "schema": {
               "$ref": "#/definitions/Dashboard"
-            }
-          },
-          "400": {
-            "description": "Error 400",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -421,6 +434,12 @@
                 "$ref": "#/definitions/Datasource"
               }
             }
+          },
+          "403": {
+            "description": "The user is not authorized to access all datasources",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -449,6 +468,12 @@
         "responses": {
           "205": {
             "description": "Datasources successfully updates for the given role"
+          },
+          "403": {
+            "description": "The user is not authorized to assign datasources",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -472,6 +497,12 @@
               "items": {
                 "$ref": "#/definitions/Permission"
               }
+            }
+          },
+          "403": {
+            "description": "The user is not authorized to access the list of permissions",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -503,10 +534,10 @@
           "205": {
             "description": "The update was successful, please refresh content."
           },
-          "401": {
+          "403": {
             "description": "The user is not authorised to make this request",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -535,10 +566,10 @@
               }
             }
           },
-          "401": {
+          "403": {
             "description": "The user is not authorised to access this information",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -581,7 +612,7 @@
           "403": {
             "description": "The user is not authorised to make this request",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -613,7 +644,7 @@
           "403": {
             "description": "The user is not authorised to access this information",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "type": "string"
             }
           }
         }
@@ -758,29 +789,27 @@
       },
       "description": "A segment of data within the database"
     },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Unique identifier for errors"
-        },
-        "message": {
-          "type": "string",
-          "description": "Displays the error message"
-        }
-      },
-      "description": "Describes the error in case of a bad request."
-    },
     "Filter": {
       "type": "object",
       "required": [
         "id",
-        "name",
-        "valueType"
+        "name"
       ],
       "properties": {
+        "canGetDistinct": {
+          "type": "boolean",
+          "description": "Specifies whether the API can return all the dictinct values for the filter",
+          "default": false
+        },
+        "datasource": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique identifier for the datasource associated with the filter"
+        },
+        "filterType": {
+          "type": "string",
+          "description": "Specifies the type of the filter, such as categorical, numerical, etc."
+        },
         "id": {
           "type": "integer",
           "format": "int32",
@@ -789,17 +818,6 @@
         "name": {
           "type": "string",
           "description": "Name of the filter"
-        },
-        "valueEnum": {
-          "type": "array",
-          "description": "Choices only available for a set of predefined fields",
-          "items": {
-            "type": "string"
-          }
-        },
-        "valueType": {
-          "type": "string",
-          "description": "Value type of filter, can be String, Int, TimeRange,  array, ENUM if ENUM, then filter value ENUM contains all possibilities"
         }
       },
       "description": "Filters available for a given data source"
@@ -931,7 +949,7 @@
       "type": "object",
       "required": [
         "filterId",
-        "filterValue"
+        "filterValues"
       ],
       "properties": {
         "filterId": {
@@ -939,9 +957,12 @@
           "format": "int32",
           "description": "ID of the filter"
         },
-        "filterValue": {
-          "type": "string",
-          "description": "Value to filter with, can be string, int, double or an array."
+        "filterValues": {
+          "type": "array",
+          "description": "Value to filter with, can be string, int, double or an array.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Object to represent a filter in a request"
