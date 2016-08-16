@@ -2,6 +2,10 @@ module.exports =
 {
   applyFilters: function($, ex, datasource, filters, callback) {
     // make a map of the datasource filters
+    if (!filters) {
+      return callback(false, ex);
+    }
+
     var datasourceFilters = datasource.filters.reduce(function(map, obj) {
       map[obj.id] = { name: obj.name, type: obj.filterType };
       return map;
