@@ -5,5 +5,6 @@ export default {
 	dashboards:[],
 	layout:[],
 	data:[],
-	roles:{}
+	roles:{},
+	permissions:[]
 };

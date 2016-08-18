@@ -1,4 +1,6 @@
 import React from 'react';
+import Wrapper from '../Wrapper';
+import Canvas from './Canvas';
 
 class GraphTool extends React.Component{
 	constructor(props,context){
@@ -9,7 +11,7 @@ class GraphTool extends React.Component{
 	render(){
 		return(
 			<Wrapper>
-			
+				<Canvas/>
 			</Wrapper>
 		);
 	}

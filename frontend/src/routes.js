@@ -11,6 +11,8 @@ import AdminPage from './components/Admin/AdminPage';
 import PermissionPage from './components/Admin/PermissionPage';
 import ViewPage from './components/Home/ViewPage';
 
+import GraphTool from './components/Common/GraphTool/GraphTool';
+
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={HomePage}/>
@@ -23,5 +25,6 @@ export default (
 		<Route path="admin" component={AdminPage}/>
 		<Route path="permissions/:id" component={PermissionPage}/>
 		<Route path="demovis" component={ViewPage}/>
+		<Route path="editDashboard" component={GraphTool}/>
 	</Route>
 );

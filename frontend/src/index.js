@@ -21,6 +21,7 @@ import {loadDashboards} from './actions/dashboardActions';
 import {loadLayout} from './actions/layoutActions';
 import {loadData} from './actions/dataActions';
 import {loadAllRoles,logRequest} from './actions/roleActions';
+import {loadPermissions} from './actions/permissionActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -36,6 +37,7 @@ store.dispatch(loadLayout());
 store.dispatch(loadData());
 store.dispatch(loadAllRoles());
 store.dispatch(logRequest());
+store.dispatch(loadPermissions());
 
 render(
 	<Provider store={store}>

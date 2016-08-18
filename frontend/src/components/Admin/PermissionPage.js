@@ -2,6 +2,8 @@ import React from 'react';
 import PermissionTable from './PermissionTable';
 import DataSourceTable from './DataSourceTable';
 import {connect} from 'react-redux';
+import Wrapper from '../Common/Wrapper';
+import AdminToolbar from '../Common/Toolbars/AdminToolbar';
 
 class PermissionPage extends React.Component{
 	constructor(props,context){
@@ -11,6 +13,8 @@ class PermissionPage extends React.Component{
 	render(){
 		return(
 			<div>
+			<AdminToolbar />
+			<Wrapper>
 				<PermissionTable 
 					permissions = {this.props.permissions}
 				/>
@@ -22,10 +26,15 @@ class PermissionPage extends React.Component{
 					sources={[{id:1,name:"EXAMPQR",description:""},{id:2,name:"PATX2",description:""}]}
 				/>
 
+			</Wrapper>
 			</div>
 		);
 	}
 }
+
+PermissionPage.propTypes = {
+	permissions:React.PropTypes.array
+};
 
 function mapStateToProps(state, ownProps){
 	const roleId = ownProps.params.id;
@@ -33,7 +42,7 @@ function mapStateToProps(state, ownProps){
 	return {
 		roleId: roleId,
 		permissions : state.roles[0].permissions
-	}
+	};
 }
 
 

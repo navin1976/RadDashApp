@@ -16,6 +16,23 @@ import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 */
 
+const paraStyles = {
+	float:"left",
+	overflowX:"hidden"
+};
+
+const editButton ={
+	backgroundColor:"#659D32",
+	color:"white",
+	border:"none"
+};
+
+const deleteButton ={
+	backgroundColor:"#CD3333",
+	color:"white",
+	border:"none"
+};
+
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
@@ -68,7 +85,14 @@ class Dashboard extends React.Component{
 
 		return(
 			<div key={widget.layout.i} className="card">
-				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={500}/>
+				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={470}/>
+				<div className="overlayCard">
+					<p style={paraStyles}> Exam count per year (2010-2015) </p>
+					<div className="cardOptions">
+						<button style={editButton}>E</button>
+						<button style={deleteButton}>X</button>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -80,11 +104,8 @@ class Dashboard extends React.Component{
 	
 	render(){
 		//retrieve layouts from the layout object
-		console.log(this.props.data);
-		let displayLayout = [];
-		for(let i=0; i<this.props.dashboard.widgets;i++){
-			displayLayout.push(this.props.dashboard.widgets[i].layout);
-		}
+		let displayLayout = []
+		displayLayout.push(this.props.dashboard.widgets[0].layout);
 		const id = (this.props.dashboardId || "default");
 		return (
 			<div>

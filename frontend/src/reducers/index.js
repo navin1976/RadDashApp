@@ -6,6 +6,7 @@ import layout from './layoutReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 import dashboards from './dashboardReducer';
 import roles from './roleReducer';
+import permissions from './permissionReducer';
 
 const rootReducer = combineReducers({
 	courses,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
 	layout,
 	ajaxCallsInProgress,
 	dashboards,
-	roles
+	roles,
+	permissions
 });
 
 export default rootReducer;
