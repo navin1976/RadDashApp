@@ -16,7 +16,7 @@ describe('/data/entities', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/data/entities',
+        url: 'http://localhost:1338/data/entities',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

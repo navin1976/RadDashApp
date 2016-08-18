@@ -19,7 +19,7 @@ describe('/data/timeseries', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/data/timeseries',
+        url: 'http://localhost:1338/data/timeseries',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

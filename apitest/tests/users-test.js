@@ -22,7 +22,7 @@ describe('/users', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/users',
+        url: 'http://localhost:1338/users',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ describe('/users', function() {
     it('should respond with 403, if the user is not authorised to get the list of all users ', function(done) {
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/users',
+        url: 'http://localhost:1338/users',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

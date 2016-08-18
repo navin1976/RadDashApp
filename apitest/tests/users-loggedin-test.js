@@ -4,6 +4,9 @@ var ZSchema = require('z-schema');
 var validator = new ZSchema({});
 var request = require('request');
 
+var testHelper = require('../testHelper.js');
+testHelper.prepareForTest(ZSchema, validator);
+
 chai.should();
 
 describe('/users/loggedin', function() {
@@ -11,15 +14,16 @@ describe('/users/loggedin', function() {
     it('should respond with 200 Info of logged in user...', function(done) {
       /*eslint-disable*/
       var schema = {
-        "$ref": "#/definitions/User"
+        "$ref": "REFERENCE#/definitions/User"
       };
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/users/loggedin',
+        url: 'http://localhost:1338/users/loggedin',
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': testHelper.constants.USER_ADMIN
         }
       },
       function(error, res, body) {
@@ -27,7 +31,7 @@ describe('/users/loggedin', function() {
 
         res.statusCode.should.equal(200);
 
-        validator.validate(body, schema).should.be.true;
+        validator.validate(JSON.parse(body), schema).should.be.true;
         done();
       });
     });

@@ -1,0 +1,299 @@
+
+[32minfo: [39mStarting app...
+
+[32minfo: [39m
+[32minfo: [39m               .-..-.
+[32minfo: [39m
+[32minfo: [39m   Sails              <|    .-..-.
+[32minfo: [39m   v0.12.4             |\
+[32minfo: [39m                      /|.\
+[32minfo: [39m                     / || \
+[32minfo: [39m                   ,'  |'  \
+[32minfo: [39m                .-'.-==|/_--'
+[32minfo: [39m                `--'-------' 
+[32minfo: [39m   __---___--___---___--___---___--___
+[32minfo: [39m ____---___--___---___--___---___--___-__
+[32minfo: [39m
+[32minfo: [39mServer lifted in `/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi`
+[32minfo: [39mTo see your app, visit http://localhost:1338
+[32minfo: [39mTo shut down Sails, press <CTRL> + C at any time.
+[37m[39m
+[34mdebug: [39m-------------------------------------------------------
+[34mdebug: [39m:: Thu Aug 18 2016 22:45:27 GMT+0100 (BST)
+[37m[39m
+[34mdebug: [39mEnvironment : test
+[34mdebug: [39mPort        : 1338
+[34mdebug: [39m-------------------------------------------------------
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Conversion failed when converting the varchar value 'default' to data type int.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Conversion failed when converting the varchar value 'default' to data type int.
+
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Conversion failed when converting the varchar value 'default' to data type int.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Conversion failed when converting the varchar value 'default' to data type int.
+
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Conversion failed when converting the varchar value '{dashboardId PARAM GOES HERE}' to data type int.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Conversion failed when converting the varchar value '{dashboardId PARAM GOES HERE}' to data type int.
+
+dashboardId:  NaN
+userId:  1
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Invalid column name 'Na'.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Invalid column name 'Na'.
+
+{ [ConnectionError: Failed to connect to dashboarddatabase.database.windows.net:1433 - getaddrinfo ENOTFOUND dashboarddatabase.database.windows.net dashboarddatabase.database.windows.net:1433]
+  name: 'ConnectionError',
+  message: 'Failed to connect to dashboarddatabase.database.windows.net:1433 - getaddrinfo ENOTFOUND dashboarddatabase.database.windows.net dashboarddatabase.database.windows.net:1433',
+  code: 'ESOCKET' }
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+    at new WLError (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/error/WLError.js:25:15)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/model/lib/defaultMethods/save.js:188:17
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/async/lib/async.js:52:16
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/async/lib/async.js:550:17
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/async/lib/async.js:544:17
+    at _arrayEach (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/async/lib/async.js:85:13)
+    at Immediate.taskComplete (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/async/lib/async.js:543:13)
+    at processImmediate [as _immediateCallback] (timers.js:368:17)
+
+
+[31merror: [39mSending 500 ("Server Error") response: 
+ TypeError: Cannot read property 'replace' of undefined
+    at Object.module.exports.strtotime (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/services/TimeService.js:7:20)
+    at Object.wrapper [as strtotime] (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
+    at Object.module.exports.find (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/DataentitiesController.js:10:42)
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+    at module.exports (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/policies/sessionAuth.js:33:5)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+    at _sendHeaders (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/hooks/cors/to-prepare-send-headers.js:91:7)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Invalid column name 'Na'.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Invalid column name 'Na'.
+
+[31merror: [39mSending 500 ("Server Error") response: 
+ TypeError: Cannot read property 'replace' of undefined
+    at Object.module.exports.strtotime (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/services/TimeService.js:7:20)
+    at Object.wrapper [as strtotime] (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
+    at Object.module.exports.find (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/TimeseriesController.js:13:42)
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+    at module.exports (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/policies/sessionAuth.js:33:5)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+    at _sendHeaders (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/hooks/cors/to-prepare-send-headers.js:91:7)
+    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
+    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+{ role: 1, id: 5, name: 'testAdmin', hashpass: '1234' }
+{ role: 3, id: 9, name: 'testRole', hashpass: '1234' }
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Invalid column name 'Na'.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Invalid column name 'Na'.
+
+[31merror: [39mSending 500 ("Server Error") response: 
+ Error (E_UNKNOWN) :: Encountered an unexpected error
+RequestError: Invalid column name 'Na'.
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
+    at emitOne (events.js:77:13)
+    at Connection.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
+    at emitOne (events.js:77:13)
+    at Parser.emit (events.js:169:7)
+    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
+    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
+    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
+    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+
+Details:  RequestError: Invalid column name 'Na'.
+
+{ role: 1, id: 5, name: 'testAdmin', hashpass: '1234' }
+{ role: 3, id: 9, name: 'testRole', hashpass: '1234' }
+{ role: 1, id: 5, name: 'testAdmin', hashpass: '1234' }
+{ role: { id: 1, description: 'admin' },
+  id: 5,
+  name: 'testAdmin',
+  hashpass: '1234' }
+{ role: 1, id: 5, name: 'testAdmin', hashpass: '1234' }
+{ role: 3, id: 9, name: 'testRole', hashpass: '1234' }

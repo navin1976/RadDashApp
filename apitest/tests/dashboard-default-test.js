@@ -10,7 +10,7 @@ describe('/dashboard/default', function() {
   describe('post', function() {
     it('should respond with 201 The default dashboard is...', function(done) {
       request({
-        url: 'http://localhost:1337/dashboard/default',
+        url: 'http://localhost:1338/dashboard/default',
         qs: {
           roleId: 'DATA GOES HERE'
         },
@@ -40,7 +40,7 @@ describe('/dashboard/default', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/dashboard/default',
+        url: 'http://localhost:1338/dashboard/default',
         qs: {
           roleId: 'DATA GOES HERE'
         },

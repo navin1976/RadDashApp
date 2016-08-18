@@ -19,7 +19,7 @@ describe('/dashboards', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/dashboards',
+        url: 'http://localhost:1338/dashboards',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ describe('/dashboards', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/dashboards',
+        url: 'http://localhost:1338/dashboards',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ describe('/dashboards', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/dashboards',
+        url: 'http://localhost:1338/dashboards',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ describe('/dashboards', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/dashboards',
+        url: 'http://localhost:1338/dashboards',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

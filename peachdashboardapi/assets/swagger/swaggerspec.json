@@ -863,8 +863,7 @@
     "MetricData": {
       "type": "object",
       "required": [
-        "date",
-        "metric"
+        "date"
       ],
       "properties": {
         "date": {
@@ -874,7 +873,14 @@
         "metric": {
           "type": "number",
           "format": "double",
-          "description": "The metric requested,"
+          "description": "The metric requested, if there was a split, the field is not set"
+        },
+        "split": {
+          "type": "array",
+          "description": "If there was a split, this field is set, it is an array of SplitMetric which represent the metric computed for each distinct value of the dimension by which the data was split",
+          "items": {
+            "$ref": "#/definitions/SplitMetric"
+          }
         }
       },
       "description": "Any metric that can be represented with a double. It is an array that is returned according to the granularity as requested. \n\n[\n  {\n    \"metric\": 108750,\n    \"date\": \"2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z\"\n  }\n]"
@@ -1097,6 +1103,25 @@
         }
       },
       "description": "Roles with assigned permissions"
+    },
+    "SplitMetric": {
+      "type": "object",
+      "required": [
+        "metric",
+        "split"
+      ],
+      "properties": {
+        "metric": {
+          "type": "number",
+          "format": "double",
+          "description": "The metric computed"
+        },
+        "split": {
+          "type": "string",
+          "description": "The distinct value of the dimension by which the data was split"
+        }
+      },
+      "description": "An object representing the metric calculation over a given dimension that we used as a split."
     },
     "User": {
       "type": "object",

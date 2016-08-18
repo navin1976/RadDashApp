@@ -8,7 +8,7 @@ describe('/dashboard/{dashboardId}', function() {
   describe('put', function() {
     it('should respond with 205 Dashboard is successfully...', function(done) {
       request({
-        url: 'http://localhost:1337/dashboard/{dashboardId PARAM GOES HERE}',
+        url: 'http://localhost:1338/dashboard/{dashboardId PARAM GOES HERE}',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ describe('/dashboard/{dashboardId}', function() {
   describe('delete', function() {
     it('should respond with 205 Dashboard is successfully...', function(done) {
       request({
-        url: 'http://localhost:1337/dashboard/{dashboardId PARAM GOES HERE}',
+        url: 'http://localhost:1338/dashboard/{dashboardId PARAM GOES HERE}',
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

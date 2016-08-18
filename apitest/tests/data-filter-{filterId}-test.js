@@ -19,7 +19,7 @@ describe('/data/filter/{filterId}', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/data/filter/{filterId PARAM GOES HERE}',
+        url: 'http://localhost:1338/data/filter/{filterId PARAM GOES HERE}',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
