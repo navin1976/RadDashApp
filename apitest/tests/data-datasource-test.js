@@ -19,7 +19,7 @@ describe('/data/datasource', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/data/datasource',
+        url: 'http://localhost:1338/data/datasource',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

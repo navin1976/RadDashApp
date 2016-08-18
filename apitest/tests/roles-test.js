@@ -22,7 +22,7 @@ describe('/roles', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/roles',
+        url: 'http://localhost:1338/roles',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ describe('/roles', function() {
     it('should respond with 403, if the user is not authorised ', function(done) {
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/roles',
+        url: 'http://localhost:1338/roles',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

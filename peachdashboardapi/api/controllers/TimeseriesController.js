@@ -65,18 +65,23 @@ module.exports = {
                   return res.send('Wrong paramaeters');
                 }
 
-                ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'interval');
+                ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'time');
 
                 // split by if necessary
                 if (splitBy) {
-                  ex = ex.apply('split', $(dataset).split($(datasource.filters[0].name), datasource.filters[0].title).apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+                  ex = ex.apply('split', $(dataset).split($(datasource.filters[splitBy].name), 'split').apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
                 } else {
                   ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
                 }
 
                 // send the query to druid
                 ex.compute(context).then(function(data) {
+
                   var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
+                  dataToJS.map(function(e) {
+                    e.time = e.time.start + '/' + e.time.end;
+                    return e
+                  })
                   res.type('application/json');
                   res.status(200);
                   res.send(JSON.stringify(dataToJS));

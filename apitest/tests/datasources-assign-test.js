@@ -8,7 +8,7 @@ describe('/datasources/assign', function() {
   describe('put', function() {
     it('should respond with 205 Datasources successfully...', function(done) {
       request({
-        url: 'http://localhost:1337/datasources/assign',
+        url: 'http://localhost:1338/datasources/assign',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

@@ -10,7 +10,7 @@ describe('/roles/assign', function() {
   describe('put', function() {
     it('should respond with 205 The update was successful...', function(done) {
       request({
-        url: 'http://localhost:1337/roles/assign',
+        url: 'http://localhost:1338/roles/assign',
         qs: {
           roleId: 'DATA GOES HERE',userId: 'DATA GOES HERE'
         },
@@ -39,7 +39,7 @@ describe('/roles/assign', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/roles/assign',
+        url: 'http://localhost:1338/roles/assign',
         qs: {
           roleId: 'DATA GOES HERE',userId: 'DATA GOES HERE'
         },

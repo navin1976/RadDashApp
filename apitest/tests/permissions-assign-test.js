@@ -10,7 +10,7 @@ describe('/permissions/assign', function() {
   describe('put', function() {
     it('should respond with 205 The update was successful...', function(done) {
       request({
-        url: 'http://localhost:1337/permissions/assign',
+        url: 'http://localhost:1338/permissions/assign',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ describe('/permissions/assign', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1337/permissions/assign',
+        url: 'http://localhost:1338/permissions/assign',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

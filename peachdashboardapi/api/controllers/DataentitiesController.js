@@ -46,9 +46,14 @@ module.exports = {
           // send the query to druid
           ex.compute(context).then(function(data) {
             // send the response
+            var dataToJS = data.toJS();
+            dataToJS.map(function(e) {
+              e.time = e.time.value;
+              return e;
+            });
             res.type('application/json');
             res.status(200);
-            res.send(JSON.stringify(data.toJS()));
+            res.send(JSON.stringify(dataToJS));
           }).done();
         });
 
