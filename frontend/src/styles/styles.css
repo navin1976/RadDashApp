@@ -320,6 +320,6 @@ html, body, #app{
 .optionPane{
     float:right;
     height: 100%;
-    background-color: Red;
-    width:250px; 
+    background-color: white;
+    width:260px; 
 }

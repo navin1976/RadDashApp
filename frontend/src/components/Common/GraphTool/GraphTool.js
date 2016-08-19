@@ -11,7 +11,7 @@ class GraphTool extends React.Component{
 	render(){
 		return(
 			<Wrapper>
-				<div>Graph</div>
+				<div>null</div>
 				<OptionPanel />
 			</Wrapper>
 		);

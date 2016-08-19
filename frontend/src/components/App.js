@@ -5,14 +5,20 @@
 import React, {PropTypes} from 'react';
 import Header from './Common/Header';
 import {connect} from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const muiTheme = getMuiTheme({});
 
 class App extends React.Component{
 	render(){
 		return(
-			<div id="wrapper">
-				<Header loading={this.props.loading}/>
-				{this.props.children}
-			</div>
+			<MuiThemeProvider muiTheme={muiTheme}>
+				<div id="wrapper">
+					<Header loading={this.props.loading}/>
+					{this.props.children}
+				</div>
+			</MuiThemeProvider>
 		);
 	}
 }
