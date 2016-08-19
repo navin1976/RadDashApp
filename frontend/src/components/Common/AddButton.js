@@ -68,7 +68,6 @@ class AddButton extends React.Component{
 	}
 
 	render(){
-		console.log(this.state.settings.width);
 		return(
 			<div>
 				<Dialog open={this.state.open} title="Add a dashboard" onRequestClose = {this.handleRequestClose}>

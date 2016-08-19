@@ -28,15 +28,15 @@ export function loadDashboards(){
 			let d;
 			let s = getState();
 			for(d in s.dashboards){
-				console.log(s.dashboards[d]);
+				//console.log(s.dashboards[d]);
 				let widget;
 				for(widget in s.dashboards[d].widgets){
-					console.log(s.dashboards[d].widgets[widget]);
+					//console.log(s.dashboards[d].widgets[widget]);
 					dispatch(loadDatainDashboards(d,widget));
 				}
 			}
 		}).then(()=>{
-			console.log("done");
+			//console.log("done");
 		}).catch(error => {
 			throw(error);
 		});
@@ -54,7 +54,7 @@ export function loadDatainDashboards(d,widget){
 			throw(error);
 		});
 	};
-};
+}
 
 /*for(widget in dashboard.widgets){
 				if(widget.request){

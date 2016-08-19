@@ -5,8 +5,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const styles = {
   customWidth: {
-    width: 200,
-  },
+    width: 200
+  }
 };
 
 export default class TimerMenu extends React.Component {

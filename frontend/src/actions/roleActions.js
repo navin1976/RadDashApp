@@ -12,7 +12,7 @@ export function loadAllRoles(){
 		return RoleApi.getAllRoles().then(data => {
 			dispatch(loadAllRolesSuccess(data));
 		}).then(()=>{
-			console.log("Dispatched roles");
+			//console.log("Dispatched roles");
 		}).catch(error => {
 			throw(error);
 		});
@@ -22,11 +22,11 @@ export function loadAllRoles(){
 export function logRequest(){
 	return function(dispatch){
 		return fetch("http://peachdashboard.azurewebsites.net/permissions").then(data =>{
-			console.log(data.json());
+			//console.log(data.json());
 		}).catch(error => {
 			throw(error);
 		});
-	}
+	};
 }
 
 export function saveNewRole(newRole){

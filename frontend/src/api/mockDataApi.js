@@ -31,7 +31,6 @@ class DataApi{
 	static getData(){
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				console.log("THIS IS THE DATA CALL");
 				resolve(Object.assign([], data));
 			}, delay);
 		});

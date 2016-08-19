@@ -30,7 +30,7 @@ class AdminPage extends React.Component{
 
 	changeHandler(event){
 		this.setState({'filter':event.target.value},()=>{
-			console.log(this.state.filter);
+			//console.log(this.state.filter);
 		});
 	}
 

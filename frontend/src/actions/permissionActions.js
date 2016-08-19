@@ -13,7 +13,7 @@ export function loadPermissions(){
 		return axios.get("http://peachdashboard.azurewebsites.net/permissions").then(function(response){
 			dispatch(loadPermissionsSuccess(response.data));
 		}).then(function(){
-			console.log(getState());
+			//console.log(getState());
 		}).catch(function(err){
 			throw(err);
 		});

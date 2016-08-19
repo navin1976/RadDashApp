@@ -7,10 +7,10 @@ const RoleForm = ({allRoles}) => {
 			<RoleTable roles={allRoles}/>
 		</div>
 	);
-}
+};
 
 RoleForm.propTypes = {
-	allRoles:PropTypes.array,
+	allRoles:PropTypes.array
 };
 
 export default RoleForm;
