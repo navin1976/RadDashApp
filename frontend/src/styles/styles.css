@@ -316,3 +316,10 @@ html, body, #app{
 .cardOptions{
     float: right;
 }
+
+.optionPane{
+    float:right;
+    height: 100%;
+    background-color: Red;
+    width:250px; 
+}

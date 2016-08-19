@@ -1,6 +1,6 @@
 import React from 'react';
 import Wrapper from '../Wrapper';
-
+import OptionPanel from './OptionPanel';
 
 class GraphTool extends React.Component{
 	constructor(props,context){
@@ -12,6 +12,7 @@ class GraphTool extends React.Component{
 		return(
 			<Wrapper>
 				<div>Graph</div>
+				<OptionPanel />
 			</Wrapper>
 		);
 	}

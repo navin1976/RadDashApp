@@ -5,4 +5,14 @@ class OptionPanel extends React.Component{
 		super(props,context);
 		
 	}
+
+	render(){
+		return(
+			<div className="optionPane">
+				
+			</div>
+		);
+	}
 }
+
+export default OptionPanel;
