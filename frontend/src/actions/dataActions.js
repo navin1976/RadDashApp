@@ -1,4 +1,5 @@
 import * as types from './actionTypes';
+import * as APIConstant from './apiConstants';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import * as axios from 'axios';
 
@@ -9,10 +10,66 @@ export function loadAllDataSourcesSuccess(payload){
 export function loadAllDataSources(){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
-		return axios.get("http://peachdashboard.azurewebsites.net/datasources").then(function(response){
+		return axios.get(APIConstant.API_ROOT+"datasources")
+		.then(function(response){
 			dispatch(loadAllDataSourcesSuccess(response.data));
-		}).catch(function(err){
-			throw(err);
+		}).catch(function(error){
+			throw(error);
 		})
+	};
+}
+
+export function assignDataSource(sourceIds,role){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.put(APIConstant.API_ROOT+"datasources/assign",{
+			datasourceIds:sourceIds,
+			roleId:role
+		})
+		.then(function(response){
+			response.status >= 200 && response.status<300?console.log("Asigned"):console.log("failed");
+		}).catch(function(error){
+			throw(error);
+		})
+	};
+}
+
+export function fetchEntityData(config){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.post(APIConstant.API_ROOT+"data/entities",
+			{
+				"dataSourceId": config.sourceId,
+				"endTime": config.endTime,
+				"filters": config.filters,
+				"startTime": config.startTime
+			})
+		.then(function(response){
+
+		}).catch(function(error){
+			throw(error);
+		});
+	};
+}
+
+export function fetchDataTimeseries(config){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.post(APIConstant.API_ROOT+"data/timeseries",
+			{
+				"dataSourceId": config.sourceId,
+				"endTime": config.endTime,
+				"filters":config.filters,
+				"granularityId": config.granularityId,
+				"metricId": config.metricId,
+				"splitBy": config.splitBy,
+				"startTime": config.startTime
+			}
+		)
+		.then(function(response){
+
+		}).catch(function(error){
+			throw(error);
+		});
 	};
 }

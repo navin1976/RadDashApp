@@ -18,7 +18,7 @@ import routes from './routes';
 
 import {loadDashboards} from './actions/dashboardActions';
 import {loadAllDataSources} from './actions/dataActions';
-import {loadAllRoles,logRequest} from './actions/roleActions';
+import {loadAllRoles} from './actions/roleActions';
 import {loadPermissions} from './actions/permissionActions';
 
 import './styles/styles.css';
@@ -32,7 +32,6 @@ const store = configureStore(getInitialData());
 store.dispatch(loadDashboards());
 store.dispatch(loadAllDataSources());
 store.dispatch(loadAllRoles());
-store.dispatch(logRequest());
 store.dispatch(loadPermissions());
 
 render(
