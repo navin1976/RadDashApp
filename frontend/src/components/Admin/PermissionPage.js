@@ -15,15 +15,18 @@ class PermissionPage extends React.Component{
 			<div>
 			<AdminToolbar />
 			<Wrapper>
+
 				<PermissionTable 
 					permissions = {this.props.permissions}
 				/>
+
 				<div id="searchBar">
 					<div id="searchIcon" className="inline noSelect">S</div>
 					<input id="searchField" className="inline" type="text" onChange={this.changeHandler}/>
 				</div>
+				
 				<DataSourceTable
-					sources={[{id:1,name:"EXAMPQR",description:""},{id:2,name:"PATX2",description:""}]}
+					sources={this.props.dataSources}
 				/>
 
 			</Wrapper>
@@ -33,7 +36,8 @@ class PermissionPage extends React.Component{
 }
 
 PermissionPage.propTypes = {
-	permissions:React.PropTypes.array
+	permissions:React.PropTypes.array,
+	dataSources:React.PropTypes.array
 };
 
 function mapStateToProps(state, ownProps){
@@ -41,7 +45,8 @@ function mapStateToProps(state, ownProps){
 
 	return {
 		roleId: roleId,
-		permissions : state.roles[0].permissions
+		permissions : state.permissions,
+		dataSources : state.dataSources
 	};
 }
 
