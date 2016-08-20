@@ -9,8 +9,13 @@ module.exports = {
     validator.setRemoteReference('REFERENCE', require('../peachdashboardapi/assets/swagger/swaggerspec.json'));
   },
   constants: {
-    USER_ADMIN: 5,
-    USER_RADIOLOGIST: 6,
-    USER_RADIOGRAPHER: 9
+    USER_ADMIN: 1,
+    USER_MANAGER: 2,
+    USER_MEMBER: 3,
+    USER_SWITCHER: 4,
+
+    ROLE_ADMIN: 1,
+    ROLE_MANAGER: 2,
+    ROLE_MEMBER:3
   }
 }

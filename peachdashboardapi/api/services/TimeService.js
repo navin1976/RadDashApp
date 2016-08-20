@@ -48,26 +48,37 @@ module.exports =
       switch (m[0]) {
         case 'last':
         case 'next':
-          switch (m[1].substring(0, 3)) {
-            case 'yea':
+          switch (m[1]) {
+            case 'year':
+            case 'years':
               now.setFullYear(now.getFullYear() + num);
               break;
-            case 'mon':
+            case 'month':
+            case 'months':
               now.setMonth(now.getMonth() + num);
               break;
-            case 'wee':
+            case 'week':
+            case 'weeks':
               now.setDate(now.getDate() + (num * 7));
               break;
             case 'day':
+            case 'days':
               now.setDate(now.getDate() + num);
               break;
-            case 'hou':
+            case 'hour':
+            case 'hours':
               now.setHours(now.getHours() + num);
               break;
             case 'min':
+            case 'mins':
+            case 'minute':
+            case 'minutes':
               now.setMinutes(now.getMinutes() + num);
               break;
             case 'sec':
+            case 'secs':
+            case 'second':
+            case 'seconds':
               now.setSeconds(now.getSeconds() + num);
               break;
             default:
@@ -93,26 +104,37 @@ module.exports =
         default:
           if (/\d+/.test(m[0])) {
             num *= parseInt(m[0], 10);
-            switch (m[1].substring(0, 3)) {
-              case 'yea':
+            switch (m[1]) {
+              case 'year':
+              case 'years':
                 now.setFullYear(now.getFullYear() + num);
                 break;
-              case 'mon':
+              case 'month':
+              case 'months':
                 now.setMonth(now.getMonth() + num);
                 break;
-              case 'wee':
+              case 'week':
+              case 'weeks':
                 now.setDate(now.getDate() + (num * 7));
                 break;
               case 'day':
+              case 'days':
                 now.setDate(now.getDate() + num);
                 break;
-              case 'hou':
+              case 'hour':
+              case 'hours':
                 now.setHours(now.getHours() + num);
                 break;
               case 'min':
+              case 'mins':
+              case 'minute':
+              case 'minutes':
                 now.setMinutes(now.getMinutes() + num);
                 break;
               case 'sec':
+              case 'secs':
+              case 'second':
+              case 'seconds':
                 now.setSeconds(now.getSeconds() + num);
                 break;
             }
@@ -142,7 +164,7 @@ module.exports =
       return parseInt(this.strtotime(s[2] + ' ' + s[1] + ' ' + s[0] + ' ' + match[2]) + (match[4] ? match[4] / 1000 : ''), 10);
     }
 
-    var regex = '([+-]?\\d+\\s' + '(years?|months?|weeks?|days?|hours?|min|minutes?|sec|seconds?' + '|sun\\.?|sunday|mon\\.?|monday|tue\\.?|tuesday|wed\\.?|wednesday' + '|thu\\.?|thursday|fri\\.?|friday|sat\\.?|saturday)' + '|(last|next)\\s' + '(years?|months?|weeks?|days?|hours?|min|minutes?|sec|seconds?' + '|sun\\.?|sunday|mon\\.?|monday|tue\\.?|tuesday|wed\\.?|wednesday' + '|thu\\.?|thursday|fri\\.?|friday|sat\\.?|saturday))' + '(\\sago)?';
+    var regex = '([+-]?\\d+\\s' + '(years?|months?|weeks?|days?|hours?|mins?|minutes?|secs?|seconds?' + '|sun\\.?|sunday|mon\\.?|monday|tue\\.?|tuesday|wed\\.?|wednesday' + '|thu\\.?|thursday|fri\\.?|friday|sat\\.?|saturday)' + '|(last|next)\\s' + '(years?|months?|weeks?|days?|hours?|mins?|minutes?|s|sec|seconds?' + '|sun\\.?|sunday|mon\\.?|monday|tue\\.?|tuesday|wed\\.?|wednesday' + '|thu\\.?|thursday|fri\\.?|friday|sat\\.?|saturday))' + '(\\sago)?';
     match = strTmp.match(new RegExp(regex, 'gi'));
     if (match === null) {
       return false;

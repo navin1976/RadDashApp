@@ -4,6 +4,9 @@ var ZSchema = require('z-schema');
 var validator = new ZSchema({});
 var request = require('request');
 
+var testHelper = require('../testHelper.js');
+testHelper.prepareForTest(ZSchema, validator);
+
 chai.should();
 
 describe('/dashboard/default', function() {
@@ -35,7 +38,7 @@ describe('/dashboard/default', function() {
     it('should respond with 403 User is not authorised to...', function(done) {
       /*eslint-disable*/
       var schema = {
-        "$ref": "#/definitions/Error"
+        "$ref": "REFERENCE#/definitions/Error"
       };
 
       /*eslint-enable*/
@@ -57,7 +60,7 @@ describe('/dashboard/default', function() {
 
         res.statusCode.should.equal(403);
 
-        validator.validate(body, schema).should.be.true;
+        validator.validate(JSON.parse(body), schema).should.be.true;
         done();
       });
     });

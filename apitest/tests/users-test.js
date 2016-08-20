@@ -44,7 +44,7 @@ describe('/users', function() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : testHelper.constants.USER_RADIOGRAPHER
+          'Authorization' : testHelper.constants.USER_MEMBER
         }
       },
       function(error, res, body) {

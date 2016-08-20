@@ -8,7 +8,7 @@ module.exports = {
   assignRole: function (req, res) {
     var idUpdate = req.query.userId;
     var roleId = req.query.roleId;
-    User.update({id: idUpdate}, {roleId: roleId}).exec(function(error, records){
+    User.update({id: idUpdate}, {role: roleId}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
         return res.negotiate(error);

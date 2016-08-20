@@ -3,11 +3,11 @@ var plywood = require('plywood');
 var External = plywood.External;
 var druidRequesterFactory = require('plywood-druid-requester').druidRequesterFactory;
 var druidRequester = druidRequesterFactory({
-  host: 'localhost:8082' // Where ever your Druid may be
+  host: sails.config.druid.host // Where ever your Druid may be
 });
 
+// these libraries are necessary to initialize  in order to be able use time buckets in druid requests
 var chronoshift = require('chronoshift');
-
 var WalltimeData = require('./WalltimeData.js');
 chronoshift.WallTime.init(WalltimeData.rules, WalltimeData.zones);
 
@@ -25,3 +25,4 @@ module.exports = {
     }, druidRequester);
   }
 }
+

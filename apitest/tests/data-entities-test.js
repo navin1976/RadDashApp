@@ -4,6 +4,9 @@ var ZSchema = require('z-schema');
 var validator = new ZSchema({});
 var request = require('request');
 
+var testHelper = require('../testHelper.js');
+testHelper.prepareForTest(ZSchema, validator);
+
 chai.should();
 
 describe('/data/entities', function() {
@@ -30,7 +33,7 @@ describe('/data/entities', function() {
 
         res.statusCode.should.equal(200);
 
-        validator.validate(body, schema).should.be.true;
+        validator.validate(JSON.parse(body), schema).should.be.true;
         done();
       });
     });

@@ -21,6 +21,10 @@ module.exports = {
   //   connection: 'someMysqlServer'
   // },
 
+  druid: {
+    host: 'localhost:8082'
+  },
+
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/

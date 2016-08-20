@@ -1,6 +1,11 @@
 'use strict';
 var chai = require('chai');
+var ZSchema = require('z-schema');
+var validator = new ZSchema({});
 var request = require('request');
+
+var testHelper = require('../testHelper.js');
+testHelper.prepareForTest(ZSchema, validator);
 
 chai.should();
 

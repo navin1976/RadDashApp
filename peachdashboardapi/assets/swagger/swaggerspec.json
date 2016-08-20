@@ -793,7 +793,8 @@
       "type": "object",
       "required": [
         "id",
-        "name"
+        "name",
+        "title"
       ],
       "properties": {
         "canGetDistinct": {
@@ -818,6 +819,10 @@
         "name": {
           "type": "string",
           "description": "Name of the filter"
+        },
+        "title": {
+          "type": "string",
+          "description": "Friendly name for the filter"
         }
       },
       "description": "Filters available for a given data source"
