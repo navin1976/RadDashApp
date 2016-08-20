@@ -4,6 +4,9 @@ var ZSchema = require('z-schema');
 var validator = new ZSchema({});
 var request = require('request');
 
+var testHelper = require('../testHelper.js');
+testHelper.prepareForTest(ZSchema, validator);
+
 chai.should();
 
 describe('/roles/assign', function() {
@@ -12,52 +15,55 @@ describe('/roles/assign', function() {
       request({
         url: 'http://localhost:1338/roles/assign',
         qs: {
-          roleId: 'DATA GOES HERE',userId: 'DATA GOES HERE'
+          roleId: testHelper.constants.ROLE_MANAGER, userId: testHelper.constants.USER_SWITCHER
         },
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Authorization': testHelper.constants.USER_ADMIN
         },
-        json: {
-        }
       },
       function(error, res, body) {
         if (error) return done(error);
-
         res.statusCode.should.equal(205);
-
-        body.should.equal(null); // non-json response or no schema
         done();
       });
     });
 
     it('should respond with 403 The user is not authorised...', function(done) {
-      /*eslint-disable*/
-      var schema = {
-        "$ref": "#/definitions/Error"
-      };
-
-      /*eslint-enable*/
       request({
-        url: 'http://localhost:1338/roles/assign',
-        qs: {
-          roleId: 'DATA GOES HERE',userId: 'DATA GOES HERE'
+          url: 'http://localhost:1338/roles/assign',
+          qs: {
+            roleId: testHelper.constants.ROLE_MANAGER, userId: testHelper.constants.USER_SWITCHER
+          },
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
         },
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
+        function(error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(403);
+          done();
+        });
+    });
+
+    it('should respond with 205 The update was successful...', function(done) {
+      request({
+          url: 'http://localhost:1338/roles/assign',
+          qs: {
+            roleId: testHelper.constants.ROLE_MEMBER, userId: testHelper.constants.USER_SWITCHER
+          },
+          method: 'PUT',
+          headers: {
+            'Authorization': testHelper.constants.USER_ADMIN
+          },
         },
-        json: {
-        }
-      },
-      function(error, res, body) {
-        if (error) return done(error);
-
-        res.statusCode.should.equal(403);
-
-        validator.validate(body, schema).should.be.true;
-        done();
-      });
+        function(error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(205);
+          done();
+        });
     });
 
   });

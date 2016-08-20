@@ -4,7 +4,7 @@ kill -9 $(lsof -t -i:1338) &> /dev/null
 echo "Starting sails in test mode"
 NODE_ENV=test sails lift &> ../test.log &
 sleep 15
-cd -
+cd ../apitest
 echo "Starting test runner"
-node mocha.js
+node ./node_modules/mocha/bin/mocha tests/**/*-test.js
 kill -9 $(lsof -t -i:1338)
