@@ -27,19 +27,20 @@ describe('/permissions', function() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': testHelper.constants.USER_ADMIN
-        }
+        },
+        json: true
       },
       function(error, res, body) {
         if (error) return done(error);
 
         res.statusCode.should.equal(200);
 
-        validator.validate(JSON.parse(body), schema).should.be.true;
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
 
-    it('should respond with 403, if the user is not authorised ', function(done) {
+    it('should respond with 403, if the user is not authorised to assign permissions', function(done) {
       /*eslint-enable*/
       request({
           url: 'http://localhost:1338/roles',
@@ -47,7 +48,8 @@ describe('/permissions', function() {
           headers: {
             'Content-Type': 'application/json',
             'Authorization' : testHelper.constants.USER_MEMBER
-          }
+          },
+          json: true
         },
         function(error, res, body) {
           if (error) return done(error);

@@ -38,9 +38,9 @@ module.exports.routes = {
   'POST /dashboards': {controller: 'DashboardController', action: 'create'},
   'PUT /dashboard/:id': {controller: 'DashboardController', action: 'update'},
   'DELETE /dashboard/:id': {controller: 'DashboardController', action: 'delete'},
-  'POST /dashboards/default': {controller: 'DashboardController', action: 'createDefault'},
-  'PUT /dashboards/default/:id': {controller: 'DashboardController', action: 'updateDefault'},
-  'DELETE /dashboards/default/:id': {controller: 'DashboardController', action: 'deleteDefault'},
+  'POST /dashboard/default': {controller: 'DashboardController', action: 'createDefault'},
+  'PUT /dashboard/default/:id': {controller: 'DashboardController', action: 'updateDefault'},
+  'DELETE /dashboard/default/:id': {controller: 'DashboardController', action: 'deleteDefault'},
 
   /**Users Routes**/
   'GET /users': {controller: 'UserController', action: 'find'},

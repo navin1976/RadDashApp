@@ -6,5 +6,5 @@ NODE_ENV=test sails lift &> ../test.log &
 sleep 15
 cd ../apitest
 echo "Starting test runner"
-node ./node_modules/mocha/bin/mocha tests/**/*-test.js
+node ./node_modules/mocha/bin/mocha --timeout 15000 tests/**/*-test.js
 kill -9 $(lsof -t -i:1338)

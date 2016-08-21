@@ -16,6 +16,7 @@ module.exports = {
 
     ROLE_ADMIN: 1,
     ROLE_MANAGER: 2,
-    ROLE_MEMBER:3
+    ROLE_MEMBER:3,
+    ROLE_ROLE_SWITCHER: 4
   }
 }

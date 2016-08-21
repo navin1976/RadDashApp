@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^3.5.0",
+    "lodash": "^4.15.0",
     "mocha": "^3.0.2",
     "request": "^2.74.0",
     "swagger-test-templates": "^1.2.0",

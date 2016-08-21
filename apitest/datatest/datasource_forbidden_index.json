@@ -1,0 +1,56 @@
+{
+  "type" : "index_hadoop",
+  "spec" : {
+    "ioConfig" : {
+      "type" : "hadoop",
+      "inputSpec" : {
+        "type" : "static",
+        "paths" : "/Users/BlackLinden/Projects/radiologyDashboardAPI/apitest/datatest/datatest/datasource.csv"
+      }
+    },
+    "dataSchema" : {
+      "dataSource" : "datasource",
+      "granularitySpec" : {
+        "type" : "uniform",
+        "segmentGranularity" : "year",
+        "queryGranularity" : "none",
+        "intervals" : ["2000-01-01/2020-01-01"]
+      },
+      "parser" : {
+        "type" : "string",
+        "parseSpec" : {
+          "format" : "csv",
+          "dimensionsSpec" : {
+            "dimensions" : [
+              "dimension1"
+            ]
+          },
+          "timestampSpec" : {
+            "format" : "yyyy-MM-dd HH:mm:ss",
+            "column" : "date"
+          },
+          "columns":
+          [
+              "date",
+              "dimension1"
+          ]
+        }
+      },
+      "metricsSpec" : [
+        {
+          "name" : "count",
+          "type" : "count"
+        }
+      ]
+    },
+    "tuningConfig" : {
+      "type" : "hadoop",
+      "ignoreInvalidRows": true,
+      "partitionsSpec" : {
+        "type" : "hashed",
+        "targetPartitionSize" : 5000000
+      },
+      "jobProperties" : {}
+    }
+  }
+}

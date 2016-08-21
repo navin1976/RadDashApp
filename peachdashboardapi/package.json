@@ -22,7 +22,8 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "test": "node ./node_modules/mocha/bin/mocha tests/**/*-test.js",
+    "test": "npm run unit-test && npm run system-test",
+    "unit-test": "node ./node_modules/mocha/bin/mocha tests/**/*-test.js",
     "system-test":"bash ../apitest/test_run.sh"
   },
   "main": "app.js",

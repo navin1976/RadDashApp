@@ -148,6 +148,7 @@ module.exports = {
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
+
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[id]}).exec(function(error, records){
       if (error) {
         return res.negotiate(error);
