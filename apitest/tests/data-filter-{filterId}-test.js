@@ -22,21 +22,72 @@ describe('/data/filter/{filterId}', function() {
 
       /*eslint-enable*/
       request({
-        url: 'http://localhost:1338/data/filter/{filterId PARAM GOES HERE}',
+        url: 'http://localhost:1338/data/filter/'+testHelper.constants.FILTER_DS_DIM1,
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Authorization': testHelper.constants.USER_ADMIN
+        },
+        json: true
       },
       function(error, res, body) {
         if (error) return done(error);
 
         res.statusCode.should.equal(200);
 
-        validator.validate(JSON.parse(body), schema).should.be.true;
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
+
+    it('should respond with 403 if you do not have access to the datasource', function(done) {
+      request({
+          url: 'http://localhost:1338/data/filter/'+testHelper.constants.FILTER_DS_FORBIDDEN_DIM1,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_ADMIN
+          }
+        },
+        function(error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(403);
+          done();
+        });
+    });
+
+    it('should respond with 403 if the filter does not exist', function(done) {
+      request({
+          url: 'http://localhost:1338/data/filter/'+100,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_ADMIN
+          }
+        },
+        function(error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(403);
+          done();
+        });
+    });
+
+    it('should respond with 403 if you can not get distinct values for the filter', function(done) {
+      request({
+          url: 'http://localhost:1338/data/filter/'+testHelper.constants.FILTER_DS_DIM2,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_ADMIN
+          }
+        },
+        function(error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(403);
+          done();
+        });
+    });
+
 
   });
 

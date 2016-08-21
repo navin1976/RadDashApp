@@ -9,7 +9,7 @@
       }
     },
     "dataSchema" : {
-      "dataSource" : "datasource",
+      "dataSource" : "datasource_forbidden",
       "granularitySpec" : {
         "type" : "uniform",
         "segmentGranularity" : "year",

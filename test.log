@@ -19,7 +19,7 @@
 [32minfo: [39mTo shut down Sails, press <CTRL> + C at any time.
 [37m[39m
 [34mdebug: [39m-------------------------------------------------------
-[34mdebug: [39m:: Sun Aug 21 2016 12:40:51 GMT+0100 (BST)
+[34mdebug: [39m:: Sun Aug 21 2016 21:15:35 GMT+0100 (BST)
 [37m[39m
 [34mdebug: [39mEnvironment : test
 [34mdebug: [39mPort        : 1338
@@ -30,120 +30,94 @@
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-dashboardId:  39
+dashboardId:  56
 { role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-dashboardId:  39
+dashboardId:  56
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 2, id: 2, name: 'u_manager', hashpass: '1234' }
-dashboardId:  40
+dashboardId:  57
 userId:  2
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-dashboardId:  40
+dashboardId:  57
 userId:  3
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-dashboardId:  40
+dashboardId:  57
 userId:  3
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-[31merror: [39mSending 500 ("Server Error") response: 
- TypeError: Cannot read property 'replace' of undefined
-    at Object.module.exports.strtotime (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/services/TimeService.js:7:20)
-    at Object.wrapper [as strtotime] (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
-    at Object.module.exports.find (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/DataentitiesController.js:10:42)
-    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
-    at module.exports (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/policies/sessionAuth.js:33:5)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
-    at _sendHeaders (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/hooks/cors/to-prepare-send-headers.js:91:7)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-[31merror: [39mSending 500 ("Server Error") response: 
- Error (E_UNKNOWN) :: Encountered an unexpected error
-RequestError: Invalid column name 'Na'.
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:692:17
-    at emitOne (events.js:77:13)
-    at Connection.emit (events.js:169:7)
-    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/connection.js:244:16)
-    at emitOne (events.js:77:13)
-    at Parser.emit (events.js:169:7)
-    at Parser.<anonymous> (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/token-stream-parser.js:51:15)
-    at emitOne (events.js:77:13)
-    at Parser.emit (events.js:169:7)
-    at readableAddChunk (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:210:18)
-    at Parser.Readable.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_readable.js:169:10)
-    at Parser.Transform.push (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/node_modules/readable-stream/lib/_stream_transform.js:123:32)
-    at doneParsing (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:82:17)
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:49:5
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:18:19
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:219:9
-    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
-    at Parser.readUInt32LE (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:216:12)
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/infoerror-token-parser.js:17:90
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:417:11
-    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:405:9
-    at Parser.awaitData (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/node_modules/tedious/lib/token/stream-parser.js:116:9)
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ [ConnectionError: Failed to connect to radiologydashboard2016.database.windows.net:1433 - getaddrinfo ENOTFOUND radiologydashboard2016.database.windows.net radiologydashboard2016.database.windows.net:1433]
+  name: 'ConnectionError',
+  message: 'Failed to connect to radiologydashboard2016.database.windows.net:1433 - getaddrinfo ENOTFOUND radiologydashboard2016.database.windows.net radiologydashboard2016.database.windows.net:1433',
+  code: 'ESOCKET' }
+/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/RolePermissionController.js:24
+      var rolesParsed = roles.map(function(role){
+                             ^
 
-Details:  RequestError: Invalid column name 'Na'.
-
-[31merror: [39mSending 500 ("Server Error") response: 
- TypeError: Cannot read property 'replace' of undefined
-    at Object.module.exports.strtotime (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/services/TimeService.js:7:20)
-    at Object.wrapper [as strtotime] (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
-    at Object.module.exports.find (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/TimeseriesController.js:13:42)
-    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3095:19)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
-    at module.exports (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/policies/sessionAuth.js:33:5)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-    at nextRoute (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
-    at _sendHeaders (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/hooks/cors/to-prepare-send-headers.js:91:7)
-    at routeTargetFnWrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/lib/router/bind.js:181:5)
-    at callbacks (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
-    at param (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
-    at pass (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: { id: 1, description: 'admin' },
-  id: 1,
-  name: 'u_admin',
-  hashpass: '1234' }
-{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+TypeError: Cannot read property 'map' of undefined
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/RolePermissionController.js:24:30
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3592:19)
+    at applyInOriginalCtx (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:421:80)
+    at wrappedCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:335:16)
+    at callback.error (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/normalize.js:42:31)
+    at _switch (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/factory.js:56:28)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/query/finders/basic.js:265:23
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/query/finders/operations.js:72:21
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3592:19)
+    at applyInOriginalCtx (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:421:80)
+    at wrappedCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:335:16)
+    at callback.error (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/normalize.js:42:31)
+    at _switch (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/factory.js:56:28)
+    at afterPopulateBuffers (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/cursor/cursor.js:54:20)
+    at taskCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:468:21)
+    at done (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:126:15)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:32:16
+    at _afterFetchingRelatedChildRecords (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/cursor/populateBuffers.js:146:31)
+    at __FIND__ (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/lib/adapter.js:318:18)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/lib/adapter.js:131:13
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/main.js:287:20
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:408:20

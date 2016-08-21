@@ -13,6 +13,10 @@ module.exports = {
         res.negotiate(error);
         return res.send();
       }
+      if (!filter) {
+        res.status(403);
+        return res.send('Filter does not exist');
+      }
       if (!filter.canGetDistinct) {
         res.status(403);
         return res.send('Cannot get distinct values for this filter');
