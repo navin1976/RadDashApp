@@ -244,12 +244,6 @@
                 "$ref": "#/definitions/Dashboard"
               }
             }
-          },
-          "404": {
-            "description": "The given user does not have dashboard data associated with the id",
-            "schema": {
-              "type": "string"
-            }
           }
         }
       },
@@ -374,6 +368,9 @@
                 "type": "string"
               }
             }
+          },
+          "403": {
+            "description": "Cannot get distinct values for this filter or filter does not exist"
           }
         }
       }
