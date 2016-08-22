@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import * as courseActions from '../../actions/courseActions';
 import CourseList from './CourseList';
+import Wrapper from '../Common/Wrapper';
 
 class CoursesPage extends React.Component{
 	constructor(props,context){
@@ -24,6 +25,7 @@ class CoursesPage extends React.Component{
 		//console.log(this.context.store.getState());
 		const {courses} = this.props;
 		return(
+			<Wrapper>
 			<div className="info-context">
 				<h1>Courses</h1>
 				<input type="submit"
@@ -32,6 +34,7 @@ class CoursesPage extends React.Component{
 					onClick = {this.redirectToAddCoursePage}/>
 				<CourseList courses={courses}/>	
 			</div>
+			</Wrapper>
 		);
 	}
 }

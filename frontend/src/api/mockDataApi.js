@@ -1,20 +1,36 @@
 import delay from './delay';
 
 const data = [
-	{letter:"A",frequency:"0.08167"},
-	{letter:"B",frequency:"0.06167"},
-	{letter:"C",frequency:"0.03167"},
-	{letter:"D",frequency:"0.04267"},
-	{letter:"E",frequency:"0.01267"},
-	{letter:"F",frequency:"0.01967"},
-	{letter:"G",frequency:"0.05567"},
+  {
+    "metric": 108750,
+    "date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+  },
+  {
+    "metric": 380650,
+    "date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+  },
+  {
+    "metric": 393695,
+    "date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+  },
+  {
+    "metric": 418133,
+    "date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
+  },
+  {
+    "metric": 437033,
+    "date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
+  },
+  {
+    "metric": 311548,
+    "date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
+  }
 ];
 
 class DataApi{
-	static getData(d,widget){
+	static getData(){
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				console.log("THIS IS THE ID: "+widget);
 				resolve(Object.assign([], data));
 			}, delay);
 		});

@@ -5,13 +5,12 @@ const RoleForm = ({allRoles}) => {
 	return(
 		<div>
 			<RoleTable roles={allRoles}/>
-			<button>Add</button>
 		</div>
 	);
-}
+};
 
 RoleForm.propTypes = {
-	allRoles:PropTypes.array,
+	allRoles:PropTypes.array
 };
 
 export default RoleForm;

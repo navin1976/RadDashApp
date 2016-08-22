@@ -15,12 +15,11 @@ import {Provider} from 'react-redux';
 import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 
-import {loadCourses} from './actions/courseActions';
-import {loadAuthors} from './actions/authorActions';
+
 import {loadDashboards} from './actions/dashboardActions';
-import {loadLayout} from './actions/layoutActions';
-import {loadData} from './actions/dataActions';
-import {loadAllRoles,logRequest} from './actions/roleActions';
+import {loadAllDataSources} from './actions/dataActions';
+import {loadAllRoles} from './actions/roleActions';
+import {loadPermissions} from './actions/permissionActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -29,13 +28,11 @@ import '../node_modules/toastr/build/toastr.min.css';
 
 
 const store = configureStore(getInitialData());
-store.dispatch(loadCourses());
-store.dispatch(loadAuthors());
+
 store.dispatch(loadDashboards());
-store.dispatch(loadLayout());
-store.dispatch(loadData());
+store.dispatch(loadAllDataSources());
 store.dispatch(loadAllRoles());
-store.dispatch(logRequest());
+store.dispatch(loadPermissions());
 
 render(
 	<Provider store={store}>

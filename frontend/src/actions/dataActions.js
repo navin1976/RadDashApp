@@ -1,64 +1,74 @@
 import * as types from './actionTypes';
+import * as APIConstant from './apiConstants';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
-import DataApi from  '../api/mockDataApi';
+import * as axios from 'axios';
 
-
-//Needs a loadCoursesFailure/Error action to dispatch
-
-export function loadDataForWidget(id,data){
-	return {type: types.LOAD_DATA_WIDGET_SUCCESS,id,data};
+export function loadAllDataSourcesSuccess(payload){
+	return {type:types.LOAD_ALL_DATASOURCES_SUCCESS,payload};
 }
-/*
-Dispatch necessary for react-thunk. Arrow functions need to include several
-parameters then put into brackets as such (a,b,c) => {}
-LoadCourses returns a promise -> dispatches a Success action / Error action
-*/
-export function loadData(){
+
+export function loadAllDataSources(){
 	return function(dispatch){
-		let url = "http://localhost:1337/data/timeseries";
-		// druid not in azure for now
 		dispatch(beginAjaxCall());
-		return fetch(url,{
-			method:"POST",
-			headers:{
-				"Content-Type":"application/json"
-			},
-			body:JSON.stringify({
-				"dataSourceId": 1,
-  				"granularityId": 2,
-  				"metricId": 1	
+		return axios.get(APIConstant.API_ROOT+"datasources")
+		.then(function(response){
+			dispatch(loadAllDataSourcesSuccess(response.data));
+		}).catch(function(error){
+			throw(error);
+		})
+	};
+}
+
+export function assignDataSource(sourceIds,role){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.put(APIConstant.API_ROOT+"datasources/assign",{
+			datasourceIds:sourceIds,
+			roleId:role
+		})
+		.then(function(response){
+			response.status >= 200 && response.status<300?console.log("Asigned"):console.log("failed");
+		}).catch(function(error){
+			throw(error);
+		})
+	};
+}
+
+export function fetchEntityData(config){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.post(APIConstant.API_ROOT+"data/entities",
+			{
+				"dataSourceId": config.sourceId,
+				"endTime": config.endTime,
+				"filters": config.filters,
+				"startTime": config.startTime
 			})
-		}).then(data => {
-			dispatch(loadDataSuccess(data));
-		}).catch(error=> {
+		.then(function(response){
+
+		}).catch(function(error){
 			throw(error);
 		});
 	};
 }
 
-function loadGenData(url,method,payload){
+export function fetchDataTimeseries(config){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
-		return fetch(url,{
-			method:method,
-			headers:{
-				"Content-Type":"application/json"
-			},
-			body:JSON.stringify(payload)
-		}).then(data => {
-			dispatch(loadDataSuccess(data));
-		}).catch(error=>{
-			throw(error);
-		});
-	};
-}
+		return axios.post(APIConstant.API_ROOT+"data/timeseries",
+			{
+				"dataSourceId": config.sourceId,
+				"endTime": config.endTime,
+				"filters":config.filters,
+				"granularityId": config.granularityId,
+				"metricId": config.metricId,
+				"splitBy": config.splitBy,
+				"startTime": config.startTime
+			}
+		)
+		.then(function(response){
 
-export function loadDataForWidget(id){
-	return function(dispatch){
-		dispatch(beginAjaxCall());
-		return DataApi.getData(id).then(data=>{
-			dispatch(loadDataSuccessFor(id,data));
-		}).catch(error => {
+		}).catch(function(error){
 			throw(error);
 		});
 	};

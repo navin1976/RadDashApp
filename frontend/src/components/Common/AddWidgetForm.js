@@ -28,7 +28,8 @@ AddWidgetForm.propTypes = {
 	onChange: React.PropTypes.func.isRequired,
 	onSubmit: React.PropTypes.func.isRequired,
 	errors: React.PropTypes.object,
-	closer: React.PropTypes.func.isRequired
+	closer: React.PropTypes.func.isRequired,
+	handler:React.PropTypes.func
 };
 
 export default AddWidgetForm;

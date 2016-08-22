@@ -4,23 +4,21 @@
 
 import React, {PropTypes} from 'react';
 import Header from './Common/Header';
-import Toolbar from './Common/Toolbar';
 import {connect} from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const muiTheme = getMuiTheme({});
 
 class App extends React.Component{
 	render(){
 		return(
-			<div id="wrapper">
-				<Header loading={this.props.loading}/>
-				<Toolbar />
-					<div id="content-area">
-						<div id="page-content-wrapper">
-							<div className="container-fluid layout">
-								{this.props.children}
-							</div>
-						</div>
-					</div>
-			</div>
+			<MuiThemeProvider muiTheme={muiTheme}>
+				<div id="wrapper">
+					<Header loading={this.props.loading}/>
+					{this.props.children}
+				</div>
+			</MuiThemeProvider>
 		);
 	}
 }
