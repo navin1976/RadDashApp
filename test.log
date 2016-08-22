@@ -1,0 +1,123 @@
+
+[32minfo: [39mStarting app...
+
+[32minfo: [39m
+[32minfo: [39m               .-..-.
+[32minfo: [39m
+[32minfo: [39m   Sails              <|    .-..-.
+[32minfo: [39m   v0.12.4             |\
+[32minfo: [39m                      /|.\
+[32minfo: [39m                     / || \
+[32minfo: [39m                   ,'  |'  \
+[32minfo: [39m                .-'.-==|/_--'
+[32minfo: [39m                `--'-------' 
+[32minfo: [39m   __---___--___---___--___---___--___
+[32minfo: [39m ____---___--___---___--___---___--___-__
+[32minfo: [39m
+[32minfo: [39mServer lifted in `/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi`
+[32minfo: [39mTo see your app, visit http://localhost:1338
+[32minfo: [39mTo shut down Sails, press <CTRL> + C at any time.
+[37m[39m
+[34mdebug: [39m-------------------------------------------------------
+[34mdebug: [39m:: Sun Aug 21 2016 21:15:35 GMT+0100 (BST)
+[37m[39m
+[34mdebug: [39mEnvironment : test
+[34mdebug: [39mPort        : 1338
+[34mdebug: [39m-------------------------------------------------------
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+dashboardId:  56
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+dashboardId:  56
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 2, id: 2, name: 'u_manager', hashpass: '1234' }
+dashboardId:  57
+userId:  2
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+dashboardId:  57
+userId:  3
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+dashboardId:  57
+userId:  3
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ [ConnectionError: Failed to connect to radiologydashboard2016.database.windows.net:1433 - getaddrinfo ENOTFOUND radiologydashboard2016.database.windows.net radiologydashboard2016.database.windows.net:1433]
+  name: 'ConnectionError',
+  message: 'Failed to connect to radiologydashboard2016.database.windows.net:1433 - getaddrinfo ENOTFOUND radiologydashboard2016.database.windows.net radiologydashboard2016.database.windows.net:1433',
+  code: 'ESOCKET' }
+/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/RolePermissionController.js:24
+      var rolesParsed = roles.map(function(role){
+                             ^
+
+TypeError: Cannot read property 'map' of undefined
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/api/controllers/RolePermissionController.js:24:30
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3592:19)
+    at applyInOriginalCtx (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:421:80)
+    at wrappedCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:335:16)
+    at callback.error (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/normalize.js:42:31)
+    at _switch (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/factory.js:56:28)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/query/finders/basic.js:265:23
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/query/finders/operations.js:72:21
+    at wrapper (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/lodash/index.js:3592:19)
+    at applyInOriginalCtx (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:421:80)
+    at wrappedCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/lib/waterline/utils/normalize.js:335:16)
+    at callback.error (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/normalize.js:42:31)
+    at _switch (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails/node_modules/waterline/node_modules/switchback/lib/factory.js:56:28)
+    at afterPopulateBuffers (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/cursor/cursor.js:54:20)
+    at taskCallback (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:468:21)
+    at done (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:126:15)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/node_modules/async/lib/async.js:32:16
+    at _afterFetchingRelatedChildRecords (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/waterline-cursor/cursor/populateBuffers.js:146:31)
+    at __FIND__ (/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/lib/adapter.js:318:18)
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/lib/adapter.js:131:13
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/main.js:287:20
+    at /Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi/node_modules/sails-sqlserver/node_modules/mssql/lib/tedious.js:408:20
