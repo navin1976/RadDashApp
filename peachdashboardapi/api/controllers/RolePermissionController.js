@@ -46,25 +46,13 @@ module.exports = {
   assignPermission: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
     var permissionIds = req.body.permissionIds;
-
     RolePermission.destroy({role:idUpdate})
       .then(function() { return Role.findOne(idUpdate);})
+      .catch(function(error) { res.negotiate(error); res.send();})
       .then(function(role) { return Role.update(idUpdate, {permissions:permissionIds, description:role.description});})
       .catch(function(error) { res.negotiate(error); res.send();})
       .then(function() { res.status(205); res.send();})
       .catch(function(error) { res.negotiate(error); res.send();});
-    /*
-     RolePermission.destroy({role:idUpdate}).exec(function(error, records) {
-      if (error) {
-        ...
-      }
-      Role.update(idUpdate, {permissions:permissionIds, description:"admin"}).exec(function(error, records) {
-        if (error) {
-          ...
-        }
-        res.send();
-        });
-     });
-     */
+
   }
 };

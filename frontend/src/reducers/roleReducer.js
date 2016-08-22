@@ -6,6 +6,14 @@ export default function roleReducer(state = initialState.roles,action){
 		case types.LOAD_ALL_ROLES_SUCCESS:{
 			return action.data;
 		}
+		case types.UPLOAD_NEW_ROLE:{
+			const currId = state[state.length-1].id;
+			const nextId = currId + 1;
+			return [
+				...state,
+				Object.assign({"id":nextId},action.newRole)
+			];
+		}
 		default:
 			return state;
 	}

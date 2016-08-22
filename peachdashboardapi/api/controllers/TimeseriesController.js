@@ -62,10 +62,10 @@ module.exports = {
               FilterService.applyFilters($, ex, datasource, filters, function(failed, ex) {
                 if (failed) {
                   res.status(403);
-                  return res.send('Wrong paramaeters');
+                  return res.send('Wrong parameters');
                 }
 
-                ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'time');
+                ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'date');
 
                 // split by if necessary
                 if (splitBy) {
@@ -79,7 +79,7 @@ module.exports = {
 
                   var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
                   dataToJS.map(function(e) {
-                    e.time = e.time.start + '/' + e.time.end;
+                    e.date = e.date.start + '/' + e.date.end;
                     return e
                   })
                   res.type('application/json');

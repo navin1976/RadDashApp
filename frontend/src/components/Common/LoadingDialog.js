@@ -10,7 +10,7 @@ export default class LoadingDialog extends React.Component{
 	constructor(props,context){
 		super(props,context);
 		this.state = {
-			open: false,
+			open: false
 		};	
 	}
 
@@ -23,12 +23,14 @@ export default class LoadingDialog extends React.Component{
 	}
 
 	render(){
-		<Dialog
-			title="Loading"
-			modal={true}
-			contentStyle={customContentStyle}
-			open={this.state.open}>
-				This dialog spans the entire width of the screen.
-		</Dialog>
+		return(
+			<Dialog
+				title="Loading"
+				modal={true}
+				contentStyle={customContentStyle}
+				open={this.state.open}>
+					This dialog spans the entire width of the screen.
+			</Dialog>
+		);
 	}
 }

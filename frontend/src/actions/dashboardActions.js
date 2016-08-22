@@ -1,15 +1,11 @@
 import * as types from './actionTypes';
 import DashboardApi from  '../api/mockDashApi';
 import DataApi from '../api/mockDataApi';
+import * as axios from 'axios';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import * as APIConstant from './apiConstants';
 
-export function createTile(tile){
-	return {type: types.CREATE_TILE, tile};
-}
 
-export function updateLayout(newLayout){
-	return {type: types.UPDATE_TILE, newLayout};
-}
 
 export function loadDashboardSuccess(dashboards){
 	return {type: types.LOAD_DASHBOARD_SUCCESS, dashboards};
@@ -28,15 +24,15 @@ export function loadDashboards(){
 			let d;
 			let s = getState();
 			for(d in s.dashboards){
-				console.log(s.dashboards[d]);
+				//console.log(s.dashboards[d]);
 				let widget;
 				for(widget in s.dashboards[d].widgets){
-					console.log(s.dashboards[d].widgets[widget]);
+					//console.log(s.dashboards[d].widgets[widget]);
 					dispatch(loadDatainDashboards(d,widget));
 				}
 			}
 		}).then(()=>{
-			console.log("done");
+			//console.log("done");
 		}).catch(error => {
 			throw(error);
 		});
@@ -54,7 +50,12 @@ export function loadDatainDashboards(d,widget){
 			throw(error);
 		});
 	};
-};
+}
+
+
+
+
+
 
 /*for(widget in dashboard.widgets){
 				if(widget.request){
@@ -86,3 +87,53 @@ export function add_data(data){
 }
 
 */
+
+
+export function updateDashboard(id,isDefault){
+	const apiPath = APIConstant.API_ROOT+"dashboard/"+isDefault?"default":""+id;
+	return function(dispatch){
+		return axios.put(apiPath)
+		.then(function(response){
+			response.status >= 200 && response.status<300?console.log("Updated"):console.log("failed");
+		}).catch(function(error){
+			throw(error);
+		});
+	};
+}
+
+export function deleteDashboard(id,isDefault){
+	const apiPath = APIConstant.API_ROOT+"dashboard/"+isDefault?"default":""+id;
+	return function(dispatch){
+		return axios.delete(apiPath)
+		.then(function(response){
+			if(response.status >= 200 && response.status<300){
+				console.log("Dashboard successfully deleted");
+			}else{
+				console.log("Failed to delete dashboard");
+			}
+		}).catch(function(error){
+			throw(error);
+		});
+	};
+}
+
+
+export function createNewDashboard(title,isDefault){
+	const apiPath = APIConstant.API_ROOT+"dashboard/"+isDefault?"default":"";
+	return function(dispatch){
+		return axios.post(apiPath,{
+				title:title,
+				isEnabled:true,
+				configuration:"string"
+			})
+		.then(function(response){
+			if(response.status >= 200 && response.status<300){
+				console.log("Dashboard successfully created");
+			}else{
+				console.log("Failed to create dashboard");
+			}
+		}).catch(function(error){
+			throw(error);
+		});
+	};	
+}

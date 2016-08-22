@@ -11,7 +11,7 @@ chai.should();
 
 describe('/data/timeseries', function() {
   describe('post', function() {
-    it('should respond with 200 Metric computed for the...', function(done) {
+    it('should respond with 200 when call successful (without splitBy)', function(done) {
       /*eslint-disable*/
       var schema = {
         "type": "array",
@@ -25,10 +25,16 @@ describe('/data/timeseries', function() {
         url: 'http://localhost:1338/data/timeseries',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': testHelper.constants.USER_MEMBER
         },
-        json: {
-          body: 'DATA GOES HERE'
+        json: true,
+        body: {
+          "dataSourceId": testHelper.constants.DATASOURCE,
+          "startTime": "2016-01-01 00:00:00",
+          "endTime": "2016-12-15 00:00:00",
+          "metricId": testHelper.constants.METRIC_COUNT,
+          "granularityId": testHelper.constants.GRANULARITY_MONTHLY
         }
       },
       function(error, res, body) {
@@ -36,9 +42,183 @@ describe('/data/timeseries', function() {
 
         res.statusCode.should.equal(200);
 
-        validator.validate(JSON.parse(body), schema).should.be.true;
+        validator.validate(body, schema).should.be.true;
         done();
       });
+    });
+
+    it('should respond with 200 when call successful (with splitBy)', function(done) {
+      /*eslint-disable*/
+      var schema = {
+        "type": "array",
+        "items": {
+          "$ref": "REFERENCE#/definitions/MetricData"
+        }
+      };
+
+      /*eslint-enable*/
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2016-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function(error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(200);
+
+          validator.validate(body, schema).should.be.true;
+          done();
+        });
+    });
+
+    it('should respond with 404 when granularity is not associated with the datasource', function(done) {
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2016-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": 99,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function (error, res, body) {
+          if (error) return done(error);
+          res.statusCode.should.equal(404);
+          done();
+        });
+    });
+
+    it('should respond with 404 when metric is not associated with the datasource', function(done) {
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2016-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": 99,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function (error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(404);
+          done();
+        });
+    });
+
+    it('should respond with 404 when splitBy is not associated with the datasource', function(done) {
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2016-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_FORBIDDEN_DIM1
+          }
+        },
+        function (error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(404);
+          done();
+        });
+    });
+
+    it('should respond with 403 when user cannot access the datasource', function(done) {
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE_FORBIDDEN,
+            "startTime": "2016-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function (error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(403);
+          done();
+        });
+    });
+
+    it('should respond with 403 when the filter is not found', function(done) {
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2016-01-01 00:00:00",
+            "filters": [
+              {
+                "filterId": testHelper.constants.FILTER_DS_FORBIDDEN_DIM1,
+                "filterValues": [
+                  "string"
+                ]
+              }
+            ],
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function (error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(403);
+          done();
+        });
     });
 
   });
