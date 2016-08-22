@@ -2,9 +2,21 @@ import React,{PropTypes} from 'react';
 import TextField from 'material-ui/TextField';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-
+import DatePicker from 'material-ui/DatePicker';
+import areIntlLocalesSupported from 'intl-locales-supported';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+
+let DateTimeFormat;
+
+if (areIntlLocalesSupported(['fr'])) {
+  DateTimeFormat = global.Intl.DateTimeFormat;
+} else {
+  const IntlPolyfill = require('intl');
+  DateTimeFormat = IntlPolyfill.DateTimeFormat;
+  require('intl/locale-data/jsonp/fr');
+}
 
 const prevStyle = {
 	border:"none",
@@ -99,6 +111,8 @@ class OptionPanel extends React.Component{
 					<button style={prevStyle}>Preview</button>
 					<button style={saveStyle}>Save</button>
 				</div>
+				<DatePicker/>
+				<DatePicker/>
 			</div>
 		);
 	}
