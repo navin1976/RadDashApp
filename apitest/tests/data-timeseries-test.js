@@ -221,6 +221,34 @@ describe('/data/timeseries', function() {
         });
     });
 
+    it('should respond with 405 when the start time of the query is greater than (later) the end time', function(done) {
+
+      /*eslint-enable*/
+      request({
+          url: 'http://localhost:1338/data/timeseries',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': testHelper.constants.USER_MEMBER
+          },
+          json: true,
+          body: {
+            "dataSourceId": testHelper.constants.DATASOURCE,
+            "startTime": "2017-01-01 00:00:00",
+            "endTime": "2016-12-15 00:00:00",
+            "metricId": testHelper.constants.METRIC_COUNT,
+            "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
+            "splitBy": testHelper.constants.FILTER_DS_DIM1
+          }
+        },
+        function(error, res, body) {
+          if (error) return done(error);
+
+          res.statusCode.should.equal(405);
+          done();
+        });
+    });
+
   });
 
 });
