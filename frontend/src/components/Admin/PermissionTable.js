@@ -1,16 +1,16 @@
 import React,{PropTypes} from 'react';
 import PermissionRow from './PermissionRow';
 
+
 class PermissionTable extends React.Component{
 	constructor(props,context){
 		super(props,context);
 
-		this.state = {
-			posIds:[]
-		};
+		this.state = {};
 	}
 
 	render(){
+
 		return(
 			<div>
 				<table className="table">
@@ -35,7 +35,8 @@ class PermissionTable extends React.Component{
 }
 
 PermissionTable.propTypes = {
-	permissions:PropTypes.array.isRequired
+	permissions:PropTypes.array.isRequired,
+	current:PropTypes.array
 };
 
 export default PermissionTable;

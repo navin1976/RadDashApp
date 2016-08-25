@@ -5,12 +5,22 @@ import {connect} from 'react-redux';
 import Wrapper from '../Common/Wrapper';
 import AdminToolbar from '../Common/Toolbars/AdminToolbar';
 
+const findId = function(roleObj,sId){
+	for(let i = 0; i<roleObj.length;i++){
+		if(roleObj[i].id == sId){
+			return roleObj[i].permissions;
+		}
+	}
+};
+
+
 class PermissionPage extends React.Component{
 	constructor(props,context){
 		super(props,context);
 	}
 
 	render(){
+		const perm = findId(this.props.roles,this.props.roleId);
 		return(
 			<div>
 			<AdminToolbar />
@@ -18,6 +28,7 @@ class PermissionPage extends React.Component{
 
 				<PermissionTable 
 					permissions = {this.props.permissions}
+					current = {perm}
 				/>
 
 				<div id="searchBar">
@@ -46,7 +57,8 @@ function mapStateToProps(state, ownProps){
 	return {
 		roleId: roleId,
 		permissions : state.permissions,
-		dataSources : state.dataSources
+		dataSources : state.dataSources,
+		roles: state.roles
 	};
 }
 
