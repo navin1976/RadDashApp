@@ -43,7 +43,9 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "roleId",
@@ -65,7 +67,10 @@
         ],
         "responses": {
           "201": {
-            "description": "The default dashboard is successfully created, please refresh content"
+            "description": "The default dashboard is successfully created, The dashboard created is returned",
+            "schema": {
+              "$ref": "#/definitions/DashboardCreate"
+            }
           },
           "403": {
             "description": "User is not authorised to create a new default dashboard",
@@ -244,12 +249,6 @@
                 "$ref": "#/definitions/Dashboard"
               }
             }
-          },
-          "404": {
-            "description": "The given user does not have dashboard data associated with the id",
-            "schema": {
-              "type": "string"
-            }
           }
         }
       },
@@ -374,6 +373,9 @@
                 "type": "string"
               }
             }
+          },
+          "403": {
+            "description": "Cannot get distinct values for this filter or filter does not exist"
           }
         }
       }
