@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import OptionForm from './OptionForm';
-
+import GraphPreview from './GraphPreview';
 
 const prevStyle = {
 	border:"none",
@@ -23,6 +23,12 @@ const saveStyle = {
 	textDecoration:"none"
 };
 
+const graphStyle = {
+	float:"left",
+	width:"calc(100%-300px)",
+	backgroundColor:"red"
+};
+
 class OptionPanel extends React.Component{
 	constructor(props,context){
 		super(props,context);
@@ -38,12 +44,14 @@ class OptionPanel extends React.Component{
 				granularity:""
 			},
 			error:{},
+			display:false
 		};
 		
 		this.handleChartChange = this.handleChartChange.bind(this);
 		this.handleDataChange = this.handleDataChange.bind(this);
 		this.updateGraphState = this.updateGraphState.bind(this);
 		this.saveGraph = this.saveGraph.bind(this);
+		this.previewGraph = this.previewGraph.bind(this);
 	}
 
 	handleChartChange(event,index,valueue){
@@ -63,21 +71,35 @@ class OptionPanel extends React.Component{
 		const field = event.target.name;
 		let details = this.state.details;
 		details[field] = event.target.value;
-		return this.setState({details:details});
+		return this.setState({details:details,display:false});
+	}
+
+	previewGraph(event){
+		event.preventDefault();
+		return this.setState({display:true});
 	}
 
 	render(){
 		return(
-			<div className="optionPane">
-				<OptionForm 
-					graphOption={this.state.details} 
-					onChange={this.updateGraphState} 
-					errors = {this.state.error} 
-					allAllowedSources = {this.props.d}
-					allAlowedFilters = {this.props.f}
-					allAlowedGranularities = {this.props.g}
-					onSave = {this.saveGraph}
-				/>
+			<div>
+				<div style = {graphStyle}>
+					<GraphPreview
+						info={this.state.details}
+						enable={this.state.display}
+					/>
+				</div>
+				<div className="optionPane">
+					<OptionForm 
+						graphOption={this.state.details} 
+						onChange={this.updateGraphState} 
+						errors = {this.state.error} 
+						allAllowedSources = {this.props.d}
+						allAlowedFilters = {this.props.f}
+						allAlowedGranularities = {this.props.g}
+						onSave = {this.saveGraph}
+						onPreview = {this.previewGraph}
+					/>
+				</div>
 			</div>
 		);
 	}

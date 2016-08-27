@@ -21,7 +21,7 @@ const saveStyles = {
 	height:"34px"
 };
 
-const OptionForm = ({graphOption,allAllowedSources,allAlowedFilters,allAlowedGranularities,onSave,onChange,saving,errors}) => {
+const OptionForm = ({graphOption,allAllowedSources,allAlowedFilters,allAlowedGranularities,onSave,onChange,onPreview,saving,errors}) => {
 	return(
 		<form>
 			<h1>Manage graph</h1>
@@ -34,7 +34,7 @@ const OptionForm = ({graphOption,allAllowedSources,allAlowedFilters,allAlowedGra
 			<SelectInput name="granularity" label="Granularity" value={graphOption.granularity} defaultOption="Select Granularity" options={allAlowedGranularities} onChange={onChange} error={errors.granularity} />
 			<DatePicker hintText="Start time" />
 			<DatePicker hintText="End time" />
-			<button style={prevStyles} onClick={onSave}>Preview</button>
+			<button style={prevStyles} onClick={onPreview}>Preview</button>
 			<button style={saveStyles} onClick={onSave}>Save</button>
 		</form>
 	);
