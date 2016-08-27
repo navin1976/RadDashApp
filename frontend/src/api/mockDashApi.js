@@ -13,6 +13,12 @@ const dashboards = [
 				"layout":{i: '1', x: 0, y: 0, w: 7, h: 10},
 				"type":"BAR_CHART",
 				"request":true
+			},{
+				"name":"examCountData",
+				"description":"Line chart showing the count of exam instances in a given interval",
+				"layout":{i: '2', x: 7, y: 0, w: 7, h: 10},
+				"type":"BAR_CHART",
+				"request":true
 			}
 		]
 	},

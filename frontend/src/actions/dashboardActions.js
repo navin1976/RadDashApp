@@ -5,7 +5,9 @@ import * as axios from 'axios';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import * as APIConstant from './apiConstants';
 
-
+export function removeWidget(dashId,widgetId){
+	return {type: types.REMOVE_WIDGET_SUCCESS,dId:dashId,wId:widgetId};
+}
 
 export function loadDashboardSuccess(dashboards){
 	return {type: types.LOAD_DASHBOARD_SUCCESS, dashboards};

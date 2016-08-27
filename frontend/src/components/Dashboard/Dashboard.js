@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
 import * as dashboardActions from '../../actions/dashboardActions';
 
 import ReactGridLayout from 'react-grid-layout';
@@ -40,8 +41,21 @@ class Dashboard extends React.Component{
 
 		this.update = this.update.bind(this);
 		this.widgetMap = this.widgetMap.bind(this);
+
+		this.editWidget = this.editWidget.bind(this);
+		this.deleteWidget = this.deleteWidget.bind(this);
 	}
 	
+	editWidget(id,dashId,event){
+		console.log("editing");
+		console.log(id);
+		console.log(dashId);
+	}
+
+	deleteWidget(id,dashId,event){
+		this.props.actions.removeWidget(dashId,id);
+	}
+
 	widgetMap(widget, index){
 		let data = [
 			{
@@ -82,15 +96,15 @@ class Dashboard extends React.Component{
 			}
 		];
 		let xScale = 'ordinal';
-
+		const dashId = (this.props.dashboardId || "default");
 		return(
 			<div key={widget.layout.i} className="card">
 				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={470}/>
 				<div className="overlayCard">
 					<p style={paraStyles}> Exam count per year (2010-2015) </p>
 					<div className="cardOptions">
-						<button style={editButton}>E</button>
-						<button style={deleteButton}>X</button>
+						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId)}}>E</button>
+						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId)}}>X</button>
 					</div>
 				</div>
 			</div>

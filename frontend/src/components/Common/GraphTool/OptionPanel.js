@@ -1,10 +1,7 @@
 import React,{PropTypes} from 'react';
-import TextField from 'material-ui/TextField';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import {connect} from 'react-redux';
+import OptionForm from './OptionForm';
 
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const prevStyle = {
 	border:"none",
@@ -31,77 +28,71 @@ class OptionPanel extends React.Component{
 		super(props,context);
 
 		this.state = {
-			chartValue: 1,
-			dataValue: 1
+			details:{
+				title:"",
+				description:"",
+				width:"",
+				height:"",
+				datasource:"",
+				filter:"",
+				granularity:""
+			},
+			error:{},
 		};
 		
 		this.handleChartChange = this.handleChartChange.bind(this);
 		this.handleDataChange = this.handleDataChange.bind(this);
+		this.updateGraphState = this.updateGraphState.bind(this);
+		this.saveGraph = this.saveGraph.bind(this);
 	}
 
-	handleChartChange(event,index,value){
-		this.setState({chartValue:value});
+	handleChartChange(event,index,valueue){
+		this.setState({chartvalueue:valueue});
 	}
 
-	handleDataChange(event,index,value){
-		this.setState({dataValue:value});
+	handleDataChange(event,index,valueue){
+		this.setState({datavalueue:valueue});
+	}
+
+	saveGraph(event){
+		event.preventDefault();
+		console.log(this.state);
+	}
+
+	updateGraphState(event){
+		const field = event.target.name;
+		let details = this.state.details;
+		details[field] = event.target.value;
+		return this.setState({details:details});
 	}
 
 	render(){
 		return(
 			<div className="optionPane">
-				<TextField hintText="Widget title" floatingLabelText="Title"/>
-				<br />
-				<TextField hintText="Widget description" />
-				<br />
-				<TextField hintText="Widget width" />
-				<br />
-				<TextField hintText="Widget height"/>
-				<br />
-				<DropDownMenu
-					value = {this.state.chartValue}
-					onChange = {this.handleChartChange}
-					autoWidth
-				>
-					<MenuItem value={1} primaryText="Chart type"/>
-					<MenuItem value={2} primaryText="Bar chart"/>
-					<MenuItem value={3} primaryText="Line chart"/>
-					<MenuItem value={4} primaryText="Pie chart"/>
-				</DropDownMenu>
-
-				<DropDownMenu
-					value = {this.state.dataValue}
-					onChange = {this.handleDataChange}
-					autoWidth
-				>
-					<MenuItem value={1} primaryText="DataSource1"/>
-					<MenuItem value={2} primaryText="DataSource2"/>
-					<MenuItem value={3} primaryText="DataSource3"/>
-					<MenuItem value={4} primaryText="DataSource4"/>
-				</DropDownMenu>
-
-				<DropDownMenu
-					value = {this.state.dataValue}
-					onChange = {this.handleDataChange}
-					autoWidth
-				>
-					<MenuItem value={1} primaryText="Filter1"/>
-				</DropDownMenu>
-
-				<DropDownMenu
-					value = {this.state.dataValue}
-					onChange = {this.handleDataChange}
-					autoWidth
-				>
-					<MenuItem value={1} primaryText="Granularity1"/>
-				</DropDownMenu>
-				<div>
-					<button style={prevStyle}>Preview</button>
-					<button style={saveStyle}>Save</button>
-				</div>
+				<OptionForm 
+					graphOption={this.state.details} 
+					onChange={this.updateGraphState} 
+					errors = {this.state.error} 
+					allAllowedSources = {this.props.d}
+					allAlowedFilters = {this.props.f}
+					allAlowedGranularities = {this.props.g}
+					onSave = {this.saveGraph}
+				/>
 			</div>
 		);
 	}
 }
 
-export default OptionPanel;
+function mapStateToProps(state,ownProps){
+	const datasources = [{id:1,value:"item1",text:"Item 1"},{id:2,value:"item2",text:"Item 2"},{id:3,value:"item3",text:"Item 3"}];
+	const granularity = [{id:1,value:"daily",text:"Daily"},{id:2,value:"weekly",text:"Weekly"},{id:3,value:"monthly",text:"Monthly"}];
+	const filter = [{id:1,value:"filter1",text:"Filter 1"},{id:2,value:"filter2",text:"Filter 2"}];
+
+	return {
+		d:datasources,
+		g:granularity,
+		f:filter
+	};
+}
+
+export default connect(mapStateToProps)(OptionPanel);

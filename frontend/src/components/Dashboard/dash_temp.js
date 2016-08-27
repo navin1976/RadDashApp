@@ -2,11 +2,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
 import * as dashboardActions from '../../actions/dashboardActions';
 
 import ReactGridLayout from 'react-grid-layout';
 
 import AddButton from '../Common/AddButton';
+import Wrapper from '../Common/Wrapper';
+import DashboardToolbar from '../Common/Toolbars/DashboardToolbar';
 
 import {BarChart,PieChart,BarStackChart,LineChart} from 'react-d3-basic';
 
@@ -15,87 +18,186 @@ import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 
+const paraStyles = {
+	float:"left",
+	overflowX:"hidden"
+};
+
+const editButton ={
+	backgroundColor:"#659D32",
+	color:"white",
+	border:"none"
+};
+
+const deleteButton ={
+	backgroundColor:"#CD3333",
+	color:"white",
+	border:"none"
+};
+
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
 		this.state = {};
 
 		this.update = this.update.bind(this);
+		this.widgetMap = this.widgetMap.bind(this);
+
+		this.editWidget = this.editWidget.bind(this);
+		this.deleteWidget = this.deleteWidget.bind(this);
 	}
 	
-	tileEntry(tile, index){
+	editWidget(id,dashId,event){
+		console.log("editing");
+		console.log(id);
+		console.log(dashId);
+	}
+
+	deleteWidget(id,dashId,event){
+		this.props.actions.removeWidget(dashId,id);
+	}
+
+	widgetMap(widget, index){
+		let data = [
+			{
+			"metric": 108750,
+			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 380650,
+			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 393695,
+			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 418133,
+			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 437033,
+			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 311548,
+			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
+			}
+		];
+		let x = function(d){
+			return d.date;
+		};
+		let y = function(d){
+			return +d;
+		};
 		let chartSeries = [
-    		{
-     			field: 'frequency',
-     			name: 'Frequency',
-      			style: {
-        			'fillOpacity': .5
-      			}
-   			 }
-  		];
+			{
+				field:'metric',
+				name:'Metric'
+			}
+		];
+		let xScale = 'ordinal';
+		const dashId = (this.props.dashboardId || "default");
+		return(
+			<div key={widget.layout.i} className="card">
+				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={470}/>
+				<div className="overlayCard">
+					<p style={paraStyles}> Exam count per year (2010-2015) </p>
+					<div className="cardOptions">
+						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId)}}>E</button>
+						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId)}}>X</button>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
-  		let data=[
-  			{letter:"A",frequency:"0.08167"},
-  			{letter:"B",frequency:"0.06167"},
-  			{letter:"C",frequency:"0.03167"},
-  			{letter:"D",frequency:"0.04267"},
-  			{letter:"E",frequency:"0.01267"},
-  			{letter:"F",frequency:"0.01967"},
-  			{letter:"G",frequency:"0.05567"},
-  		];
+	update(newLayout){
+		//console.log(newLayout);
+		//this.props.actions.updateLayout(newLayout);
+	}
+	
+	render(){
+		//retrieve layouts from the layout object
+		let displayLayout = []
+		displayLayout.push(this.props.dashboard.widgets[0].layout);
+		const id = (this.props.dashboardId || "default");
+		return (
+			<div>
+				<DashboardToolbar id={id} />
+				<Wrapper>
+					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
+						{this.props.dashboard.widgets.map(this.widgetMap)}
+					</ReactGridLayout>
+				</Wrapper>
+			</div>
+		);
+	}
+}
 
-  		let x = function(d) {
-   		 return d.letter;
-  		};
+function mapStateToProps(state,ownProps){
+	const dashboardId = ownProps.params.id;
+	return {
+		data:[
+			{
+			"metric": 108750,
+			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 380650,
+			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 393695,
+			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 418133,
+			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 437033,
+			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
+			},
+			{
+			"metric": 311548,
+			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
+			}
+		],
+		dashboard:state.dashboards[0],
+		dashboardId: dashboardId
+	};
+}
 
-  		let xScale = "ordinal";
+function mapDispatchToProps(dispatch){
+	return {
+		actions: bindActionCreators(dashboardActions,dispatch)
+	};
+}
 
-  		let y = function(d){
-  			return +d;
-  		};
+Dashboard.propTypes = {
+	data: React.PropTypes.array.isRequired,
+	dashboard: React.PropTypes.object.isRequired,
+	dashboardId: React.PropTypes.string
+};
 
-  		let data2 = [
-  			{age:"<5",population:"27000"},
-  			{age:"5-13",population:"16000"},
-  			{age:"14-17",population:"19000"},
-  			{age:"18-24",population:"22000"},
-  			{age:"25-44",population:"9000"}
-  		];
+export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
 
-  		let chartSeries2 = [
-  			{
-  				"field":"<5",
-  				"name": "less than 5",
-  				"color":"red"
-  			},{
-  				"field":"5-13",
-  				"name": "5 to 13",
-  				"color":"green"
-  			},{
-  				"field":"14-17",
-  				"name": "14 to 17",
-  				"color":"yellow"
-  			},{
-  				"field":"18-24",
-  				"name": "18 to 24",
-  				"color":"blue"
-  			},{
-  				"field":"25-44",
-  				"name": "25 to 44",
-  				"color":"orange"
-  			}
-  		];
 
-  		let value = function(d){
-  			return +d.population;
-  		};
 
-  		let name = function(d){
-  			return d.age;
-  		};
 
-		let entry = null;
 
+
+
+
+
+
+
+
+
+
+
+/*
 		switch(tile.type){
 			case 'BAR_CHART':
 				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
@@ -109,74 +211,21 @@ class Dashboard extends React.Component{
 			default:
 				console.log("Chart type doesnt exist");
 		}
+render(){
 
-		return(
-			<div key={tile.l.i} className="card">
-				{entry}
-			</div>
-		);
-	}
-
-	update(newLayout){
-		//console.log(newLayout);
-		//this.props.actions.updateLayout(newLayout);
-	}
 	
-	render(){
-		//retrieve layouts from the layout object
-		let displayLayout = [];
-		for(let i = 0; i<this.props.layout.length;i++){
-			displayLayout.push(this.props.layout[i].l);
-		}
 
+		const layout = {
+		lg :[
+			{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
+			{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
+			{i: 'c', x: 4, y: 0, w: 1, h: 2}]
+    	};
 		return (
-			<div>	
-				<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
-					{this.props.layout.map(this.tileEntry)}
-				</ReactGridLayout>
-				<AddButton />
-			</div>
+			<ResponsiveReactGridLayout className="layout" layout={layout} breakpoints={{lg: 1200, md: 996,sm: 768, xs: 480}} cols={{lg: 12, md: 10,sm: 6, xs: 4}}>
+				<div key={'a'} className="testCard">a</div>
+				<div key={'b'} className="testCard">b</div>
+				<div key={'c'} className="testCard">c</div>
+			</ResponsiveReactGridLayout>
 		);
-	}
-}
-
-function mapStateToProps(state,ownProps){
-	const dashboardId = ownProps.params.id;
-	let dashLayout = [
-			{
-				l:{i: '1', x: 0, y: 0, w: 4, h: 8},
-				c:2,
-				n:"Dashboard 1",
-				type:"BAR_CHART"
-			},
-			{
-				l:{i: '2', x: 4, y: 0, w: 4, h: 8},
-				c:2,
-				n:"Dashboard 2",
-				type:"BAR_CHART"
-			}
-	];
-	
-	if(!dashboardId){
-		dashLayout = state.layout;
-	}
-	
-	console.log(dashLayout);
-	return {
-		layout: dashLayout
-	};
-}
-
-function mapDispatchToProps(dispatch){
-	return {
-		actions: bindActionCreators(dashboardActions,dispatch)
-	};
-}
-
-Dashboard.propTypes = {
-	layout: React.PropTypes.array.isRequired
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
-
-*/
+	}*/

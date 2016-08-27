@@ -10,6 +10,18 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 			console.log(...state);
 			return state;
 		}
+		case types.REMOVE_WIDGET_SUCCESS:{
+			const elementPos = state.map(function(x){ return x.id;}).indexOf(action.dId);
+			const newObj = Object.assign({},state[elementPos]);
+
+			console.log(newObj[widgets]);
+			return [
+				...state.slice(0,elementPos),
+				newObj,
+				...state.slice(elementPos+1)
+			];
+
+		}
 		default:
 			return state;
 	}

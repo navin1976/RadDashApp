@@ -31,3 +31,6 @@ export const UPLOAD_NEW_ROLE = "UPLOAD_NEW_ROLE";
 
 //Permission actions
 export const LOAD_PERMISSIONS_SUCCESS = "LOAD_PERMISSIONS_SUCCESS";
+
+//Widget actions
+export const REMOVE_WIDGET_SUCCESS = "REMOVE_WIDGET_SUCCESS";
