@@ -50,10 +50,10 @@ module.exports.connections = {
 
   sqlServer: {
     adapter: 'sails-sqlserver',
-    user: 'mfeket23',
-    password: 'Grimbergen92',
-    host: 'dashboarddatabase.database.windows.net', // azure database
-    database: 'DashboardDatabase',
+    user: 'peachdashboard',
+    password: 'P3achpe4ch',
+    host: 'radiologydashboard2016.database.windows.net', // azure database
+    database: 'RadiologyDashboard2016',
     port: 1433,
     options: {
       encrypt: true   // use this for Azure databases
