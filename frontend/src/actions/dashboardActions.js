@@ -30,11 +30,11 @@ export function loadDashboards(){
 				let widget;
 				for(widget in s.dashboards[d].widgets){
 					//console.log(s.dashboards[d].widgets[widget]);
-					dispatch(loadDatainDashboards(d,widget));
+					dispatch(loadDatainDashboards(s.dashboards[d].id,s.dashboards[d].widgets[widget].layout.i));
 				}
 			}
 		}).then(()=>{
-			//console.log("done");
+			console.log("done");
 		}).catch(error => {
 			throw(error);
 		});
@@ -44,10 +44,10 @@ export function loadDashboards(){
 export function loadDatainDashboards(d,widget){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());
-		return DataApi.getData(d,widget).then(wd=>{
+		return DataApi.getData().then(wd=>{
 			dispatch(loadDataSuccess(d,widget,wd));
 		}).then(()=>{
-
+			console.log("Loaded data for "+d+":"+widget);
 		}).catch(error => {
 			throw(error);
 		});

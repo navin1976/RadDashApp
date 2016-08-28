@@ -12,7 +12,9 @@ import DashboardToolbar from '../Common/Toolbars/DashboardToolbar';
 
 import {BarChart,PieChart,BarStackChart,LineChart} from 'react-d3-basic';
 
+
 /*
+//For responsive design, integrate these classes
 import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 */
@@ -39,7 +41,6 @@ class Dashboard extends React.Component{
 		super(props,context);
 		this.state = {};
 
-		this.update = this.update.bind(this);
 		this.widgetMap = this.widgetMap.bind(this);
 
 		this.editWidget = this.editWidget.bind(this);
@@ -57,113 +58,110 @@ class Dashboard extends React.Component{
 	}
 
 	widgetMap(widget, index){
-		let data = [
-			{
-			"metric": 108750,
-			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 380650,
-			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 393695,
-			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 418133,
-			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 437033,
-			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 311548,
-			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
-			}
-		];
+
 		let x = function(d){
 			return d.date;
 		};
+
 		let y = function(d){
 			return +d;
 		};
+
 		let chartSeries = [
 			{
 				field:'metric',
 				name:'Metric'
 			}
 		];
+
 		let xScale = 'ordinal';
 		const dashId = (this.props.dashboardId || "default");
+		let chartItem;
+
+		switch(widget.type){
+			case 'BAR_CHART':{
+				chartItem = (<BarChart 
+					title={widget.title} 
+					data={widget.data} 
+					showLegend={false} 
+					xScale={xScale} 
+					chartSeries={chartSeries} 
+					x={x} 
+					y={y} 
+					width={widget.layout.w*35} 
+					height={widget.layout.h*40}
+				/>);
+				break;
+			}
+			case 'LINE_CHART':{
+				chartItem = (<BarChart 
+					title={widget.title} 
+					data={widget.data} 
+					showLegend={false} 
+					xScale={xScale} 
+					chartSeries={chartSeries} 
+					x={x} 
+					y={y} 
+					width={widget.layout.w*35} 
+					height={widget.layout.h*40}
+				/>);
+				break;
+			}
+			default:{
+				chartItem = <p>Graph could not be loaded</p>;
+				break;
+			}
+		}
+
 		return(
 			<div key={widget.layout.i} className="card">
-				<BarChart title={"Exam data per month"} data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={500} height={470}/>
+				{chartItem}
 				<div className="overlayCard">
-					<p style={paraStyles}> Exam count per year (2010-2015) </p>
+					<p style={paraStyles}> Missing title </p>
 					<div className="cardOptions">
-						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId)}}>E</button>
-						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId)}}>X</button>
+						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId);}}>E</button>
+						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
 					</div>
 				</div>
 			</div>
 		);
 	}
 
-	update(newLayout){
-		//console.log(newLayout);
-		//this.props.actions.updateLayout(newLayout);
-	}
-	
 	render(){
-		//retrieve layouts from the layout object
-		let displayLayout = []
-		displayLayout.push(this.props.dashboard.widgets[0].layout);
 		const id = (this.props.dashboardId || "default");
+		let displayLayout = [];
+		
+		for(let i = 0; i<this.props.dashboard.widgets.length; i++){
+			displayLayout.push(this.props.dashboard.widgets[i].layout);
+		}
+
 		return (
 			<div>
 				<DashboardToolbar id={id} />
+
 				<Wrapper>
 					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
 						{this.props.dashboard.widgets.map(this.widgetMap)}
 					</ReactGridLayout>
 				</Wrapper>
+
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state,ownProps){
-	const dashboardId = ownProps.params.id;
+	const dashboardId = (ownProps.params.id || "default");
+	let dash;
+
+	for(let i = 0; i< state.dashboards.length; i++){
+		if(state.dashboards[i].id == dashboardId){
+			dash = state.dashboards[i];
+			break;
+		}
+	}
 	return {
-		data:[
-			{
-			"metric": 108750,
-			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 380650,
-			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 393695,
-			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 418133,
-			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 437033,
-			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 311548,
-			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
-			}
-		],
-		dashboard:state.dashboards[0],
+		dashboard:dash,
 		dashboardId: dashboardId
 	};
 }
@@ -175,12 +173,23 @@ function mapDispatchToProps(dispatch){
 }
 
 Dashboard.propTypes = {
-	data: React.PropTypes.array.isRequired,
 	dashboard: React.PropTypes.object.isRequired,
 	dashboardId: React.PropTypes.string
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
