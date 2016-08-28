@@ -37,7 +37,11 @@ module.exports.policies = {
 
     findPermission: ['sessionAuth', 'canGetPermissions'],
 
-    assignPermission: ['sessionAuth', 'canAssignPermissions']
+    assignPermission: ['sessionAuth', 'canAssignPermissions'],
+
+    createRole: ['sessionAuth', 'canCreateRoles'],
+
+    deleteRole: ['sessionAuth', 'canDeleteRoles']
   },
 
   UserController: {

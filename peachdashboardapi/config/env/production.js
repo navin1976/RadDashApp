@@ -22,7 +22,7 @@ module.exports = {
   // },
 
   druid: {
-    host: 'localhost:8082'
+    host: 'dashboarddruidapi.westeurope.cloudapp.azure.com:8082'
   },
 
   /***************************************************************************

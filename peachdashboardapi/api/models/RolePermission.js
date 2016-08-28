@@ -11,7 +11,9 @@ module.exports = {
     CAN_ASSIGN_ROLES: 4,
     CAN_ASSIGN_PERMISSION: 6,
     CAN_GET_DATASOURCES: 7,
-    CAN_ASSIGN_DATASOURCES: 8
+    CAN_ASSIGN_DATASOURCES: 8,
+    CAN_CREATE_ROLES: 9,
+    CAN_DELETE_ROLES: 10
   },
   attributes: {
     role:{

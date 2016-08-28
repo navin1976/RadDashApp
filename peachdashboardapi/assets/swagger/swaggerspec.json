@@ -72,6 +72,9 @@
               "$ref": "#/definitions/DashboardCreate"
             }
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorised to create a new default dashboard",
             "schema": {
@@ -114,6 +117,9 @@
           "205": {
             "description": "Default dashboard successfully updated"
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorized to modify default dashboard",
             "schema": {
@@ -143,6 +149,9 @@
         "responses": {
           "205": {
             "description": "Existing default dashboard successfully deleted"
+          },
+          "400": {
+            "description": "Data types in request do not match expectations"
           },
           "403": {
             "description": "User is not authorized to delete default dashboard",
@@ -187,6 +196,9 @@
           "205": {
             "description": "Dashboard is successfully updated, please refresh content."
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorized to update the given dashboard",
             "schema": {
@@ -217,6 +229,9 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully deleted (not enabled), please refresh content."
+          },
+          "400": {
+            "description": "Data types in request do not match expectations"
           },
           "403": {
             "description": "User is not authorized to delete the given dashboard",
@@ -249,6 +264,9 @@
                 "$ref": "#/definitions/Dashboard"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           }
         }
       },
@@ -281,6 +299,9 @@
             "schema": {
               "$ref": "#/definitions/Dashboard"
             }
+          },
+          "400": {
+            "description": "Expected integers and a boolean value"
           }
         }
       }
@@ -374,6 +395,9 @@
               }
             }
           },
+          "400": {
+            "description": "Expected an integer"
+          },
           "403": {
             "description": "Cannot get distinct values for this filter or filter does not exist"
           }
@@ -411,6 +435,9 @@
                 "$ref": "#/definitions/MetricData"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           }
         }
       }
@@ -436,6 +463,9 @@
                 "$ref": "#/definitions/Datasource"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           },
           "403": {
             "description": "The user is not authorized to access all datasources",
@@ -470,6 +500,9 @@
         "responses": {
           "205": {
             "description": "Datasources successfully updates for the given role"
+          },
+          "400": {
+            "description": "Expected an integer"
           },
           "403": {
             "description": "The user is not authorized to assign datasources",
@@ -536,6 +569,9 @@
           "205": {
             "description": "The update was successful, please refresh content."
           },
+          "400": {
+            "description": "Expected integers"
+          },
           "403": {
             "description": "The user is not authorised to make this request",
             "schema": {
@@ -575,6 +611,43 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Create new role",
+        "description": "Creates a new role",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RoleCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Role successfully created",
+            "schema": {
+              "$ref": "#/definitions/RoleCreated"
+            }
+          },
+          "400": {
+            "description": "Expected a string"
+          },
+          "403": {
+            "description": "User is not authorised to create a new default dashboard"
+          }
+        }
       }
     },
     "/roles/assign": {
@@ -611,11 +684,55 @@
           "205": {
             "description": "The update was successful, content should be refreshed"
           },
+          "400": {
+            "description": "Request failed - Expected an integer"
+          },
           "403": {
             "description": "The user is not authorised to make this request",
             "schema": {
               "type": "string"
             }
+          }
+        }
+      }
+    },
+    "/roles/{roleId}": {
+      "delete": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Role deletion",
+        "description": "Deletes a given role",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "Unique identifier for a role",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "replaceRoleId",
+            "in": "query",
+            "description": "What to replace the current role with",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 1
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Role successfully deleted, please refresh content"
+          },
+          "400": {
+            "description": "Expected an integer"
+          },
+          "403": {
+            "description": "User not authorised to delete a role"
           }
         }
       }
@@ -670,6 +787,9 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "400": {
+            "description": "Can not identify userId"
           }
         }
       }
@@ -932,7 +1052,9 @@
       "type": "object",
       "required": [
         "dataSourceId",
-        "filters"
+        "endTime",
+        "filters",
+        "startTime"
       ],
       "properties": {
         "dataSourceId": {
@@ -1064,6 +1186,34 @@
         }
       },
       "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
+    },
+    "RoleCreate": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A name or description of the role"
+        }
+      },
+      "description": "Role entity used when creating a new role"
+    },
+    "RoleCreated": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description of the role"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "role id"
+        }
+      },
+      "description": "role created"
     },
     "RoleDatasource": {
       "type": "object",

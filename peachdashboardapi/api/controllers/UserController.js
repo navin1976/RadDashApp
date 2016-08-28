@@ -24,6 +24,7 @@ module.exports = {
 
   info: function (req, res) {
     var userId = req.info.userId;
+
     User.findOne({id: userId}).populate('role').exec(function (error, user) {
       if (error) {
         res.negotiate(error);

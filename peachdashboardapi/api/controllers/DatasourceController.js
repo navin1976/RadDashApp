@@ -4,7 +4,7 @@
 module.exports = {
   findForCurrentUser: function (req, res) {
     //userId of the current user
-    var userId = parseInt(req.info.userId);
+    var userId = req.info.userId;
 
     //finding roleId of current user
     User.find({id: userId}).exec(function (error, users){
@@ -70,7 +70,12 @@ module.exports = {
 
   assign: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
-    var datasourceIds = req.body.datasourceIds.map(Number);
+    var datasourceIds = req.body.datasourceIds.map(function(e){return parseInt(e);});
+
+    if (isNaN(idUpdate) || _.indexOf(datasourceIds, NaN)!=-1) {
+      res.status(400);
+      return res.send();
+    }
     RoleDatasource.destroy({role: idUpdate})
       .then(function () { return Role.findOne(idUpdate);})
       .then(function (role) {

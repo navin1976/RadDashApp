@@ -24,6 +24,7 @@ describe('/data/entities', function() {
         body: {
           "dataSourceId": testHelper.constants.DATASOURCE,
           "startTime": "2016-01-01 00:00:00",
+          "filters": [],
           "endTime": "2016-01-15 00:00:00"
         }
       },
@@ -91,6 +92,7 @@ describe('/data/entities', function() {
           body: {
             "dataSourceId": testHelper.constants.DATASOURCE_FORBIDDEN,
             "startTime": "2016-01-01 00:00:00",
+            "filters": [],
             "endTime": "2018-01-15 00:00:00"
           }
         },
@@ -144,6 +146,7 @@ describe('/data/entities', function() {
           json: true,
           body: {
             "dataSourceId": testHelper.constants.DATASOURCE,
+            "filters": [],
             "startTime": "2017-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00"
           }

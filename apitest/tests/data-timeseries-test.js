@@ -33,6 +33,7 @@ describe('/data/timeseries', function() {
           "dataSourceId": testHelper.constants.DATASOURCE,
           "startTime": "2016-01-01 00:00:00",
           "endTime": "2016-12-15 00:00:00",
+          "filters": [],
           "metricId": testHelper.constants.METRIC_COUNT,
           "granularityId": testHelper.constants.GRANULARITY_MONTHLY
         }
@@ -69,6 +70,7 @@ describe('/data/timeseries', function() {
             "dataSourceId": testHelper.constants.DATASOURCE,
             "startTime": "2016-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00",
+            "filters": [],
             "metricId": testHelper.constants.METRIC_COUNT,
             "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
             "splitBy": testHelper.constants.FILTER_DS_DIM1
@@ -97,6 +99,7 @@ describe('/data/timeseries', function() {
             "dataSourceId": testHelper.constants.DATASOURCE,
             "startTime": "2016-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00",
+            "filters": [],
             "metricId": testHelper.constants.METRIC_COUNT,
             "granularityId": 99,
             "splitBy": testHelper.constants.FILTER_DS_DIM1
@@ -122,6 +125,7 @@ describe('/data/timeseries', function() {
             "dataSourceId": testHelper.constants.DATASOURCE,
             "startTime": "2016-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00",
+            "filters": [],
             "metricId": 99,
             "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
             "splitBy": testHelper.constants.FILTER_DS_DIM1
@@ -148,6 +152,7 @@ describe('/data/timeseries', function() {
             "dataSourceId": testHelper.constants.DATASOURCE,
             "startTime": "2016-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00",
+            "filters": [],
             "metricId": testHelper.constants.METRIC_COUNT,
             "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
             "splitBy": testHelper.constants.FILTER_DS_FORBIDDEN_DIM1
@@ -173,6 +178,7 @@ describe('/data/timeseries', function() {
           body: {
             "dataSourceId": testHelper.constants.DATASOURCE_FORBIDDEN,
             "startTime": "2016-01-01 00:00:00",
+            "filters": [],
             "endTime": "2016-12-15 00:00:00",
             "metricId": testHelper.constants.METRIC_COUNT,
             "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
@@ -236,6 +242,7 @@ describe('/data/timeseries', function() {
             "dataSourceId": testHelper.constants.DATASOURCE,
             "startTime": "2017-01-01 00:00:00",
             "endTime": "2016-12-15 00:00:00",
+            "filters": [],
             "metricId": testHelper.constants.METRIC_COUNT,
             "granularityId": testHelper.constants.GRANULARITY_MONTHLY,
             "splitBy": testHelper.constants.FILTER_DS_DIM1

@@ -51,6 +51,8 @@ module.exports.routes = {
   'GET /permissions': {controller: 'RolePermissionController', action: 'findPermission'},
   'PUT /roles/assign': {controller: 'RolePermissionController', action: 'assignRole'},
   'PUT /permissions/assign': {controller: 'RolePermissionController', action: 'assignPermission'},
+  'POST /roles': {controller: 'RolePermissionController', action: 'createRole'},
+  'DELETE /roles/:id': {controller: 'RolePermissionController', action: 'deleteRole'},
 
   /**Data Routes**/
   'GET /data/datasource': {controller: 'DatasourceController', action: 'findForCurrentUser'},
