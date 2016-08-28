@@ -12,8 +12,14 @@ module.exports = {
     var filters = req.body.filters;
     var startTime = new Date(TimeService.strtotime(req.body.startTime)*1000);
     var endTime = new Date(TimeService.strtotime(req.body.endTime)*1000);
+
     if (startTime.getTime()>endTime.getTime()) {
       res.status(405);
+      return res.send();
+    }
+
+    if (!_.isArray(filters) || isNaN(datasourceId) || isNaN(granularityId) || isNaN(metricId)) {
+      res.status(400);
       return res.send();
     }
 

@@ -1,13 +1,21 @@
-/**
- * Created by BlackLinden on 20/07/2016.
- */
-/**
- * Created by BlackLinden on 20/07/2016.
- */
+function checkErrors(error, res) {
+  if (error) {
+    res.negotiate(error);
+    return res.send();
+  }
+  res.status(403);
+  res.send('Unexpected Error');
+}
+
+
 module.exports = {
   assignRole: function (req, res) {
-    var idUpdate = req.query.userId;
-    var roleId = req.query.roleId;
+    var idUpdate = parseInt(req.query.userId);
+    var roleId = parseInt(req.query.roleId);
+    if (isNaN(idUpdate) || isNaN(roleId)){
+      res.status(400);
+      return res.send();
+    }
     User.update({id: idUpdate}, {role: roleId}).exec(function (error, records) {
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
@@ -49,7 +57,14 @@ module.exports = {
 
   assignPermission: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
-    var permissionIds = req.body.permissionIds;
+    var permissionIds = req.body.permissionIds.map(function(e){return parseInt(e);});
+    console.log(req.body.permissionIds, permissionIds, _.indexOf(permissionIds, NaN));
+    if (isNaN(idUpdate) || _.indexOf(permissionIds, NaN)!=-1) {
+      res.status(400);
+      return res.send();
+    }
+
+
     RolePermission.destroy({role: idUpdate})
       .then(function () {
         return Role.findOne(idUpdate);
@@ -78,7 +93,12 @@ module.exports = {
 
   createRole: function (req, res) {
     var description = req.body.description;
-    console.log('description: ', description);
+
+    if (!(_.isString(description))) {
+      res.status(400);
+      return res.send();
+    }
+
     Role.create({description: description}).exec(function (error, role) {
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
@@ -93,19 +113,16 @@ module.exports = {
   deleteRole: function (req, res) {
     var roleId = parseInt(req.params.id);
     var replaceRoleId = parseInt(req.query.replaceRoleId);
-    console.log(roleId, replaceRoleId);
+
+    if (isNaN(roleId) || isNaN(replaceRoleId)){
+      res.status(400);
+      return res.send();
+    }
+
+
     if (roleId == replaceRoleId) {
       res.status(400);
       return res.send('User cannot replace a role with itself');
-    }
-
-    function checkErrors(error, res) {
-      if (error) {
-        res.negotiate(error);
-        return res.send();
-      }
-      res.status(403);
-      res.send('Unexpected Error');
     }
 
     Role.findOne({id: replaceRoleId}).exec(function (error, roleReplace) {

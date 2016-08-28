@@ -1,3 +1,114 @@
 
 [32minfo: [39mStarting app...
 
+[32minfo: [39m
+[32minfo: [39m               .-..-.
+[32minfo: [39m
+[32minfo: [39m   Sails              <|    .-..-.
+[32minfo: [39m   v0.12.4             |\
+[32minfo: [39m                      /|.\
+[32minfo: [39m                     / || \
+[32minfo: [39m                   ,'  |'  \
+[32minfo: [39m                .-'.-==|/_--'
+[32minfo: [39m                `--'-------' 
+[32minfo: [39m   __---___--___---___--___---___--___
+[32minfo: [39m ____---___--___---___--___---___--___-__
+[32minfo: [39m
+[32minfo: [39mServer lifted in `/Users/BlackLinden/Projects/radiologyDashboardAPI/peachdashboardapi`
+[32minfo: [39mTo see your app, visit http://localhost:1338
+[32minfo: [39mTo shut down Sails, press <CTRL> + C at any time.
+[37m[39m
+[34mdebug: [39m-------------------------------------------------------
+[34mdebug: [39m:: Mon Aug 29 2016 00:29:11 GMT+0100 (BST)
+[37m[39m
+[34mdebug: [39mEnvironment : test
+[34mdebug: [39mPort        : 1338
+[34mdebug: [39m-------------------------------------------------------
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+Is isEnabled a boolean? true
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 2, id: 2, name: 'u_manager', hashpass: '1234' }
+dashboardId:  69
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+dashboardId:  69
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+dashboardId:  69
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+Preparing the query
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+User can access datasource
+Preparing the query
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+[ 1, 2, 3 ] [ 1, 2, 3 ] -1
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+[] [] -1
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Replace role id exist
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Replace role id exist
+Role to delete exist
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+Replace role id exist
+Role to delete exist
+Users with old role updated
+old role deleted
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: { id: 1, description: 'admin' },
+  id: 1,
+  name: 'u_admin',
+  hashpass: '1234' }
+{ role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
+{ role: 3, id: 3, name: 'u_member', hashpass: '1234' }

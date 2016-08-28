@@ -54,6 +54,12 @@ module.exports = {
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
+    console.log("Is isEnabled a boolean?", typeof isEnabled === 'boolean');
+
+    if (!(_.isString(configuration) || !(_.isString(title)) || !_.isBoolean(isEnabled))) {
+      res.status(400);
+      return res.send();
+    }
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, users:[req.info.userId]}).exec(function(error, records){
       if (error) {
         // handle error here- e.g. `res.serverError(err);`
@@ -70,8 +76,13 @@ module.exports = {
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
-    var dashboardId = req.params.id;
+    var dashboardId = parseInt(req.params.id);
     var userId = req.info.userId;
+
+    if (isNaN(dashboardId) || !(_.isString(configuration) || !(_.isString(title)) || !_.isBoolean(isEnabled))) {
+      res.status(400);
+      return res.send();
+    }
     //checks if dashboard belongs to current user
     UserDashboard.findOne({user:userId, dashboard:dashboardId}).exec(function(error, userDashboard) {
       if (userDashboard) {
@@ -98,7 +109,10 @@ module.exports = {
     console.log('dashboardId: ', dashboardId);
     //checks if dashboard belongs to current user
     var userId = req.info.userId;
-    console.log('userId: ', userId);
+    if (isNaN(dashboardId)) {
+      res.status(400);
+      return res.send();
+    }
     UserDashboard.findOne({user: userId, dashboard: dashboardId}).exec(function(error, userDashboard) {
       if (userDashboard) {
         Dashboard.destroy({id: dashboardId}).exec(function (error) {
@@ -121,7 +135,10 @@ module.exports = {
 
   deleteDefault: function (req, res) {
     var dashboardId = parseInt(req.params.id);
-    console.log('dashboardId: ', dashboardId);
+    if (isNaN(dashboardId)) {
+      res.status(400);
+      return res.send();
+    }
     //checks if dashboard belongs to current user
     RoleDashboard.findOne({dashboard: dashboardId}).exec(function(error, userDashboard) {
       if (userDashboard) {
@@ -144,11 +161,15 @@ module.exports = {
   },
 
   createDefault: function (req, res) {
-    var id = req.query.roleId;
+    var id = parseInt(req.query.roleId);
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
 
+    if (isNaN(id) || !(_.isString(configuration) || !(_.isString(title)) || !_.isBoolean(isEnabled))) {
+      res.status(400);
+      return res.send();
+    }
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[id]}).exec(function(error, records){
       if (error) {
         return res.negotiate(error);
@@ -164,6 +185,11 @@ module.exports = {
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
     var id = parseInt(req.params.id);
+
+    if (isNaN(id) || !(_.isString(configuration) || !(_.isString(title)) || !_.isBoolean(isEnabled))) {
+      res.status(400);
+      return res.send();
+    }
     RoleDashboard.findOne({dashboard:id}).exec(function(error, roledashboard) {
       if (roledashboard) {
         Dashboard.update({id: id}, {
@@ -183,7 +209,7 @@ module.exports = {
           return res.send();
         }
         res.status(403);
-        return res.send();
+        return res.send("This dashboard does not exist");
       }
     });
   },

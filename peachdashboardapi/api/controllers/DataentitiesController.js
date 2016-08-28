@@ -14,6 +14,12 @@ module.exports = {
       return res.send();
     }
 
+    if (!_.isArray(filters) || isNaN(roleId) || isNaN(datasourceId)) {
+      res.status(400);
+      return res.send();
+    }
+
+
     // check if user has the permission to access a certain datasource
     Datasource.findOne(datasourceId).populate('roles', {id: roleId}).populate('filters').exec(function (error, datasource) {
       if (datasource && datasource.roles.length > 0) {

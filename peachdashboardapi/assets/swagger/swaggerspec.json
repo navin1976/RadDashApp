@@ -72,6 +72,9 @@
               "$ref": "#/definitions/DashboardCreate"
             }
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorised to create a new default dashboard",
             "schema": {
@@ -114,6 +117,9 @@
           "205": {
             "description": "Default dashboard successfully updated"
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorized to modify default dashboard",
             "schema": {
@@ -143,6 +149,9 @@
         "responses": {
           "205": {
             "description": "Existing default dashboard successfully deleted"
+          },
+          "400": {
+            "description": "Data types in request do not match expectations"
           },
           "403": {
             "description": "User is not authorized to delete default dashboard",
@@ -187,6 +196,9 @@
           "205": {
             "description": "Dashboard is successfully updated, please refresh content."
           },
+          "400": {
+            "description": "Data types in request do not match expectations"
+          },
           "403": {
             "description": "User is not authorized to update the given dashboard",
             "schema": {
@@ -217,6 +229,9 @@
         "responses": {
           "205": {
             "description": "Dashboard is successfully deleted (not enabled), please refresh content."
+          },
+          "400": {
+            "description": "Data types in request do not match expectations"
           },
           "403": {
             "description": "User is not authorized to delete the given dashboard",
@@ -249,6 +264,9 @@
                 "$ref": "#/definitions/Dashboard"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           }
         }
       },
@@ -281,6 +299,9 @@
             "schema": {
               "$ref": "#/definitions/Dashboard"
             }
+          },
+          "400": {
+            "description": "Expected integers and a boolean value"
           }
         }
       }
@@ -374,6 +395,9 @@
               }
             }
           },
+          "400": {
+            "description": "Expected an integer"
+          },
           "403": {
             "description": "Cannot get distinct values for this filter or filter does not exist"
           }
@@ -411,6 +435,9 @@
                 "$ref": "#/definitions/MetricData"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           }
         }
       }
@@ -436,6 +463,9 @@
                 "$ref": "#/definitions/Datasource"
               }
             }
+          },
+          "400": {
+            "description": "Expected an integer"
           },
           "403": {
             "description": "The user is not authorized to access all datasources",
@@ -470,6 +500,9 @@
         "responses": {
           "205": {
             "description": "Datasources successfully updates for the given role"
+          },
+          "400": {
+            "description": "Expected an integer"
           },
           "403": {
             "description": "The user is not authorized to assign datasources",
@@ -535,6 +568,9 @@
         "responses": {
           "205": {
             "description": "The update was successful, please refresh content."
+          },
+          "400": {
+            "description": "Expected integers"
           },
           "403": {
             "description": "The user is not authorised to make this request",
@@ -605,6 +641,9 @@
               "$ref": "#/definitions/RoleCreated"
             }
           },
+          "400": {
+            "description": "Expected a string"
+          },
           "403": {
             "description": "User is not authorised to create a new default dashboard"
           }
@@ -644,6 +683,9 @@
         "responses": {
           "205": {
             "description": "The update was successful, content should be refreshed"
+          },
+          "400": {
+            "description": "Request failed - Expected an integer"
           },
           "403": {
             "description": "The user is not authorised to make this request",
@@ -685,6 +727,9 @@
         "responses": {
           "205": {
             "description": "Role successfully deleted, please refresh content"
+          },
+          "400": {
+            "description": "Expected an integer"
           },
           "403": {
             "description": "User not authorised to delete a role"
@@ -742,6 +787,9 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "400": {
+            "description": "Can not identify userId"
           }
         }
       }
@@ -1004,7 +1052,9 @@
       "type": "object",
       "required": [
         "dataSourceId",
-        "filters"
+        "endTime",
+        "filters",
+        "startTime"
       ],
       "properties": {
         "dataSourceId": {

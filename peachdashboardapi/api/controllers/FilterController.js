@@ -7,6 +7,11 @@ module.exports = {
     var filterId = parseInt(req.params.id);// extract from request
     var roleId = req.info.roleId;
 
+    if (isNaN(filterId)) {
+      res.status(400);
+      return res.send();
+    }
+
     // check if user has the permission to access a certain datasource
     Filter.findOne(filterId).exec(function (error, filter) {
       if (error) {
@@ -47,7 +52,7 @@ module.exports = {
           return res.send();
         } else {
           res.status(403);
-          return res.send("User does not have access to this datasource");
+          return res.send("User does not have access to datasource " + filter.datasource);
         }
       });
     });
