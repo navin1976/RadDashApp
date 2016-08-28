@@ -575,6 +575,40 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Create new role",
+        "description": "Creates a new role",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RoleCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Role successfully created",
+            "schema": {
+              "$ref": "#/definitions/RoleCreated"
+            }
+          },
+          "403": {
+            "description": "User is not authorised to create a new default dashboard"
+          }
+        }
       }
     },
     "/roles/assign": {
@@ -616,6 +650,44 @@
             "schema": {
               "type": "string"
             }
+          }
+        }
+      }
+    },
+    "/roles/{roleId}": {
+      "delete": {
+        "tags": [
+          "Roles and Permissions"
+        ],
+        "summary": "Role deletion",
+        "description": "Deletes a given role",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "Unique identifier for a role",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "replaceRoleId",
+            "in": "query",
+            "description": "What to replace the current role with",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 1
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "Role successfully deleted, please refresh content"
+          },
+          "403": {
+            "description": "User not authorised to delete a role"
           }
         }
       }
@@ -1064,6 +1136,34 @@
         }
       },
       "description": "Specifies the role of the user, generally corresponds to position in hospital (example: nurse) and is associated with permissions"
+    },
+    "RoleCreate": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A name or description of the role"
+        }
+      },
+      "description": "Role entity used when creating a new role"
+    },
+    "RoleCreated": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description of the role"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "role id"
+        }
+      },
+      "description": "role created"
     },
     "RoleDatasource": {
       "type": "object",
