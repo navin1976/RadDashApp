@@ -21,5 +21,6 @@ export default (
 		<Route path="permissions/:id" component={PermissionPage}/>
 		<Route path="demovis" component={ViewPage}/>
 		<Route path="editDashboard" component={GraphTool}/>
+		<Route path="editDashboard/:id" component={GraphTool}/>
 	</Route>
 );

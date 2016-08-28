@@ -6,7 +6,7 @@ import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import * as APIConstant from './apiConstants';
 
 export function removeWidget(dashId,widgetId){
-	return {type: types.REMOVE_WIDGET_SUCCESS,dId:dashId,wId:widgetId};
+	return {type: types.REMOVE_WIDGET_SUCCESS,dashId,widgetId};
 }
 
 export function loadDashboardSuccess(dashboards){
@@ -15,6 +15,10 @@ export function loadDashboardSuccess(dashboards){
 
 export function loadDataSuccess(dashboardIndex,widgetIndex,payload){
 	return {type: types.LOAD_DATA_SUCCESS,dashboardIndex,widgetIndex,payload};
+}
+
+export function addWidgetToDashboardSuccess(dashId, widgetDetails){
+	return {type: types.ADD_WIDGET_SUCCESS,dashId,widgetDetails};
 }
 
 export function loadDashboards(){
@@ -26,10 +30,8 @@ export function loadDashboards(){
 			let d;
 			let s = getState();
 			for(d in s.dashboards){
-				//console.log(s.dashboards[d]);
 				let widget;
 				for(widget in s.dashboards[d].widgets){
-					//console.log(s.dashboards[d].widgets[widget]);
 					dispatch(loadDatainDashboards(s.dashboards[d].id,s.dashboards[d].widgets[widget].layout.i));
 				}
 			}
@@ -52,6 +54,12 @@ export function loadDatainDashboards(d,widget){
 			throw(error);
 		});
 	};
+}
+
+export function addWidgetToDashboard(dashId,widgetDetails){
+	return function(dispatch,getState){
+		dispatch(addWidgetToDashboardSuccess(dashId, widgetDetails))
+	}
 }
 
 

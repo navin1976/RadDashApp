@@ -1,5 +1,4 @@
 import React,{PropTypes} from 'react';
-import {connect} from 'react-redux';
 import toastr from 'toastr';
 import GeneralOption from './GeneralOption';
 
@@ -12,7 +11,7 @@ class DashboardToolbar extends React.Component{
 
 	redirect(event){
 		event.preventDefault();
-		this.context.router.push('/');
+		this.context.router.push('/editDashboard/'+this.props.id);
 	}
 
 	render(){

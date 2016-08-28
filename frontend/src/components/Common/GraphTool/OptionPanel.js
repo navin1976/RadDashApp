@@ -2,6 +2,8 @@ import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import OptionForm from './OptionForm';
 import GraphPreview from './GraphPreview';
+import {bindActionCreators} from 'redux';
+import * as dashboardActions from '../../../actions/dashboardActions';
 
 const prevStyle = {
 	border:"none",
@@ -44,7 +46,9 @@ class OptionPanel extends React.Component{
 				granularity:""
 			},
 			error:{},
-			display:false
+			display:false,
+			activeFilter:[],
+			activeGranularities:[]
 		};
 		
 		this.handleChartChange = this.handleChartChange.bind(this);
@@ -64,7 +68,31 @@ class OptionPanel extends React.Component{
 
 	saveGraph(event){
 		event.preventDefault();
-		console.log(this.state);
+		if(this.state.display){
+			this.props.actions.addWidgetToDashboard(this.props.dashId,
+				Object.assign({},
+					{name:this.state.details.title},
+					{description:this.state.details.description},
+					{type:"BAR_CHART"},
+					{request:true},
+					{layout:{i:'4',x:0,y:0,w:7,h:7}},
+					{data:[
+						{
+						"metric": 108750,
+						"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
+						},
+						{
+						"metric": 380650,
+						"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
+						},
+						{
+						"metric": 393695,
+						"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
+						}]
+					}			
+				)
+			);
+		}
 	}
 
 	updateGraphState(event){
@@ -80,6 +108,16 @@ class OptionPanel extends React.Component{
 	}
 
 	render(){
+		/*
+		let ds = [];
+		console.log(this.props.datastore);
+		for(let i= 0 ; i< this.props.datastore; i++){
+			ds.push(Object.assign({},{value:this.props.datastore[i].id}));
+		}
+		console.log(ds);
+		*/
+		let ds = [];
+
 		return(
 			<div>
 				<div style = {graphStyle}>
@@ -93,9 +131,9 @@ class OptionPanel extends React.Component{
 						graphOption={this.state.details} 
 						onChange={this.updateGraphState} 
 						errors = {this.state.error} 
-						allAllowedSources = {this.props.d}
-						allAlowedFilters = {this.props.f}
-						allAlowedGranularities = {this.props.g}
+						allAllowedSources = {ds}
+						allAlowedFilters = {this.state.activeFilter}
+						allAlowedGranularities = {this.state.activeGranularities}
 						onSave = {this.saveGraph}
 						onPreview = {this.previewGraph}
 					/>
@@ -105,6 +143,21 @@ class OptionPanel extends React.Component{
 	}
 }
 
+function mapStateToProps(state,ownProps){
+	return {
+		datastore:state.dataSources,
+	};
+}
+
+function mapDispatchToProps(dispatch){
+	return {
+		actions: bindActionCreators(dashboardActions,dispatch)
+	};
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(OptionPanel);
+
+/*
 function mapStateToProps(state,ownProps){
 	const datasources = [{id:1,value:"item1",text:"Item 1"},{id:2,value:"item2",text:"Item 2"},{id:3,value:"item3",text:"Item 3"}];
 	const granularity = [{id:1,value:"daily",text:"Daily"},{id:2,value:"weekly",text:"Weekly"},{id:3,value:"monthly",text:"Monthly"}];
@@ -116,5 +169,4 @@ function mapStateToProps(state,ownProps){
 		f:filter
 	};
 }
-
-export default connect(mapStateToProps)(OptionPanel);
+*/

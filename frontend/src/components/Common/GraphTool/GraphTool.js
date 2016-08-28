@@ -1,6 +1,7 @@
 import React from 'react';
 import Wrapper from '../Wrapper';
 import OptionPanel from './OptionPanel';
+import {connect} from 'react-redux';
 
 class GraphTool extends React.Component{
 	constructor(props,context){
@@ -11,10 +12,17 @@ class GraphTool extends React.Component{
 	render(){
 		return(
 			<div>
-				<OptionPanel />
+				<OptionPanel dashId={this.props.dashboardId} />
 			</div>
 		);
 	}
 }
 
-export default GraphTool;
+function mapStateToProps(state,ownProps){
+	const dashboardId = (ownProps.params.id || "default");
+	return {
+		dashboardId:dashboardId
+	};
+}
+
+export default connect(mapStateToProps)(GraphTool);
