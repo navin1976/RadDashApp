@@ -128,12 +128,13 @@ class Dashboard extends React.Component{
 	}
 
 	render(){
-		const id = (this.props.dashboardId || "default");
-		let displayLayout = [];
-		
-		for(let i = 0; i<this.props.dashboard.widgets.length; i++){
-			displayLayout.push(this.props.dashboard.widgets[i].layout);
-		}
+		if(this.props.dashboard){
+			const id = (this.props.dashboardId || "default");
+			let displayLayout = [];
+			
+			for(let i = 0; i<this.props.dashboard.widgets.length; i++){
+				displayLayout.push(this.props.dashboard.widgets[i].layout);
+			}
 
 		return (
 			<div>
@@ -146,7 +147,9 @@ class Dashboard extends React.Component{
 				</Wrapper>
 
 			</div>
-		);
+		);}else{
+			return <h1>Empty dashboard</h1>;
+		}
 	}
 }
 

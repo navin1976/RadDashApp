@@ -19,7 +19,7 @@ export function loadAllDataSources(){
 	};
 }
 
-export function assignDataSource(sourceIds,role){
+export function assignDataSource(role,sourceIds){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
 		return axios.put(APIConstant.API_ROOT+"datasources/assign",{

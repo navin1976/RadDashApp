@@ -16,7 +16,6 @@ class AdminToolbar extends React.Component{
 			open:false,
 			role:{
 				"title":"",
-				"description":""
 			},
 			errors: {},
 			saving:false
@@ -30,9 +29,11 @@ class AdminToolbar extends React.Component{
 	}
 
 	handleRequestClose(){
-		this.setState({
-			open:false
-		});
+		if(!this.state.saving){
+			this.setState({
+				open:false
+			});
+		}
 	}
 
 	handleButtonTap(){
@@ -52,8 +53,9 @@ class AdminToolbar extends React.Component{
 		event.preventDefault();
 		this.setState({saving:true});
 
-		this.props.actions.saveNewRole(Object.assign({permissions:[]},this.state.role))
-			.then()
+		this.props.actions.saveNewRole(this.state.role.title)
+			.then(this.setState({saving:false,open:false}))
+			.then(toastr.success("New role added!"))
 			.catch(error => {
 				toastr.error(error);
 				this.setState({saving:false});
@@ -61,11 +63,16 @@ class AdminToolbar extends React.Component{
 	}
 
 	render(){
+		let res;
+		if(this.props.saveHandler){
+			res = <button className="toolbarButton" onClick={this.props.saveHandler}>Save</button>;
+		}
 		return(
 			<div className="toolbar">
 				<button id="logout">Logout</button>
 				<div id="toolbarButtonGroup">
 					<button className="toolbarButton" onClick={this.handleButtonTap}>Add role</button>
+					{res}
 				</div>
 				<Dialog open={this.state.open} title="Add a role" onRequestClose = {this.handleRequestClose}>
 					<AddRoleForm

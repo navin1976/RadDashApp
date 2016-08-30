@@ -35,3 +35,6 @@ export const LOAD_PERMISSIONS_SUCCESS = "LOAD_PERMISSIONS_SUCCESS";
 //Widget actions
 export const REMOVE_WIDGET_SUCCESS = "REMOVE_WIDGET_SUCCESS";
 export const ADD_WIDGET_SUCCESS = "ADD_WIDGET_SUCCESS";
+
+//Manage defautl dashboard actions
+export const TEST_AND_WAIT = "TEST_AND_WAIT";

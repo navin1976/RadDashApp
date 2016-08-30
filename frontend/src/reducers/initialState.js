@@ -6,5 +6,6 @@ export default {
 	layout:[],
 	data:[],
 	roles:{},
-	permissions:[]
+	permissions:[],
+	manageDashboard:{}
 };

@@ -8,6 +8,7 @@ export function loadAllRolesSuccess(data){
 	return {type: types.LOAD_ALL_ROLES_SUCCESS,data};
 }
 
+/*
 export function loadAllRoles(){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());
@@ -19,13 +20,33 @@ export function loadAllRoles(){
 			throw(error);
 		});
 	};
-}
+}*/
 
 export function saveNewRole(newRole){
-	return {type: types.UPLOAD_NEW_ROLE,newRole};
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.post(APIConstant.API_ROOT+"/roles",{description:newRole})
+		.then(function(response){
+			dispatch(loadAllRoles());
+		}).catch(function(error){
+			throw(error);
+		});
+	};
 }
 
-/*
+export function deleteRole(roleId){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return axios.delete(APIConstant.API_ROOT+"/roles/"+roleId)
+		.then(function(response){
+			dispatch(loadAllRoles());
+		}).catch(function(error){
+			throw(error);
+		});
+	};
+}
+
+
 export function loadAllRoles(){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
@@ -37,4 +58,3 @@ export function loadAllRoles(){
 		});
 	};
 }
-*/

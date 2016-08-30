@@ -1,10 +1,10 @@
 import React,{PropTypes} from 'react';
 import RoleTable from './RoleTable';
 
-const RoleForm = ({allRoles}) => {
+const RoleForm = ({allRoles,delhandler}) => {
 	return(
 		<div>
-			<RoleTable roles={allRoles}/>
+			<RoleTable roles={allRoles} deleteHandler={delhandler}/>
 		</div>
 	);
 };

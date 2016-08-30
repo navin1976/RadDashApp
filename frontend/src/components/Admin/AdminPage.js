@@ -6,7 +6,7 @@ import toastr from 'toastr';
 import RoleForm from './RoleForm';
 import Wrapper from '../Common/Wrapper';
 import AdminToolbar from '../Common/Toolbars/AdminToolbar';
-
+import * as roleActions from '../../actions/roleActions';
 
 class AdminPage extends React.Component{
 	constructor(props,context){
@@ -14,6 +14,7 @@ class AdminPage extends React.Component{
 
 		this.state = {'filter':''};
 		this.changeHandler = this.changeHandler.bind(this);
+		this.deleteHandler = this.deleteHandler.bind(this);
 	}
 
 	redirectToManageDashboards(){
@@ -34,6 +35,14 @@ class AdminPage extends React.Component{
 		});
 	}
 
+	deleteHandler(roleId){
+		this.props.actions.deleteRole(roleId)
+			.then(toastr.success("Role deleted!"))
+			.catch(error => {
+				toastr.error(error);
+			});
+	}
+
 	render(){
 		return(
 			<div>
@@ -45,6 +54,7 @@ class AdminPage extends React.Component{
 					</div>
 					<RoleForm
 						allRoles={this.props.roles}
+						delhandler={this.deleteHandler}
 					/>
 				</Wrapper>
 			</div>
@@ -67,5 +77,10 @@ function mapStateToProps(state,ownProps){
 	};
 }
 
+function mapDispatchToProps(dispatch){
+	return{
+		actions: bindActionCreators(roleActions,dispatch)
+	};
+}
 
-export default connect(mapStateToProps)(AdminPage);
+export default connect(mapStateToProps,mapDispatchToProps)(AdminPage);

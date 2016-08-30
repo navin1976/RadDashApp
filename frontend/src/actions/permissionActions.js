@@ -21,7 +21,7 @@ export function loadPermissions(){
 	};
 }
 
-export function assignPermission(permissions,role){
+export function assignPermission(role,permissions){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
 		return axios.put(APIConstant.API_ROOT+"permissions/assign",{

@@ -5,13 +5,15 @@ import dashboards from './dashboardReducer';
 import roles from './roleReducer';
 import permissions from './permissionReducer';
 import dataSources from './dataReducer';
+import manageDashboard from './dashboardManagmentReducer';
 
 const rootReducer = combineReducers({
 	ajaxCallsInProgress,
 	dashboards,
 	roles,
 	permissions,
-	dataSources
+	dataSources,
+	manageDashboard
 });
 
 export default rootReducer;

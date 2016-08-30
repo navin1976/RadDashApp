@@ -24,7 +24,11 @@ class PermissionTable extends React.Component{
 					<tbody className="tableBody">
 						{this.props.permissions.map(permission =>
 							{
-								return <PermissionRow key={permission.id} permission={permission}/>;
+								if(this.props.current.indexOf(permission.id)<0){
+									return <PermissionRow key={permission.id} permission={permission} status={false} handle={this.props.handler}/>;
+								}else{
+									return <PermissionRow key={permission.id} permission={permission} status={true} handle={this.props.handler}/>;
+								}			
 							}
 						)}
 					</tbody>
@@ -36,7 +40,8 @@ class PermissionTable extends React.Component{
 
 PermissionTable.propTypes = {
 	permissions:PropTypes.array.isRequired,
-	current:PropTypes.array
+	current:PropTypes.array,
+	handler:PropTypes.func.isRequired
 };
 
 export default PermissionTable;

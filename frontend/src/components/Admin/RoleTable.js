@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 import RoleListRow from './RoleListRow';
 
-const RoleTable = ({roles}) => {
+const RoleTable = ({roles,deleteHandler}) => {
 	return(
 		<div>
 			<table className="table">
@@ -9,13 +9,14 @@ const RoleTable = ({roles}) => {
 					<tr>
 						<th className="noBold">Role type</th>
 						<th className="noBold">Role options</th>
+						<th className="noBold">Delete</th>
 					</tr>
 				</thead>
 				<tbody className="tableBody">
 					{roles.map(role =>
 						{
 							if(role.description !== 'admin'){
-								return <RoleListRow key={role.id} role={role}/>;
+								return <RoleListRow key={role.id} role={role} deleteHandler={deleteHandler}/>;
 							}
 						}
 					)}
