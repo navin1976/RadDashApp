@@ -17,7 +17,7 @@ const dashboards = [
 				"name":"examCountData",
 				"description":"Line chart showing the count of exam instances in a given interval",
 				"layout":{i: '2', x: 7, y: 0, w: 7, h: 10},
-				"type":"BAR_CHART",
+				"type":"LINE_CHART",
 				"request":true
 			}
 		]

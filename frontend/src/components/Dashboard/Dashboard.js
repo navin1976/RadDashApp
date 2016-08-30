@@ -88,13 +88,13 @@ class Dashboard extends React.Component{
 					chartSeries={chartSeries} 
 					x={x} 
 					y={y} 
-					width={widget.layout.w*35} 
-					height={widget.layout.h*40}
+					width={widget.layout.w*70} 
+					height={widget.layout.h*47}
 				/>);
 				break;
 			}
 			case 'LINE_CHART':{
-				chartItem = (<BarChart 
+				chartItem = (<LineChart 
 					title={widget.title} 
 					data={widget.data} 
 					showLegend={false} 
@@ -102,8 +102,8 @@ class Dashboard extends React.Component{
 					chartSeries={chartSeries} 
 					x={x} 
 					y={y} 
-					width={widget.layout.w*35} 
-					height={widget.layout.h*40}
+					width={widget.layout.w*70} 
+					height={widget.layout.h*47}
 				/>);
 				break;
 			}
@@ -117,7 +117,7 @@ class Dashboard extends React.Component{
 			<div key={widget.layout.i} className="card">
 				{chartItem}
 				<div className="overlayCard">
-					<p style={paraStyles}> Missing title </p>
+					<p style={paraStyles}> {widget.name} </p>
 					<div className="cardOptions">
 						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId);}}>E</button>
 						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
