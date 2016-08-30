@@ -67,6 +67,13 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 		case types.ADD_WIDGET_SUCCESS:{
 			return state.map(d => dash(d,action));
 		}
+		case types.REMOVE_DASHBOARD:{
+			return state.map(d => {
+				if(d.id !== action.dashId){
+					return d;
+				}
+			});
+		}
 		default:
 			return state;
 	}

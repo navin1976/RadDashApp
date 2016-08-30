@@ -10,9 +10,12 @@ class Header extends React.Component{
 	}
 
 	dashboardInstance(dash,index){
-		const path = "/dashboard/" + dash.id;
-		const title = dash.name;
-		return <li key={index}><Link to={path} className="dashChoice" activeClassName="active">{title}</Link></li>
+		if(dash){
+			const path = "/dashboard/" + dash.id;
+			const title = dash.name;
+			return <li key={index}><Link to={path} className="dashChoice" activeClassName="active">{title}</Link></li>	
+		}
+		
 	}
 
 	render(){

@@ -21,6 +21,10 @@ export function addWidgetToDashboardSuccess(dashId, widgetDetails){
 	return {type: types.ADD_WIDGET_SUCCESS,dashId,widgetDetails};
 }
 
+export function removeDashboard(dashId){
+	return {type: types.REMOVE_DASHBOARD, dashId};
+}
+
 export function loadDashboards(){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());
