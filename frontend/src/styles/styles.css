@@ -237,18 +237,20 @@ html, body, #app{
     float: right;
     margin-right:200px;
     margin-top: 10px;
-    width: 150px;
+    width: 400px;
     display: inline;
 }
 
 .toolbarButton{
+    display: inline;
     margin-right:15px;
     border: none;
     height: 30px;
-    width: 80px;
+    width: 100px;
     border-radius: 15px;
     color: white;
     background-color: black;
+    float:left;
 
 }
 
