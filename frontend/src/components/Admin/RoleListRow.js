@@ -11,7 +11,7 @@ const RoleListRow = ({role,deleteHandler}) =>{
 				<Link to = {'/permissions/'+role.id}>Manage permissions</Link>
 			</td>
 			<td>
-				<p onClick={()=>{deleteHandler(role.id)}}>X</p>
+				<button className="deleteRoleButton" onClick={()=>{deleteHandler(role.id)}}>X</button>
 			</td>
 		</tr>
 	);
