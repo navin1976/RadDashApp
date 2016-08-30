@@ -3,9 +3,8 @@ export default {
 	courses: [],
 	ajaxCallsInProgress:0,
 	dashboards:[],
-	layout:[],
 	data:[],
 	roles:{},
 	permissions:[],
-	manageDashboard:{}
+	manageDashboard:[]
 };

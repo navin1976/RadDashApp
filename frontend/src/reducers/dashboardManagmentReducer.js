@@ -6,6 +6,9 @@ export default function dashboardManagmentReducer(state = initialState.manageDas
 		case types.TEST_AND_WAIT:{
 			return action.payload;
 		}
+		case types.TEST_AND_TEMP:{
+			return action.newData;
+		}
 		default:
 			return state;
 	}

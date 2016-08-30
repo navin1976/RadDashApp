@@ -82,13 +82,6 @@ class GraphPreview extends React.Component{
 					width={parseInt(this.props.info.width)} 
 					height={parseInt(this.props.info.height)}
 				/>
-				<div className="overlayCard">
-					<p style={paraStyles}> </p>
-					<div className="cardOptions">
-						<button style={editButton}>E</button>
-						<button style={deleteButton}>X</button>
-					</div>
-				</div>
 			</div>);
 		}else{
 			retVar = <div>preview not available</div>;

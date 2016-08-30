@@ -323,7 +323,7 @@ html, body, #app{
     float:right;
     height: 100%;
     background-color: white;
-    width:300px; 
+    width:400px; 
     z-index: 5;
     padding: 10px;
 }

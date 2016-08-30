@@ -1,9 +1,11 @@
+/*eslint-disable react/prop-types*/
+
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import OptionForm from './OptionForm';
 import GraphPreview from './GraphPreview';
 import {bindActionCreators} from 'redux';
-import * as dashboardActions from '../../../actions/dashboardActions';
+import * as manageDashboardAction from '../../../actions/manageDashboardAction';
 
 const prevStyle = {
 	border:"none",
@@ -27,7 +29,7 @@ const saveStyle = {
 
 const graphStyle = {
 	float:"left",
-	width:"calc(100%-300px)",
+	width:"calc(100%-400px)",
 	backgroundColor:"red"
 };
 
@@ -39,59 +41,61 @@ class OptionPanel extends React.Component{
 			details:{
 				title:"",
 				description:"",
+				chartType:"",
 				width:"",
 				height:"",
 				datasource:"",
 				filter:"",
-				granularity:""
+				granularity:"",
+				metric:"",
+				startTime:"",
+				endTime:""
 			},
 			error:{},
 			display:false,
+			activeSource:"",
 			activeFilter:[],
-			activeGranularities:[]
+			activeGranularities:[],
+			activeMetrics:[],
+			allSources:[],
+			allChartTypes:[
+				{id:1,value:'BAR_CHART',text:"Bar chart"},
+				{id:2,value:'LINE_CHART',text:"Line chart"}
+			]
 		};
 		
-		this.handleChartChange = this.handleChartChange.bind(this);
-		this.handleDataChange = this.handleDataChange.bind(this);
 		this.updateGraphState = this.updateGraphState.bind(this);
 		this.saveGraph = this.saveGraph.bind(this);
 		this.previewGraph = this.previewGraph.bind(this);
+		this.updateSourceState = this.updateSourceState.bind(this);
+		this.setFilterAndGranularity = this.setFilterAndGranularity.bind(this);
 	}
 
-	handleChartChange(event,index,valueue){
-		this.setState({chartvalueue:valueue});
-	}
-
-	handleDataChange(event,index,valueue){
-		this.setState({datavalueue:valueue});
+	componentWillMount(){
+		let ds = [];
+		for(let i = 0; i<this.props.datastore.length; i++){
+			ds.push(Object.assign({},{id:this.props.datastore[i].id},{value:this.props.datastore[i].id},{text:this.props.datastore[i].name}));
+		}
+		this.setState({allSources:ds});
 	}
 
 	saveGraph(event){
 		event.preventDefault();
 		if(this.state.display){
-			this.props.actions.addWidgetToDashboard(this.props.dashId,
-				Object.assign({},
-					{name:this.state.details.title},
-					{description:this.state.details.description},
-					{type:"BAR_CHART"},
-					{request:true},
-					{layout:{i:'4',x:0,y:0,w:7,h:7}},
-					{data:[
-						{
-						"metric": 108750,
-						"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
-						},
-						{
-						"metric": 380650,
-						"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
-						},
-						{
-						"metric": 393695,
-						"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
-						}]
-					}			
-				)
+			const ref = this.state.details;
+			let res = {};
+			Object.assign(res,
+				{sourceId:parseInt(ref.datasource)},
+				{endTime:ref.endTime},
+				{startTime:ref.startTime},
+				{granularityId:parseInt(ref.granularity)},
+				{metricId: parseInt(ref.metric)},
+				{splitBy:0},
+				{filters:[]}
 			);
+			console.log("TIGGERED");
+			console.log(res);
+			this.props.actions.temp(res);
 		}
 	}
 
@@ -102,21 +106,62 @@ class OptionPanel extends React.Component{
 		return this.setState({details:details,display:false});
 	}
 
+	updateSourceState(event){
+		event.preventDefault();
+		const field = event.target.name;
+		let details = this.state.details;
+		details[field] = event.target.value;
+		this.setState({details:details,display:false,activeSource:event.target.value});
+		setTimeout(this.setFilterAndGranularity,75);
+		
+	}
+
+	setFilterAndGranularity(){
+		let numArray;
+		let filter = [];
+		let granularity = [];
+		let metric = [];
+
+		for(let i = 0; i<this.props.datastore.length;i++){
+			if(this.props.datastore[i].id == this.state.activeSource){
+				numArray = i;
+				break;
+			}
+		}
+
+		for(let i = 0; i<this.props.datastore[numArray].filters.length; i++){
+			filter.push(Object.assign({},
+				{id:this.props.datastore[numArray].filters[i].id},
+				{value:this.props.datastore[numArray].filters[i].name},
+				{text:this.props.datastore[numArray].filters[i].title}
+			));
+		}
+
+		for(let i = 0; i<this.props.datastore[numArray].granularities.length; i++){
+			granularity.push(Object.assign({},
+				{id:this.props.datastore[numArray].granularities[i].id},
+				{value:this.props.datastore[numArray].granularities[i].id},
+				{text:this.props.datastore[numArray].granularities[i].name}
+			));
+		}
+
+		for(let i = 0; i<this.props.datastore[numArray].metrics.length; i++){
+			metric.push(Object.assign({},
+				{id:this.props.datastore[numArray].metrics[i].id},
+				{value:this.props.datastore[numArray].metrics[i].id},
+				{text:this.props.datastore[numArray].metrics[i].name}
+			));
+		}
+
+		this.setState({activeFilter:filter,activeGranularities:granularity,activeMetrics:metric});
+	}
+
 	previewGraph(event){
 		event.preventDefault();
 		return this.setState({display:true});
 	}
 
 	render(){
-		/*
-		let ds = [];
-		console.log(this.props.datastore);
-		for(let i= 0 ; i< this.props.datastore; i++){
-			ds.push(Object.assign({},{value:this.props.datastore[i].id}));
-		}
-		console.log(ds);
-		*/
-		let ds = [];
 
 		return(
 			<div>
@@ -129,11 +174,14 @@ class OptionPanel extends React.Component{
 				<div className="optionPane">
 					<OptionForm 
 						graphOption={this.state.details} 
-						onChange={this.updateGraphState} 
+						onChange={this.updateGraphState}
+						onDatasourceChange={this.updateSourceState} 
 						errors = {this.state.error} 
-						allAllowedSources = {ds}
+						allAllowedSources = {this.state.allSources}
 						allAlowedFilters = {this.state.activeFilter}
 						allAlowedGranularities = {this.state.activeGranularities}
+						allAlowedMetrics = {this.state.activeMetrics}
+						allAlowedChartTypes = {this.state.allChartTypes}
 						onSave = {this.saveGraph}
 						onPreview = {this.previewGraph}
 					/>
@@ -146,12 +194,13 @@ class OptionPanel extends React.Component{
 function mapStateToProps(state,ownProps){
 	return {
 		datastore:state.dataSources,
+		tempData:state.manageDashboard
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-		actions: bindActionCreators(dashboardActions,dispatch)
+		actions: bindActionCreators(manageDashboardAction,dispatch)
 	};
 }
 
