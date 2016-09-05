@@ -9,6 +9,7 @@ import ReactGridLayout from 'react-grid-layout';
 import AddButton from '../Common/AddButton';
 import Wrapper from '../Common/Wrapper';
 import DashboardToolbar from '../Common/Toolbars/DashboardToolbar';
+import GeneralToolbar from '../Common/Toolbars/GeneralToolbar';
 
 import {BarChart,PieChart,BarStackChart,LineChart} from 'react-d3-basic';
 
@@ -119,8 +120,7 @@ class Dashboard extends React.Component{
 				<div className="overlayCard">
 					<p style={paraStyles}> {widget.name} </p>
 					<div className="cardOptions">
-						<button style={editButton} onClick={()=>{this.editWidget(widget.layout.i,dashId);}}>E</button>
-						<button style={deleteButton} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
+						<button style={deleteButton} disabled={dashId == "default"} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
 					</div>
 				</div>
 			</div>
@@ -128,7 +128,7 @@ class Dashboard extends React.Component{
 	}
 
 	render(){
-		if(this.props.dashboard){
+		if(Object.keys(this.props.dashboard).length !== 0){
 			const id = (this.props.dashboardId || "default");
 			let displayLayout = [];
 			
@@ -139,7 +139,6 @@ class Dashboard extends React.Component{
 		return (
 			<div>
 				<DashboardToolbar id={id} />
-
 				<Wrapper>
 					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
 						{this.props.dashboard.widgets.map(this.widgetMap)}
@@ -147,8 +146,16 @@ class Dashboard extends React.Component{
 				</Wrapper>
 
 			</div>
-		);}else{
-			return <h1>Empty dashboard</h1>;
+			);
+		}else{
+			return(
+				<div>
+					<GeneralToolbar />
+					<Wrapper>
+						<h1 className="noSelect">Empty dashboard</h1>
+					</Wrapper>
+				</div>
+			); 
 		}
 	}
 }
@@ -156,13 +163,18 @@ class Dashboard extends React.Component{
 function mapStateToProps(state,ownProps){
 	const dashboardId = (ownProps.params.id || "default");
 	let dash;
-
-	for(let i = 0; i< state.dashboards.length; i++){
-		if(state.dashboards[i].id == dashboardId){
-			dash = state.dashboards[i];
-			break;
+	
+	if(dashboardId == "default"){
+		dash = state.defaultDashboard;
+	}else{
+		for(let i = 0; i< state.dashboards.length; i++){
+			if(state.dashboards[i].id == dashboardId){
+				dash = state.dashboards[i];
+				break;
+			}
 		}
 	}
+	
 	return {
 		dashboard:dash,
 		dashboardId: dashboardId
@@ -181,62 +193,3 @@ Dashboard.propTypes = {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-		switch(tile.type){
-			case 'BAR_CHART':
-				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
-				break;
-			case 'LINE_CHART':
-				entry = <BarChart data={data} showLegend={false} xScale={xScale} chartSeries= {chartSeries} x= {x} y={y} width={300} height={300}/>;
-				break;
-			case 'PIE_CHART':
-				entry = <PieChart data={data2} chartSeries={chartSeries2} value={value} name={name} width={350} height={300}/>
-				break;
-			default:
-				console.log("Chart type doesnt exist");
-		}
-render(){
-
-	
-
-		const layout = {
-		lg :[
-			{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
-			{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-			{i: 'c', x: 4, y: 0, w: 1, h: 2}]
-    	};
-		return (
-			<ResponsiveReactGridLayout className="layout" layout={layout} breakpoints={{lg: 1200, md: 996,sm: 768, xs: 480}} cols={{lg: 12, md: 10,sm: 6, xs: 4}}>
-				<div key={'a'} className="testCard">a</div>
-				<div key={'b'} className="testCard">b</div>
-				<div key={'c'} className="testCard">c</div>
-			</ResponsiveReactGridLayout>
-		);
-	}*/

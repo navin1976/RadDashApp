@@ -9,7 +9,6 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import configureStore from './store/configureStore';
-import getInitialData from './init';
 
 import {Provider} from 'react-redux';
 import {Router, browserHistory} from 'react-router';
@@ -27,7 +26,7 @@ import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/toastr/build/toastr.min.css';
 
 
-const store = configureStore(getInitialData());
+const store = configureStore();
 
 store.dispatch(loadDashboards());
 store.dispatch(loadAllDataSources());

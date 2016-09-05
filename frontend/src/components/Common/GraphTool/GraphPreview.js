@@ -69,20 +69,38 @@ class GraphPreview extends React.Component{
 		let xScale = 'ordinal';
 
 		if(this.props.enable){
-			retVar = (			
-			<div className="card">
-				<BarChart 
-					title={this.props.info.title} 
-					data={data} 
-					showLegend={false} 
-					xScale={xScale} 
-					chartSeries= {chartSeries} 
-					x= {x} 
-					y= {y} 
-					width={parseInt(this.props.info.width)} 
-					height={parseInt(this.props.info.height)}
-				/>
-			</div>);
+			if(this.props.info.chartType == 'BAR_CHART'){
+				retVar = (			
+				<div className="card">
+					<BarChart 
+						title={this.props.info.title} 
+						data={data} 
+						showLegend={false} 
+						xScale={xScale} 
+						chartSeries= {chartSeries} 
+						x= {x} 
+						y= {y} 
+						width={parseInt(this.props.info.width)} 
+						height={parseInt(this.props.info.height)}
+					/>
+				</div>);
+			}else{
+				retVar = (			
+				<div className="card">
+					<LineChart 
+						title={this.props.info.title} 
+						data={data} 
+						showLegend={false} 
+						xScale={xScale} 
+						chartSeries= {chartSeries} 
+						x= {x} 
+						y= {y} 
+						width={parseInt(this.props.info.width)} 
+						height={parseInt(this.props.info.height)}
+					/>
+				</div>);
+			}
+				
 		}else{
 			retVar = <div>preview not available</div>;
 		}

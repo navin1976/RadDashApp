@@ -6,5 +6,7 @@ export default {
 	data:[],
 	roles:{},
 	permissions:[],
-	manageDashboard:[]
+	manageDashboard:[],
+	defaultDashboard:{},
+	tempDashboard:{}
 };

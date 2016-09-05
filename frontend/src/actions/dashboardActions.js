@@ -25,6 +25,10 @@ export function removeDashboard(dashId){
 	return {type: types.REMOVE_DASHBOARD, dashId};
 }
 
+export function addDashboard(payload){
+	return {type: types.ADD_DASHBOARD,payload};
+}
+
 export function loadDashboards(){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());

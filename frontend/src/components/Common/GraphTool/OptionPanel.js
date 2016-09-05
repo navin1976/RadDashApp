@@ -91,7 +91,14 @@ class OptionPanel extends React.Component{
 				{granularityId:parseInt(ref.granularity)},
 				{metricId: parseInt(ref.metric)},
 				{splitBy:0},
-				{filters:[]}
+				{filters:[
+					{
+						"filterId": 5,
+						"filterValues": [
+							"0","1","2","3","4"
+						]
+					}
+				]}
 			);
 			console.log("TIGGERED");
 			console.log(res);

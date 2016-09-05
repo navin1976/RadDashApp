@@ -6,6 +6,8 @@ import roles from './roleReducer';
 import permissions from './permissionReducer';
 import dataSources from './dataReducer';
 import manageDashboard from './dashboardManagmentReducer';
+import defaultDashboard from './defaultDashboardReducer';
+import tempDashboard from './tempDashboardReducer';
 
 const rootReducer = combineReducers({
 	ajaxCallsInProgress,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
 	roles,
 	permissions,
 	dataSources,
-	manageDashboard
+	manageDashboard,
+	defaultDashboard,
+	tempDashboard
 });
 
 export default rootReducer;

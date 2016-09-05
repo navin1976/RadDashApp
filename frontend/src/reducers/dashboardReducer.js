@@ -74,6 +74,9 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 				}
 			});
 		}
+		case types.ADD_DASHBOARD:{
+			return [...state,action.payload];
+		}
 		default:
 			return state;
 	}

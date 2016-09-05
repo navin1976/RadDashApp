@@ -2,7 +2,7 @@ import delay from './delay';
 
 const dashboards = [
 	{
-		id:'dsh1',
+		id:'1',
 		name:'My dashboard 1',
 		description:'Displays clininc imformation and financial performance',
 		author:"Admin",
@@ -23,7 +23,7 @@ const dashboards = [
 		]
 	},
 	{
-		id:'dsh2',
+		id:'2',
 		name:'My dashboard 2', 
 		description:'Displays clininc imformation and health performance',
 		author:"Admin",
@@ -50,7 +50,7 @@ const dashboards = [
 		]
 	},
 	{
-		id:'dsh3',
+		id:'3',
 		name:'My dashboard 3', 
 		description:'Displays clininc imformation and political performance',
 		author:"Admin",

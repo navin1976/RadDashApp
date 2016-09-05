@@ -25,10 +25,10 @@ class Header extends React.Component{
 			<ul className="sidebar-nav">
 				<li className="sidebar-brand"><img id="brand" src={img}/></li>
 				<li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-				<li><Link to="/about" activeClassName="active">About</Link></li>
 				<li><Link to="/dashboard" activeClassName="active">Dashboard</Link></li>
 				{this.props.dashboards.map(this.dashboardInstance)}
 				<li><Link to="/admin" activeClassName="active">Admin</Link></li>
+				<li><Link to="/about" activeClassName="active">Help</Link></li>
 			</ul>
 		</div>
 		);
