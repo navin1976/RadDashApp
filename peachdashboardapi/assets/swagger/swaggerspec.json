@@ -33,6 +33,44 @@
   ],
   "paths": {
     "/dashboard/default": {
+      "get": {
+        "tags": [
+          "Dashboards"
+        ],
+        "summary": "Get Default Dashboard",
+        "description": "Retrieve default dashboard for a given role",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "query",
+            "description": "Unique identifier for a role",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of dashboard for role successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dashboard"
+              }
+            }
+          },
+          "400": {
+            "description": "Data types in parameter list do not match - expected an int"
+          },
+          "403": {
+            "description": "User not authorized no access information"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Dashboards"
@@ -94,7 +132,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -134,8 +171,6 @@
         ],
         "summary": "Deletes Default Dashboard",
         "description": "Deletes an existing default dashboard",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -173,7 +208,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -214,8 +248,6 @@
         "summary": "Deletes User Dashboard",
         "description": "Deletes an existing dashboard.",
         "operationId": "deleteDashboardDashboardId",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
             "name": "dashboardId",
@@ -250,7 +282,6 @@
         "summary": "The Dashboard Retrieval endpoint",
         "description": "The Dashboard Retrieval endpoint returns information about the user's existing dashboards. \nThe response includes the configuration which specifies all display-related information.",
         "operationId": "getDashboards",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -314,7 +345,6 @@
         "summary": "Retrieves a list of all data sources for the role of the current user",
         "description": "Retrieves a list of all data sources for a given role to present the user with a list of available datasources, and filters and metrics associated with these datasources",
         "operationId": "getDataDatasource",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -360,7 +390,10 @@
           "200": {
             "description": "Entities successfully retrieved",
             "schema": {
-              "type": "file"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/File"
+              }
             }
           }
         }
@@ -373,8 +406,6 @@
         ],
         "summary": "Get the distinct values for a filter",
         "description": "Get the distinct values for a filter",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
             "name": "filterId",
@@ -387,7 +418,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Status 200",
             "schema": {
               "type": "array",
               "items": {
@@ -415,7 +446,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
         "parameters": [
           {
             "in": "body",
@@ -449,7 +479,6 @@
         ],
         "summary": "Datasource retrieval",
         "description": "Retrieves a list of all datasources and metrics, filters and granularities associated with the datasource",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -486,7 +515,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
         "parameters": [
           {
             "in": "body",
@@ -521,8 +549,6 @@
         "summary": "Retrieves a list of all available permissions",
         "description": "Retrieves a list of all available permissions",
         "operationId": "getPermissions",
-        "consumes": [],
-        "produces": [],
         "parameters": [],
         "responses": {
           "200": {
@@ -554,7 +580,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
         "parameters": [
           {
             "in": "body",
@@ -589,7 +614,6 @@
         "summary": "Retrieves the list of all roles",
         "description": "Retrieves the list of all roles",
         "operationId": "getRoles",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -658,8 +682,6 @@
         "summary": "The request is sent when a role is changed for a particular user.",
         "description": "The request is sent when a role is changed for a particular user.",
         "operationId": "putRolesAssign",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
             "name": "roleId",
@@ -703,8 +725,6 @@
         ],
         "summary": "Role deletion",
         "description": "Deletes a given role",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
             "name": "roleId",
@@ -745,7 +765,6 @@
         "summary": "Retrieve a list of all users",
         "description": "Retrieve a list of all users",
         "operationId": "getUsers",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -776,7 +795,6 @@
         ],
         "summary": "Info of logged in user",
         "description": "Retrieves information about the user that is logged",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
