@@ -138,8 +138,7 @@ module.exports = {
     console.log("roleId", roleId);
     var roleDashboardIds = [];
 
-    /*
-    if (isNaN(id)) {
+    if (isNaN(roleId)) {
       res.status(400);
       return res.send();
     }
@@ -169,7 +168,6 @@ module.exports = {
           return res.send(JSON.stringify(records, null, 2));
         });
     });
-    */
   },
 
   deleteDefault: function (req, res) {
