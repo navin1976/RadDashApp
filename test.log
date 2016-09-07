@@ -19,7 +19,7 @@
 [32minfo: [39mTo shut down Sails, press <CTRL> + C at any time.
 [37m[39m
 [34mdebug: [39m-------------------------------------------------------
-[34mdebug: [39m:: Mon Aug 29 2016 00:29:11 GMT+0100 (BST)
+[34mdebug: [39m:: Sat Sep 03 2016 12:24:28 GMT+0100 (BST)
 [37m[39m
 [34mdebug: [39mEnvironment : test
 [34mdebug: [39mPort        : 1338
@@ -37,11 +37,11 @@ Is isEnabled a boolean? true
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 2, id: 2, name: 'u_manager', hashpass: '1234' }
-dashboardId:  69
+dashboardId:  71
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-dashboardId:  69
+dashboardId:  71
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
-dashboardId:  69
+dashboardId:  71
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }
 Preparing the query
@@ -106,9 +106,5 @@ Role to delete exist
 Users with old role updated
 old role deleted
 { role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
-{ role: { id: 1, description: 'admin' },
-  id: 1,
-  name: 'u_admin',
-  hashpass: '1234' }
 { role: 1, id: 1, name: 'u_admin', hashpass: '1234' }
 { role: 3, id: 3, name: 'u_member', hashpass: '1234' }

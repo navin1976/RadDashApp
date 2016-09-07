@@ -6,7 +6,7 @@ module.exports = {
     User.find({}).populate('role').exec(function (error, users) {
       if (error) {
         res.negotiate(error);
-        res.send();
+        return res.send();
       }
       res.status(200);
       res.type('application/json');
@@ -28,12 +28,11 @@ module.exports = {
     User.findOne({id: userId}).populate('role').exec(function (error, user) {
       if (error) {
         res.negotiate(error);
-        res.send();
+        return res.send();
       }
       res.status(200);
       res.type('application/json');
 
-      console.log(user);
       var loggedInUser = {
         name: user.name,
         roleId: user.role.id,

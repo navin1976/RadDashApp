@@ -133,6 +133,43 @@ module.exports = {
     });
   },
 
+  findDefault: function (req, res) {
+    var roleId = parseInt(req.query.roleId);
+    console.log("roleId", roleId);
+    var roleDashboardIds = [];
+
+    if (isNaN(roleId)) {
+      res.status(400);
+      return res.send();
+    }
+    // find the dashboards for the role
+    RoleDashboard.find({role: roleId}).exec(function(error, dashboardIds) {
+
+      if (error){
+        res.negotiate(error);
+        return res.send();
+      }
+
+      for (var i = 0; i < dashboardIds.length; i++) {
+        roleDashboardIds.push(dashboardIds[i].dashboard);
+        console.log(dashboardIds[i].dashboard);
+      }
+
+        // fetch the dashboards
+        Dashboard.find({id:roleDashboardIds}).exec(function(error, records) {
+
+          if (error){
+            res.negotiate(error);
+            return res.send();
+          }
+
+          res.status(200);
+          res.type('application/json');
+          return res.send(JSON.stringify(records, null, 2));
+        });
+    });
+  },
+
   deleteDefault: function (req, res) {
     var dashboardId = parseInt(req.params.id);
     if (isNaN(dashboardId)) {
