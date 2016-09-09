@@ -1,6 +1,9 @@
 import React from 'react';
 import {BarChart,PieChart,LineChart} from 'react-d3-basic';
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 const paraStyles = {
 	float:"left",
 	overflowX:"hidden"
@@ -25,33 +28,6 @@ class GraphPreview extends React.Component{
 
 	render(){
 		let retVar;
-		let data = [
-			{
-			"metric": 108750,
-			"date": "2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 380650,
-			"date": "2011-01-01T00:00:00.000Z/2012-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 393695,
-			"date": "2012-01-01T00:00:00.000Z/2013-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 418133,
-			"date": "2013-01-01T00:00:00.000Z/2014-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 500000,
-			"date": "2014-01-01T00:00:00.000Z/2015-01-01T00:00:00.000Z"
-			},
-			{
-			"metric": 120000,
-			"date": "2015-01-01T00:00:00.000Z/2016-01-01T00:00:00.000Z"
-			}
-		];
-
 		let x = function(d){
 			return d.date;
 		};
@@ -68,13 +44,14 @@ class GraphPreview extends React.Component{
 		];
 		let xScale = 'ordinal';
 
-		if(this.props.enable){
+
+		if(this.props.enable && this.props.data !== []){
 			if(this.props.info.chartType == 'BAR_CHART'){
 				retVar = (			
 				<div className="card">
 					<BarChart 
 						title={this.props.info.title} 
-						data={data} 
+						data={this.props.data} 
 						showLegend={false} 
 						xScale={xScale} 
 						chartSeries= {chartSeries} 
@@ -89,7 +66,7 @@ class GraphPreview extends React.Component{
 				<div className="card">
 					<LineChart 
 						title={this.props.info.title} 
-						data={data} 
+						data={this.props.data} 
 						showLegend={false} 
 						xScale={xScale} 
 						chartSeries= {chartSeries} 
@@ -113,4 +90,11 @@ class GraphPreview extends React.Component{
 	}
 }
 
-export default GraphPreview;
+function mapStateToProps(state,ownProps){
+	const data = state.manageDashboard;
+	return {
+		data:data
+	};
+}
+
+export default connect(mapStateToProps,null)(GraphPreview);

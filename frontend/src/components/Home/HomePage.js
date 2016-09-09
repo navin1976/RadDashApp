@@ -82,7 +82,7 @@ class HomePage extends React.Component{
 
 	viewDefaultDashboard(event){
 		event.preventDefault();
-		this.context.router.push('/about');
+		this.context.router.push('/dashboard');
 	}
 
 	render(){
@@ -97,7 +97,6 @@ class HomePage extends React.Component{
 					</div>
 					<div className = "row">
 						<HomeOption title={"Create new custom dashboard"} trigger={this.createDashboard}/>
-						<HomeOption title={"Delete a dashboard"} trigger={this.deleteDashboard}/>
 						<HomeOption title={"View default dashboard"} trigger={this.viewDefaultDashboard}/>
 					</div>
 					<Dialog open={this.state.open_option1} title="Delete a custom dashboard" onRequestClose = {this.handleOptionOneClose}>

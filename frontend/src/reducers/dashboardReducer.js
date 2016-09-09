@@ -8,13 +8,6 @@ const widget = (state,action) => {
 				data: action.payload
 			});
 		}
-		case types.REMOVE_WIDGET_SUCCESS:{
-			if(state.layout.i !== action.widgetId){
-				return state;
-			}else{
-				return state;
-			}
-		}
 		case types.ADD_WIDGET_SUCCESS:{
 			return [...state,action.widgetDetails];
 		}
@@ -32,9 +25,28 @@ const dash = (state,action) => {
 		}
 		case types.REMOVE_WIDGET_SUCCESS:{
 			if(state.id == action.dashId){
-				return Object.assign({},state,{
-					widgets: state.widgets.map(w => widget(w,action))
-				});
+				if(state.widgets.length == 1){
+					return Object.assign({},state,{widgets:[]});	
+				}else{
+					let index;
+					for(index = 0; index<state.widgets.length; index++){
+						if(state.widgets[index].layout.i == action.widgetId){
+							break;
+						}
+					}
+					if(state.widgets.length - 1 == index){
+						return Object.assign({},state,{
+							widgets: [...state.widgets.slice(0,index)]
+						});
+					}else{
+						return Object.assign({},state,{
+							widgets: [
+								...state.widgets.slice(0,index),
+								...state.widgets.slice(index+1)
+							]
+						});
+					}	
+				}	
 			}else{
 				return state;
 			}
@@ -68,11 +80,24 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 			return state.map(d => dash(d,action));
 		}
 		case types.REMOVE_DASHBOARD:{
-			return state.map(d => {
-				if(d.id !== action.dashId){
-					return d;
+			if(state.length == 1){
+				return [];
+			}else{
+				let index;
+				for(index = 0; index<state.length; index++){
+					if(state[index].id == action.dashId){
+						break;
+					}
 				}
-			});
+				if(index == state.length-1){
+					return [...state.slice(0,index)];
+				}else{
+					return [
+						...state.slice(0,index),
+						...state.slice(index+1)
+					];
+				}
+			}	
 		}
 		case types.ADD_DASHBOARD:{
 			return [...state,action.payload];

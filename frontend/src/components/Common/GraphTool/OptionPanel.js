@@ -6,6 +6,7 @@ import OptionForm from './OptionForm';
 import GraphPreview from './GraphPreview';
 import {bindActionCreators} from 'redux';
 import * as manageDashboardAction from '../../../actions/manageDashboardAction';
+import * as dashboardActions from '../../../actions/dashboardActions';
 
 const prevStyle = {
 	border:"none",
@@ -82,28 +83,30 @@ class OptionPanel extends React.Component{
 	saveGraph(event){
 		event.preventDefault();
 		if(this.state.display){
-			const ref = this.state.details;
-			let res = {};
-			Object.assign(res,
-				{sourceId:parseInt(ref.datasource)},
-				{endTime:ref.endTime},
-				{startTime:ref.startTime},
-				{granularityId:parseInt(ref.granularity)},
-				{metricId: parseInt(ref.metric)},
-				{splitBy:0},
-				{filters:[
-					{
-						"filterId": 5,
-						"filterValues": [
-							"0","1","2","3","4"
-						]
-					}
-				]}
-			);
-			console.log("TIGGERED");
-			console.log(res);
-			this.props.actions.temp(res);
+			const len = this.props.currDash.widgets.length;
+			let layObj;
+			if(len == 0){
+				layObj = Object.assign({},
+					{i:'1',x:0,y:0,w:Math.floor(this.state.details.width/40),h:Math.floor(this.state.details.height/40)}
+				);
+			}else{
+				const lastIndex = this.props.currDash.widgets[len-1].layout.i;
+				let newIndex = String(parseInt(lastIndex) + 1);
+				layObj = Object.assign({},
+					{i:newIndex,x:0,y:0,w:Math.floor(this.state.details.width/40),h:Math.floor(this.state.details.height/40)}
+				);
+			}
+			let res = Object.assign({},
+				{name:this.state.details.title},
+				{description:this.state.details.description},
+				{layout:layObj},
+				{type:this.state.details.chartType},
+				{request:true},
+				{data:this.props.tempData}
+			)
+			this.props.dashActions.addWidgetToDashboardSuccess(this.props.dashId,res);
 		}
+
 	}
 
 	updateGraphState(event){
@@ -165,6 +168,17 @@ class OptionPanel extends React.Component{
 
 	previewGraph(event){
 		event.preventDefault();
+		const ref = this.state.details;
+		let res = {};
+		Object.assign(res,
+			{sourceId:parseInt(ref.datasource)},
+			{endTime:ref.endTime},
+			{startTime:ref.startTime},
+			{granularityId:parseInt(ref.granularity)},
+			{metricId: parseInt(ref.metric)},
+			{filters:[]}
+		);
+		this.props.actions.temp(res);
 		return this.setState({display:true});
 	}
 
@@ -199,7 +213,16 @@ class OptionPanel extends React.Component{
 }
 
 function mapStateToProps(state,ownProps){
+	const dashboardId = ownProps.dashId;
+	let dash;
+	for(let i = 0; i< state.dashboards.length; i++){
+		if(state.dashboards[i].id == dashboardId){
+			dash = state.dashboards[i];
+			break;
+		}
+	}
 	return {
+		currDash:dash,
 		datastore:state.dataSources,
 		tempData:state.manageDashboard
 	};
@@ -207,7 +230,8 @@ function mapStateToProps(state,ownProps){
 
 function mapDispatchToProps(dispatch){
 	return {
-		actions: bindActionCreators(manageDashboardAction,dispatch)
+		actions: bindActionCreators(manageDashboardAction,dispatch),
+		dashActions: bindActionCreators(dashboardActions,dispatch)
 	};
 }
 
