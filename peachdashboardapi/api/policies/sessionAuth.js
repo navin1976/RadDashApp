@@ -9,8 +9,12 @@
  */
 module.exports = function(req, res, next) {
 
+
   if (req.headers.authorization) {
-    // do the logic to convert the token to a userId
+    // for now since the single sign-on has not been implemented
+    // instead of having some logic with the token
+    // we take the authorization header as containing the userId
+    // of the user doing the request
     var userId = parseInt(req.headers.authorization);
     User.findOne(userId)
       .then(function(user) {
@@ -29,11 +33,11 @@ module.exports = function(req, res, next) {
         return res.send();
       });
   } else {
+    // for now, to simplify for the front end, even without
+    // authorization header, the request is accepted as if coming from
+    // userId 1
     req.info = {userId: 1, roleId:1};
     next();
     //return res.forbidden('You need an authorization header.');
   }
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  //
 };

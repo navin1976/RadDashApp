@@ -3,8 +3,11 @@ var ply = plywood.ply;
 var $ = plywood.$;
 
 module.exports = {
+  /*
+  Get timeseries data for datasource
+   */
   find: function (req, res) {
-    var roleId = parseInt(req.info.roleId);// extract from reques
+    var roleId = parseInt(req.info.roleId);
     var datasourceId = parseInt(req.body.dataSourceId);
     var granularityId = parseInt(req.body.granularityId);
     var metricId = parseInt(req.body.metricId);
@@ -57,7 +60,7 @@ module.exports = {
               var context = {};
               context[dataset] = DruidService.createDataset(dataset);
 
-              // filter the time and bucket by granularity
+              // filter the time
               var ex = $(dataset)
                 .filter($("time").in(
                   {
@@ -71,6 +74,7 @@ module.exports = {
                   return res.send('Wrong parameters');
                 }
 
+                // bucket by granularity
                 ex = ex.split($('time').timeBucket(granularity.interval, "Europe/London"), 'date');
 
                 // split by if necessary
@@ -82,7 +86,7 @@ module.exports = {
 
                 // send the query to druid
                 ex.compute(context).then(function(data) {
-
+                  // parse the dates in a format that is requested by the front end
                   var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
                   dataToJS.map(function(e) {
                     e.date = e.date.start + '/' + e.date.end;

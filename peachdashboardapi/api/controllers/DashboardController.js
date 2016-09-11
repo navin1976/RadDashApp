@@ -4,6 +4,9 @@
 module.exports = {
 
 
+  /*
+  Get all the dashboards for the currently logged in user
+   */
   find: function (req, res) {
     //only shows user dashboards + default for role
     var userId = req.info.userId;
@@ -50,20 +53,23 @@ module.exports = {
     });
   },
 
+  /*
+   Create a new dashboard for the currently logged in user
+   */
   create: function (req, res) {
     var configuration = req.body.configuration;
     var title = req.body.title;
     var isEnabled = req.body.isEnabled;
-    console.log("Is isEnabled a boolean?", typeof isEnabled === 'boolean');
 
     if (!(_.isString(configuration) || !(_.isString(title)) || !_.isBoolean(isEnabled))) {
       res.status(400);
       return res.send();
     }
+
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, users:[req.info.userId]}).exec(function(error, records){
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        return res.negotiate(error);
+        res.negotiate(error);
+        return res.send();
       }
       res.status(201);
       res.type('application/json');
@@ -71,7 +77,9 @@ module.exports = {
     });
   },
 
-
+  /*
+  Update a given dashboard
+   */
   update: function (req, res) {
     var configuration = req.body.configuration;
     var title = req.body.title;
@@ -104,6 +112,9 @@ module.exports = {
     });
   },
 
+  /*
+  Delete a given user dashboard
+   */
   delete: function (req, res) {
     var dashboardId = parseInt(req.params.id);
     console.log('dashboardId: ', dashboardId);
@@ -133,11 +144,12 @@ module.exports = {
     });
   },
 
+  /*
+  Get the default dashboards for a given role ID
+   */
   findDefault: function (req, res) {
     var roleId = parseInt(req.query.roleId);
-    console.log("roleId", roleId);
     var roleDashboardIds = [];
-
     if (isNaN(roleId)) {
       res.status(400);
       return res.send();
@@ -155,21 +167,25 @@ module.exports = {
         console.log(dashboardIds[i].dashboard);
       }
 
-        // fetch the dashboards
-        Dashboard.find({id:roleDashboardIds}).exec(function(error, records) {
+      // fetch the dashboards
+      Dashboard.find({id:roleDashboardIds}).exec(function(error, records) {
 
-          if (error){
-            res.negotiate(error);
-            return res.send();
-          }
+        if (error){
+          res.negotiate(error);
+          return res.send();
+        }
 
-          res.status(200);
-          res.type('application/json');
-          return res.send(JSON.stringify(records, null, 2));
-        });
+        res.status(200);
+        res.type('application/json');
+        return res.send(JSON.stringify(records, null, 2));
+      });
+
     });
   },
 
+  /*
+  Delete a default dashboard
+   */
   deleteDefault: function (req, res) {
     var dashboardId = parseInt(req.params.id);
     if (isNaN(dashboardId)) {
@@ -197,6 +213,9 @@ module.exports = {
     });
   },
 
+  /*
+  Create a default dashboard for a given role
+   */
   createDefault: function (req, res) {
     var id = parseInt(req.query.roleId);
     var configuration = req.body.configuration;
@@ -209,7 +228,8 @@ module.exports = {
     }
     Dashboard.create({configuration: configuration, title: title, isEnabled: isEnabled, roles:[id]}).exec(function(error, records){
       if (error) {
-        return res.negotiate(error);
+        res.negotiate(error);
+        return res.send();
       }
       res.status(201);
       res.type('application/json');
@@ -217,6 +237,9 @@ module.exports = {
     });
   },
 
+  /*
+  Update a default dashboard
+   */
   updateDefault: function (req, res) {
     var configuration = req.body.configuration;
     var title = req.body.title;
@@ -235,7 +258,8 @@ module.exports = {
           isEnabled: isEnabled
         }).exec(function (error) {
           if (error) {
-            return res.negotiate(error);
+            res.negotiate(error);
+            return res.send();
           }
           res.status(205);
           return res.send();
