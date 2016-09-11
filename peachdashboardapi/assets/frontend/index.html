@@ -1,0 +1,79 @@
+<html>
+
+<head>
+	<title>Raddash API</title>
+	<script src="fusioncharts.js"></script>
+	<script src="fusioncharts.charts.js"></script>
+	<script src="angular.min.js"></script>
+	<script src="d3.v3.min.js"></script>
+	<script src="c3.min.js"></script>
+	<script src="script.js"></script>
+	<link href="style.css" rel="stylesheet" />
+	<link href="bootstrap.css" rel="stylesheet" />
+	<link href="c3.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div ng-app="myApp">
+		<div style="text-align:center">
+			<h1>Raddash!</h1>
+		</div>
+		<div ng-controller="DoubleController">
+			<div ng-if="datasources.length > 0" class="row" style="width:100%">
+				<form class="form-horizontal input-form col-xs-4">
+					<div class="form-group">
+						<label>Pick a datasource</label>
+						<select ng-model="queryData.datasource" ng-options="datasource as datasource.name for datasource in datasources"></select>
+					</div>
+					<div ng-if="queryData.datasource">
+						<div class="form-group">
+							<label>{{datasource.name}}</label>
+						</div>
+						<div class="form-group">
+							<label>Start Time</label>
+							<input class="form-control" ng-model="queryData.startTime" type="text">
+							<label>End Time</label>
+							<input class="form-control" ng-model="queryData.endTime" type="text">
+						</div>
+						<div class="form-group">
+							<label>Metric {{queryData.metric}}</label>
+							<select class="form-control" ng-model="queryData.metric" ng-options="o.id as o.name for o in queryData.datasource.metrics"></select>
+							<label>Granularity {{queryData.granularity}}</label>
+							<select class="form-control" ng-model="queryData.granularity" ng-options="o.id as o.name for o in queryData.datasource.granularities"></select>
+							<!--
+							<label>Split By {{queryData.splitBy}}</label>
+							<select class="form-control" ng-model="queryData.splitBy" ng-options="o.id as o.name for o in queryData.datasource.filters"></select>
+							-->
+								
+						</div>
+						<div class="form-group">
+							
+							<button type="submit" class="btn btn-default btn-success" ng-click="displayChartData()" style="width: 120px; float:right;">Display Graph</button>
+							<button type="submit" class="btn btn-default btn-success" ng-click="displayTabularData()" style="width: 120px; float:right; margin-right:10px;">Display Table</button>
+						</div>
+					</div>
+				</form>
+					<div class="col-xs-8">
+						<div ng-if="graphData.length > 0">
+							<h3>/data/timeseries Timeseries data</h3>
+							<div id="chart"></div>
+						</div>
+						<div ng-if="tabularData.length > 0">
+							<h3>/data/entities Tabular data</h3>
+							<table class="table">
+								<tr>
+									<th ng-repeat="(key, name) in tabularData[0]">{{key}}</th>
+								</tr>
+								<tr ng-repeat="row in tabularData">
+									<td ng-repeat="value in row">{{value}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+</body>
+
+</html>

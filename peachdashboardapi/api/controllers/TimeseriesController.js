@@ -38,10 +38,13 @@ module.exports = {
           .exec(function(err, datasource) {
 
             // checking if the split by is allowed
-            splitByCheck = splitBy ? false: true;
+
+            var splitByCheck = splitBy ? false: true;
+            var splitByName = "";
             for (var i = 0; i < datasource.filters.length; i++) {
               if (datasource.filters[i].id == splitBy) {
                 splitByCheck = true;
+                splitByName = datasource.filters[i].name;
               }
             }
 
@@ -79,7 +82,7 @@ module.exports = {
 
                 // split by if necessary
                 if (splitBy) {
-                  ex = ex.apply('split', $(dataset).split($(datasource.filters[splitBy].name), 'split').apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+                  ex = ex.apply('split', $(dataset).split($(splitByName), 'split').apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
                 } else {
                   ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
                 }
