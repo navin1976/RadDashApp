@@ -2,28 +2,33 @@
  * Created by BlackLinden on 20/07/2016.
  */
 module.exports = {
+  /*
+  Get the datasource available for the current user
+   */
   findForCurrentUser: function (req, res) {
     //userId of the current user
     var userId = req.info.userId;
 
     //finding roleId of current user
-    User.find({id: userId}).exec(function (error, users){
+    User.findOne({id: userId}).exec(function (error, user){
       if (error) {
         res.negotiate(error);
         res.send();
       }
-      if (users.length > 0) {
-        var roleId = users[0].role;
-        Role.find({id: roleId}).populate('datasources').exec(function(error, roles){
+      if (user) {
+        var roleId = user.role;
+        // find the datasource IDs associated with this role
+        Role.findOne({id: roleId}).populate('datasources').exec(function(error, role){
           if (error) {
             res.negotiate(error);
             res.send();
           }
-          if (roles.length > 0) {
+          if (role) {
             datasourceIds = [];
-            for (var i = 0; i < roles[0].datasources.length; i++){
-             datasourceIds.push(roles[0].datasources[i].id);
+            for (var i = 0; i < role.datasources.length; i++){
+             datasourceIds.push(role.datasources[i].id);
             }
+            // find the datasource along side the granularities and filters and metrics associated
             Datasource.find({id: datasourceIds})
               .populate('granularities')
               .populate('filters')
@@ -52,6 +57,9 @@ module.exports = {
 
   },
 
+  /*
+  Find all datasources
+   */
   findAll: function (req, res) {
     Datasource.find({})
       .populate('granularities')
@@ -68,6 +76,9 @@ module.exports = {
       });
   },
 
+  /*
+  Assign datasources to a role
+   */
   assign: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
     var datasourceIds = req.body.datasourceIds.map(function(e){return parseInt(e);});
@@ -76,9 +87,13 @@ module.exports = {
       res.status(400);
       return res.send();
     }
+    // Delete the mappings between this role and datasources
     RoleDatasource.destroy({role: idUpdate})
       .then(function () { return Role.findOne(idUpdate);})
       .then(function (role) {
+        // Update the role to have new datasource associated with
+        // the description here is because of a bug in waterline that does not allow updates
+        // with only relationships
         if (role)
           return Role.update(idUpdate, {datasources: datasourceIds, description:role.description});
       })

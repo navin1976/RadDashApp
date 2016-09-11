@@ -3,6 +3,9 @@ var ply = plywood.ply;
 var $ = plywood.$;
 
 module.exports = {
+  /*
+  Find distinct value of a given filter
+   */
   find: function (req, res) {
     var filterId = parseInt(req.params.id);// extract from request
     var roleId = req.info.roleId;
@@ -26,6 +29,8 @@ module.exports = {
         res.status(403);
         return res.send('Cannot get distinct values for this filter');
       }
+      // Make sure that the user requesting the distinct value of a filter has access to
+      // the datasource associated with that filter
       RoleDatasource.findOne({datasource:filter.datasource, role:roleId}).populate('datasource').exec(function(error, roledatasource) {
         // you are allowed
         if (roledatasource) {
@@ -34,6 +39,8 @@ module.exports = {
           var context = {};
           context[dataset] = DruidService.createDataset(dataset);
 
+          // request the distinct value to druid by requesting a count
+          // on all the distinct value of a given dimension
           var ex = $(dataset)
                 .split($(filter.name), 'filter')
                 .limit(1000)

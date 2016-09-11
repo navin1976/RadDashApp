@@ -2,6 +2,9 @@
  * Created by BlackLinden on 20/07/2016.
  */
 module.exports = {
+  /*
+  Find all users
+   */
   find: function (req, res) {
     User.find({}).populate('role').exec(function (error, users) {
       if (error) {
@@ -22,6 +25,9 @@ module.exports = {
     });
   },
 
+  /*
+  Get info for currently logged in user
+   */
   info: function (req, res) {
     var userId = req.info.userId;
 

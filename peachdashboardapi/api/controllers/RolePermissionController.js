@@ -9,6 +9,9 @@ function checkErrors(error, res) {
 
 
 module.exports = {
+  /*
+  Assign a role to a given user
+   */
   assignRole: function (req, res) {
     var idUpdate = parseInt(req.query.userId);
     var roleId = parseInt(req.query.roleId);
@@ -18,8 +21,8 @@ module.exports = {
     }
     User.update({id: idUpdate}, {role: roleId}).exec(function (error, records) {
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        return res.negotiate(error);
+        res.negotiate(error);
+        return res.send();
       }
       res.status(205);
       res.type('application/json');
@@ -27,8 +30,15 @@ module.exports = {
     });
   },
 
+  /*
+  Get all the roles along side the permissions and datasource ids
+   */
   findRole: function (req, res) {
     Role.find({}).populate('permissions').populate('datasources').exec(function (error, roles) {
+      if (error) {
+        res.negotiate(error);
+        return res.send();
+      }
       var rolesParsed = roles.map(function (role) {
         return {
           datasourceIds: role.datasources.map(function (datasource) {
@@ -47,18 +57,28 @@ module.exports = {
     });
   },
 
+  /*
+  Get all the permissions
+   */
   findPermission: function (req, res) {
     Permission.find({}).exec(function (error, records) {
+      if (error) {
+        res.negotiate(error);
+        return res.send();
+      }
       res.status(200);
       res.type('application/json');
       return res.send(JSON.stringify(records, null, 2));
     });
   },
 
+  /*
+  Assign permissions to a role
+   */
   assignPermission: function (req, res) {
     var idUpdate = parseInt(req.body.roleId);
     var permissionIds = req.body.permissionIds.map(function(e){return parseInt(e);});
-    console.log(req.body.permissionIds, permissionIds, _.indexOf(permissionIds, NaN));
+
     if (isNaN(idUpdate) || _.indexOf(permissionIds, NaN)!=-1) {
       res.status(400);
       return res.send();
@@ -91,6 +111,9 @@ module.exports = {
 
   },
 
+  /*
+  Create a new role
+   */
   createRole: function (req, res) {
     var description = req.body.description;
 
@@ -101,8 +124,8 @@ module.exports = {
 
     Role.create({description: description}).exec(function (error, role) {
       if (error) {
-        // handle error here- e.g. `res.serverError(err);`
-        return res.negotiate(error);
+        res.negotiate(error);
+        return res.send();
       }
       res.status(201);
       res.type('application/json');
@@ -110,6 +133,9 @@ module.exports = {
     });
   },
 
+  /*
+  Delete a role and replace user with that role with a different one
+   */
   deleteRole: function (req, res) {
     var roleId = parseInt(req.params.id);
     var replaceRoleId = parseInt(req.query.replaceRoleId);
@@ -125,16 +151,16 @@ module.exports = {
       return res.send('User cannot replace a role with itself');
     }
 
+    // make sure that the new replace role exists
     Role.findOne({id: replaceRoleId}).exec(function (error, roleReplace) {
-      console.log('Replace role id exist');
       if (roleReplace) {
+        // make sure that the role to be replaced exists
         Role.findOne({id: roleId}).exec(function (error, roleDelete) {
-          console.log('Role to delete exist');
           if (roleDelete) {
+            // update users with the new role
             User.update({role: roleId}, {role: replaceRoleId}).exec(function (error, users) {
-              console.log('Users with old role updated');
+              // delete the old role
               Role.destroy({id: roleId}).exec(function (error) {
-                console.log('old role deleted');
                 if (error) {
                   res.negotiate(error);
                   return res.send();
