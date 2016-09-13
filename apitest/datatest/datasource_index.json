@@ -9,7 +9,7 @@
       }
     },
     "dataSchema" : {
-      "dataSource" : "datasource",
+      "dataSource" : "dummy_medical",
       "granularitySpec" : {
         "type" : "uniform",
         "segmentGranularity" : "year",
@@ -22,8 +22,8 @@
           "format" : "csv",
           "dimensionsSpec" : {
             "dimensions" : [
-              "dimension1",
-              "dimension2"
+              "scannerID",
+              "roomID"
             ]
           },
           "timestampSpec" : {
@@ -33,8 +33,8 @@
           "columns":
           [
               "date",
-              "dimension1",
-              "dimension2"
+              "scannerID",
+              "roomID"
           ]
         }
       },
