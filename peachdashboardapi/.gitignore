@@ -41,9 +41,8 @@
 
 config/local.js
 
-
-
-
+# ignore the connection file
+connections.json
 
 ################################################
 # Dependencies

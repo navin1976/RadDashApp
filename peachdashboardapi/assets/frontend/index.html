@@ -16,7 +16,7 @@
 <body>
 	<div ng-app="myApp">
 		<div style="text-align:center">
-			<h1>Raddash!</h1>
+			<h1>Radiology Dashboard</h1>
 		</div>
 		<div ng-controller="DoubleController">
 			<div ng-if="datasources.length > 0" class="row" style="width:100%">
@@ -27,7 +27,7 @@
 					</div>
 					<div ng-if="queryData.datasource">
 						<div class="form-group">
-							<label>{{datasource.name}}</label>
+							<label>{{queryData.datasource.name}}</label>
 						</div>
 						<div class="form-group">
 							<label>Start Time</label>
