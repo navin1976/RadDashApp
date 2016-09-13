@@ -4,7 +4,7 @@ var $ = plywood.$;
 
 module.exports = {
   /*
-  Get timeseries data for datasource
+   Get timeseries data for datasource
    */
   find: function (req, res) {
     var roleId = parseInt(req.info.roleId);
@@ -13,10 +13,11 @@ module.exports = {
     var metricId = parseInt(req.body.metricId);
     var splitBy = parseInt(req.body.splitBy);
     var filters = req.body.filters;
-    var startTime = new Date(TimeService.strtotime(req.body.startTime)*1000);
-    var endTime = new Date(TimeService.strtotime(req.body.endTime)*1000);
+    var startTime = new Date(TimeService.strtotime(req.body.startTime) * 1000);
+    var endTime = new Date(TimeService.strtotime(req.body.endTime) * 1000);
+    var metricFilterId = parseInt(req.body.metricFilterId);
 
-    if (startTime.getTime()>endTime.getTime()) {
+    if (startTime.getTime() > endTime.getTime()) {
       res.status(405);
       return res.send();
     }
@@ -35,16 +36,23 @@ module.exports = {
           .populate("granularities", {id: granularityId})
           .populate("metrics", {id: metricId})
           .populate("filters")
-          .exec(function(err, datasource) {
+          .exec(function (err, datasource) {
 
             // checking if the split by is allowed
 
-            var splitByCheck = splitBy ? false: true;
+            var splitByCheck = splitBy ? false : true;
             var splitByName = "";
+            var metricFilterIdCheck = metricFilterId ? false : true;
+            var metricFilterName = "";
             for (var i = 0; i < datasource.filters.length; i++) {
               if (datasource.filters[i].id == splitBy) {
                 splitByCheck = true;
                 splitByName = datasource.filters[i].name;
+              }
+              if (datasource.filters[i].id == metricFilterId) {
+                metricFilterIdCheck = true;
+                metricFilterName = metricId == 1 ? '' : '$' + datasource.filters[i].name;
+                console.log(metricFilterName);
               }
             }
 
@@ -52,7 +60,8 @@ module.exports = {
             if (
               datasource.metrics.length > 0 &&
               datasource.granularities.length > 0 &&
-              splitByCheck
+              splitByCheck &&
+              metricFilterIdCheck
             ) {
               console.log("Preparing the query");
               // prepare the query
@@ -71,7 +80,7 @@ module.exports = {
                     end: endTime
                   }))
               // filter the rest and execute
-              FilterService.applyFilters($, ex, datasource, filters, function(failed, ex) {
+              FilterService.applyFilters($, ex, datasource, filters, function (failed, ex) {
                 if (failed) {
                   res.status(403);
                   return res.send('Wrong parameters');
@@ -82,23 +91,30 @@ module.exports = {
 
                 // split by if necessary
                 if (splitBy) {
-                  ex = ex.apply('split', $(dataset).split($(splitByName), 'split').apply('metric', '$'+dataset+'.'+metric.metricFn+'()'));
+                  ex = ex.apply('split', $(dataset).split($(splitByName), 'split')
+                    .apply('metric', '$' + dataset + '.' + metric.metricFn + '(' + metricFilterName + ')'));
                 } else {
-                  ex = ex.apply('metric', '$'+dataset+'.'+metric.metricFn+'()');
-                }
+                  ex = ex.apply('metric', '$' + dataset + '.' + metric.metricFn + '(' + metricFilterName + ')');
 
-                // send the query to druid
-                ex.compute(context).then(function(data) {
-                  // parse the dates in a format that is requested by the front end
-                  var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
-                  dataToJS.map(function(e) {
-                    e.date = e.date.start + '/' + e.date.end;
-                    return e
-                  })
-                  res.type('application/json');
-                  res.status(200);
-                  res.send(JSON.stringify(dataToJS));
-                }).done();
+                }
+                try {
+                  // send the query to druid
+                  ex.compute(context).then(function (data) {
+                    // parse the dates in a format that is requested by the front end
+                    var dataToJS = JSON.parse(JSON.stringify(data.toJS()));
+                    dataToJS.map(function (e) {
+                      e.date = e.date.start + '/' + e.date.end;
+                      return e
+                    })
+                    res.type('application/json');
+                    res.status(200);
+                    res.send(JSON.stringify(dataToJS));
+                  }).done();                }
+                catch(err) {
+                  res.status(500);
+                  console.log(err);
+                  res.send("Unexpected Error");
+                }
               });
             } else {
               res.status(404);

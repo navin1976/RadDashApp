@@ -1152,6 +1152,10 @@
           "format": "int32",
           "description": "ID of the granularity to use in the query"
         },
+        "metricFilterId": {
+          "type": "integer",
+          "format": "int32"
+        },
         "metricId": {
           "type": "integer",
           "format": "int32",

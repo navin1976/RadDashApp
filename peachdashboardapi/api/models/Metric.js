@@ -8,6 +8,26 @@ module.exports = {
     count: {
       metricFn: 'count',
       name: 'count'
+    },
+    min: {
+      metricFn: 'min',
+      name: 'min'
+    },
+    max: {
+      metricFn: 'max',
+      name: 'max'
+    },
+    average: {
+      metricFn: 'average',
+      name: 'average'
+    },
+    countDistinct: {
+      metricFn: 'countDistinct',
+      name: 'countDistinct'
+    },
+    sum: {
+      metricFn: 'sum',
+      name: 'sum'
     }
   },
   attributes: {

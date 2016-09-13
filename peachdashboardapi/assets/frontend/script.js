@@ -12,6 +12,7 @@ myApp.controller('DoubleController', ['$scope', '$http', function ($scope, $http
     $scope.queryData.datasource = response.data[0];
     $scope.queryData.metric = $scope.queryData.datasource.metrics[0].id;
     $scope.queryData.granularity = $scope.queryData.datasource.granularities[0].id;
+    $scope.queryData.metricFilterId = $scope.queryData.datasource.filters[0].id;
     $scope.queryData.splitBy = null;
     $scope.datasources = response.data;
   }, function errorCallback(response) {
@@ -35,6 +36,7 @@ myApp.controller('DoubleController', ['$scope', '$http', function ($scope, $http
         "filters": [],
         "granularityId": $scope.queryData.granularity,
         "metricId": $scope.queryData.metric,
+        "metricFilterId": $scope.queryData.metricFilterId,
         "startTime": $scope.queryData.startTime,
         "splitBy": $scope.queryData.splitBy
       }
@@ -44,9 +46,16 @@ myApp.controller('DoubleController', ['$scope', '$http', function ($scope, $http
         return e;
       });
 
+      var name = "";
+      // get the name of the metric
+      for (var i=0; i < $scope.queryData.datasource.metrics.length; i++) {
+        if ($scope.queryData.datasource.metrics[i].id == $scope.queryData.metric) {
+          name = $scope.queryData.datasource.metrics[i].name;
+        }
+      }
       var dataColumns = [
         ['x'].concat($scope.graphData.map(function (e) { return e.date; })),
-        ['Count'].concat($scope.graphData.map(function (e) { return e.metric; }))
+        [name].concat($scope.graphData.map(function (e) { return e.metric; }))
       ];
 
       console.log(response.data);

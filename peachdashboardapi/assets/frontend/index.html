@@ -38,6 +38,8 @@
 						<div class="form-group">
 							<label>Metric {{queryData.metric}}</label>
 							<select class="form-control" ng-model="queryData.metric" ng-options="o.id as o.name for o in queryData.datasource.metrics"></select>
+							<label>Metric Filter Id {{queryData.metricFilterId}}</label>
+							<select class="form-control" ng-model="queryData.metricFilterId" ng-options="o.id as o.name for o in queryData.datasource.filters"></select>
 							<label>Granularity {{queryData.granularity}}</label>
 							<select class="form-control" ng-model="queryData.granularity" ng-options="o.id as o.name for o in queryData.datasource.granularities"></select>
 							<!--
