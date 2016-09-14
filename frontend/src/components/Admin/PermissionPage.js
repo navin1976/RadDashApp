@@ -1,3 +1,5 @@
+/*eslint-disable react/prop-types  */
+
 import React from 'react';
 import PermissionTable from './PermissionTable';
 import DataSourceTable from './DataSourceTable';
@@ -57,12 +59,10 @@ class PermissionPage extends React.Component{
 	handleSave(event){
 		event.preventDefault();
 		console.log("saved");
-		this.props.permissionActions.assignPermission(this.props.roleId,this.state.currentPermissions)
-			.then(this.props.dataActions.assignDataSource(this.props.roleId,this.state.currentData))
-			.then(this.props.roleActions.loadAllRoles())
+		this.props.roleActions.updateRole(this.props.roleId, this.state.currentPermissions, this.state.currentData)
 			.then(toastr.success("Role updated!"))
 			.catch(error => {
-				toastr.error(error);
+				console.log(error);
 			});
 	}
 

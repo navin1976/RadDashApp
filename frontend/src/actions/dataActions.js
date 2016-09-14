@@ -1,12 +1,14 @@
 import * as types from './actionTypes';
 import * as APIConstant from './apiConstants';
+import DataApi from '../api/mockDataApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import * as axios from 'axios';
 
 export function loadAllDataSourcesSuccess(payload){
 	return {type:types.LOAD_ALL_DATASOURCES_SUCCESS,payload};
 }
-
+/*
+//API function
 export function loadAllDataSources(){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
@@ -17,6 +19,19 @@ export function loadAllDataSources(){
 			throw(error);
 		})
 	};
+}*/
+
+//non-api function
+export function loadAllDataSources(){
+	return function(dispatch){
+		dispatch(beginAjaxCall());
+		return DataApi.getDatasources().then(datasources => {
+			dispatch(loadAllDataSourcesSuccess(datasources));
+		}).catch(error => {
+			throw(error);
+		})
+
+	}
 }
 
 export function assignDataSource(role,sourceIds){

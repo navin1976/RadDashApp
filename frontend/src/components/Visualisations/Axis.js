@@ -1,9 +1,16 @@
+
 import React from 'react';
 import d3 from 'd3';
 
 export default class Axis extends React.Component{
+	constructor(props,context){
+		super(props,context);
+		this.state = {};
+	}
+
 	componentDidMount(){
 		this.renderAxis();
+		console.log("component mounted");
 	}
 
 	componentDidUpdate(){
@@ -20,3 +27,5 @@ export default class Axis extends React.Component{
 		return <g className="axis" ref="axis" transform={this.props.translate}></g>;
 	}
 }
+
+Axis.propTypes = {};

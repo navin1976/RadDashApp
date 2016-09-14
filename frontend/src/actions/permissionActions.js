@@ -2,11 +2,13 @@ import * as types from './actionTypes';
 import * as axios from 'axios';
 import * as APIConstant from './apiConstants';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import RoleApi from '../api/mockRolesApi';
 
 export function loadPermissionsSuccess(payload){
 	return {type: types.LOAD_PERMISSIONS_SUCCESS , payload};
 }
 
+/*
 export function loadPermissions(){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());
@@ -15,6 +17,19 @@ export function loadPermissions(){
 			dispatch(loadPermissionsSuccess(response.data));
 		}).then(function(){
 			//console.log(getState());
+		}).catch(function(err){
+			throw(err);
+		});
+	};
+}
+*/
+
+export function loadPermissions(){
+	return function(dispatch,getState){
+		dispatch(beginAjaxCall());
+		return RoleApi.fetchPermissions()
+		.then(function(response){
+			dispatch(loadPermissionsSuccess(response));
 		}).catch(function(err){
 			throw(err);
 		});

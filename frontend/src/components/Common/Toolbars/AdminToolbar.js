@@ -51,10 +51,9 @@ class AdminToolbar extends React.Component{
 
 	handleSave(event){
 		event.preventDefault();
-		this.setState({saving:true});
+		this.setState({saving:false});
 
 		this.props.actions.saveNewRole(this.state.role.title)
-			.then(this.setState({saving:false,open:false}))
 			.then(toastr.success("New role added!"))
 			.catch(error => {
 				toastr.error(error);

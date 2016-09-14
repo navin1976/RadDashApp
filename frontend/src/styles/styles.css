@@ -22,6 +22,8 @@ html, body, #app{
  }
 
 
+
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -315,12 +317,14 @@ html, body, #app{
 }
 
 .optionPane{
-    float:right;
-    height: 100%;
+    height: 1200px;
     background-color: white;
     width:400px; 
     z-index: 5;
     padding: 10px;
+    position: absolute;
+    top:0px;
+    right:0px;
 }
 
 .deleteRoleButton{
@@ -345,4 +349,11 @@ html, body, #app{
 
 .homeButton:hover{
     opacity: 1;
+}
+
+.cardPlus{
+    background:white;
+    z-index: 1;
+    margin-left: 50px;
+    margin-top: 50px;
 }

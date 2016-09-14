@@ -36,6 +36,7 @@ class AdminPage extends React.Component{
 	}
 
 	deleteHandler(roleId){
+		console.log(roleId);
 		this.props.actions.deleteRole(roleId)
 			.then(toastr.success("Role deleted!"))
 			.catch(error => {

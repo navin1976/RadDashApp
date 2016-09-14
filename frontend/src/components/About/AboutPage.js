@@ -2,7 +2,7 @@ import React from 'react';
 import Collapsible from 'react-collapsible';
 import {Accordion,Panel} from 'react-bootstrap';
 import Wrapper from '../Common/Wrapper';
-import GeneralToolbar from '../Common/Toolbars/GeneralToolbar'
+import GeneralToolbar from '../Common/Toolbars/GeneralToolbar';
 
 class AboutPage extends React.Component{
 	render(){
@@ -12,30 +12,27 @@ class AboutPage extends React.Component{
 			<Wrapper>
 				<div>
 					<Accordion>
-						<Panel header="Collapsible Group Item #1" eventKey="1">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to add custom dashboards" eventKey="1">
+						To add a custom dashboard, simply place yourself in the home page view and click one of the two main buttons. A popup will appear which will allow you to fill in some details for the dashboard. Click save or close to terminate action.
 						</Panel>
-						<Panel header="Collapsible Group Item #2" eventKey="2">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to add a custom widget" eventKey="2">
+To add a custom widget, simply place yourself in one of the custom dashboard and prompt the add widget button in the toolbar. You will be taken to the graph editor to select the appropriate data for your widget
 						</Panel>
-						<Panel header="Collapsible Group Item #3" eventKey="3">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to visualise a custom dashboard" eventKey="3">
+To visualize a custom dashboard, look into the navigation options and find the gray tone routes which are your currently loaded custom dashboards						</Panel>
+						<Panel header="How to view the current roles" eventKey="4">
+To view all the roles available to you, click on the admin tab and you will be redirected to the admin view.
 						</Panel>
-						<Panel header="Collapsible Group Item #4" eventKey="4">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to modify permissions" eventKey="5">
+To alter permissions, navigate to the admin tab and select the role you wish to modify by clicking ‘manage permissions’. Check the permissions and the data sources you wish the user to have access to.
 						</Panel>
-						<Panel header="Collapsible Group Item #5" eventKey="5">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to view the help page" eventKey="6">
+						You're on it
 						</Panel>
-						<Panel header="Collapsible Group Item #6" eventKey="6">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<Panel header="How to fill out graphing tool" eventKey="7">
+To create a new widget, fill out the option panel at the right of the screen and click preview; remember to fill out all of the fields or it will not work. Finally choose a width and a height for your widget (preferably no more than 600 pixels and no less than 200px in either orientation)						
 						</Panel>
-						<Panel header="Collapsible Group Item #7" eventKey="7">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-						</Panel>
-						<Panel header="Collapsible Group Item #8" eventKey="8">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-						</Panel>
+
 					</Accordion>
 				</div>
 			</Wrapper>

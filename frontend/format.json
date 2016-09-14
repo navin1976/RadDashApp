@@ -157,3 +157,134 @@ widget => {
 ]
 	}
 }
+
+
+[
+  {
+    "id": 1,
+    "description": "Creating a Default Dashboard"
+  },
+  {
+    "id": 2,
+    "description": "Accessing Roles"
+  },
+  {
+    "id": 3,
+    "description": "Accessing Permissions"
+  },
+  {
+    "id": 4,
+    "description": "Assigning Roles"
+  },
+  {
+    "id": 6,
+    "description": "Assigning Permissions"
+  },
+  {
+    "id": 7,
+    "description": "Accessing Data Sources"
+  },
+  {
+    "id": 8,
+    "description": "Assigning Data Sources"
+  },
+  {
+    "id": 9,
+    "description": "Creating Roles"
+  },
+  {
+    "id": 10,
+    "description": "Deleting Roles"
+  },
+  {
+    "id": 11,
+    "description": "Accessing Default Dashboard"
+  }
+]
+
+[
+  {
+    "datasourceIds": [
+      2
+    ],
+    "description": "admin",
+    "id": 1,
+    "permissionIds": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "datasourceIds": [
+      2
+    ],
+    "description": "radiologist",
+    "id": 2,
+    "permissionIds": [
+      4,
+      6,
+      7
+    ]
+  },
+  {
+    "datasourceIds": [
+      2
+    ],
+    "description": "radiographer",
+    "id": 3,
+    "permissionIds": [
+      3,
+      6,
+      7
+    ]
+  },
+  {
+    "datasourceIds": [
+      2
+    ],
+    "description": "nurse",
+    "id": 5,
+    "permissionIds": [
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "datasourceIds": [],
+    "description": "Chief",
+    "id": 7,
+    "permissionIds": []
+  },
+  {
+    "datasourceIds": [],
+    "description": "SubChief",
+    "id": 8,
+    "permissionIds": []
+  },
+  {
+    "datasourceIds": [],
+    "description": "Urologist",
+    "id": 9,
+    "permissionIds": []
+  },
+  {
+    "datasourceIds": [
+      2
+    ],
+    "description": "Hospital Manager",
+    "id": 10,
+    "permissionIds": [
+      10,
+      11
+    ]
+  }
+]

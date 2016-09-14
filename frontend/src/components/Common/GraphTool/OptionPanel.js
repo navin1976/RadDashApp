@@ -30,8 +30,13 @@ const saveStyle = {
 
 const graphStyle = {
 	float:"left",
-	width:"calc(100%-400px)",
-	backgroundColor:"red"
+	width:"100%",
+	"minWidth":"600px",
+	"maxWidth":"600px",
+	overflowx:"scroll",
+	display:"inline",
+	marginTop:"100px",
+	marginLeft:"100px"
 };
 
 class OptionPanel extends React.Component{
@@ -192,19 +197,33 @@ class OptionPanel extends React.Component{
 						enable={this.state.display}
 					/>
 				</div>
+				
 				<div className="optionPane">
+				
 					<OptionForm 
+					
 						graphOption={this.state.details} 
+						
 						onChange={this.updateGraphState}
+						
 						onDatasourceChange={this.updateSourceState} 
+						
 						errors = {this.state.error} 
+						
 						allAllowedSources = {this.state.allSources}
+						
 						allAlowedFilters = {this.state.activeFilter}
+						
 						allAlowedGranularities = {this.state.activeGranularities}
+						
 						allAlowedMetrics = {this.state.activeMetrics}
+						
 						allAlowedChartTypes = {this.state.allChartTypes}
+						
 						onSave = {this.saveGraph}
+						
 						onPreview = {this.previewGraph}
+						
 					/>
 				</div>
 			</div>

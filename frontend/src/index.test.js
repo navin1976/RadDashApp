@@ -1,7 +1,7 @@
 import expect from 'expect';
 
-describe('Our first test', () => {
-  it('should pass', () => {
+describe('Test framework operational', () => {
+  it('confirmed', () => {
     expect(true).toEqual(true);
   });
 });

@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React from 'react';
 import {BarChart,PieChart,LineChart} from 'react-d3-basic';
 
@@ -19,6 +21,11 @@ const deleteButton ={
 	backgroundColor:"#CD3333",
 	color:"white",
 	border:"none"
+};
+
+const preview = {
+	margin:"auto",
+	fontSize:"24px"
 };
 
 class GraphPreview extends React.Component{
@@ -48,7 +55,7 @@ class GraphPreview extends React.Component{
 		if(this.props.enable && this.props.data !== []){
 			if(this.props.info.chartType == 'BAR_CHART'){
 				retVar = (			
-				<div className="card">
+				<div className="cardPlus">
 					<BarChart 
 						title={this.props.info.title} 
 						data={this.props.data} 
@@ -63,7 +70,7 @@ class GraphPreview extends React.Component{
 				</div>);
 			}else{
 				retVar = (			
-				<div className="card">
+				<div className="cardPlus">
 					<LineChart 
 						title={this.props.info.title} 
 						data={this.props.data} 
@@ -79,7 +86,7 @@ class GraphPreview extends React.Component{
 			}
 				
 		}else{
-			retVar = <div>preview not available</div>;
+			retVar = <div style = {preview}>Preview not available</div>;
 		}
 
 		return(

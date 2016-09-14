@@ -8,20 +8,53 @@ export function loadAllRolesSuccess(data){
 	return {type: types.LOAD_ALL_ROLES_SUCCESS,data};
 }
 
-/*
+//Local get all roles function
 export function loadAllRoles(){
 	return function(dispatch,getState){
 		dispatch(beginAjaxCall());
 		return RoleApi.getAllRoles().then(data => {
 			dispatch(loadAllRolesSuccess(data));
-		}).then(()=>{
-			//console.log("Dispatched roles");
 		}).catch(error => {
 			throw(error);
 		});
 	};
-}*/
+}
+//Local
+export function saveNewRole(newRole){
+	return function(dispatch,getState){
+		dispatch(beginAjaxCall());
+		return RoleApi.addRole(newRole).then(data => {
+			dispatch(loadAllRolesSuccess(data));
+		}).catch(error => {
+			throw(error);
+		});
+	};
+}
+//Local
+export function deleteRole(roleId){
+	return function(dispatch,getState){
+		dispatch(beginAjaxCall());
+		return RoleApi.delete(roleId).then(data => {
+			dispatch(loadAllRolesSuccess(data));
+		}).catch(error => {
+			throw(error);
+		});
+	};
+}
 
+export function updateRole(roleId,p,d){
+	return function(dispatch,getState){
+		dispatch(beginAjaxCall());
+		return RoleApi.setOptions(roleId,p,d).then(data => {
+			dispatch(loadAllRolesSuccess(data));
+		}).catch(error => {
+			throw(error);
+		});
+	};
+}
+
+/*
+//API call
 export function saveNewRole(newRole){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
@@ -34,6 +67,7 @@ export function saveNewRole(newRole){
 	};
 }
 
+//API call
 export function deleteRole(roleId){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
@@ -46,7 +80,7 @@ export function deleteRole(roleId){
 	};
 }
 
-
+//API call for roles
 export function loadAllRoles(){
 	return function(dispatch){
 		dispatch(beginAjaxCall());
@@ -58,3 +92,4 @@ export function loadAllRoles(){
 		});
 	};
 }
+*/
