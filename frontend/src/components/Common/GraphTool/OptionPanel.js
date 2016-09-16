@@ -92,13 +92,13 @@ class OptionPanel extends React.Component{
 			let layObj;
 			if(len == 0){
 				layObj = Object.assign({},
-					{i:'1',x:0,y:0,w:Math.floor(this.state.details.width/40),h:Math.floor(this.state.details.height/40)}
+					{i:'1',x:0,y:0,w:Math.floor(this.state.details.width/70),h:Math.floor(this.state.details.height/70)}
 				);
 			}else{
 				const lastIndex = this.props.currDash.widgets[len-1].layout.i;
 				let newIndex = String(parseInt(lastIndex) + 1);
 				layObj = Object.assign({},
-					{i:newIndex,x:0,y:0,w:Math.floor(this.state.details.width/40),h:Math.floor(this.state.details.height/40)}
+					{i:newIndex,x:0,y:0,w:Math.floor(this.state.details.width/70),h:Math.floor(this.state.details.height/70)}
 				);
 			}
 			let res = Object.assign({},

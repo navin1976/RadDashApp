@@ -19,6 +19,7 @@ import {loadDashboards} from './actions/dashboardActions';
 import {loadAllDataSources} from './actions/dataActions';
 import {loadAllRoles} from './actions/roleActions';
 import {loadPermissions} from './actions/permissionActions';
+import {loadDefaultDashboard} from './actions/defaultDashboardActions';
 
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +33,7 @@ store.dispatch(loadDashboards());
 store.dispatch(loadAllDataSources());
 store.dispatch(loadAllRoles());
 store.dispatch(loadPermissions());
+store.dispatch(loadDefaultDashboard());
 
 render(
 	<Provider store={store}>

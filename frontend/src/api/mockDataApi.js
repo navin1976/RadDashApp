@@ -1,29 +1,49 @@
+/*eslint-disable no-mixed-spaces-and-tabs*/
 import delay from './delay';
 
 const data = [
   {
     "metric": 108750,
-    "date": "2010-2011"
+    "date": "2010"
   },
   {
     "metric": 380650,
-    "date": "2011-2012"
+    "date": "2011"
   },
   {
     "metric": 393695,
-    "date": "2012-2013"
+    "date": "2012"
   },
   {
     "metric": 418133,
-    "date": "2013-2014"
+    "date": "2013"
   },
   {
     "metric": 437033,
-    "date": "2014-2015"
+    "date": "2014"
   },
   {
     "metric": 311548,
-    "date": "2015-2016"
+    "date": "2015"
+  }
+];
+
+const data2 = [
+  {
+    "metric": 108750,
+    "date": "1"
+  },
+  {
+    "metric": 380650,
+    "date": "2"
+  },
+  {
+    "metric": 393695,
+    "date": "3"
+  },
+  {
+    "metric": 418133,
+    "date": "4"
   }
 ];
 
@@ -140,16 +160,32 @@ const datasources = [
     "id": 2,
     "name": "dummy_medical2"
   }
-]
+];
 
 class DataApi{
-	static getData(){
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve(Object.assign([], data));
-			}, delay);
-		});
-	}
+	static getData(d,widget){
+      return new Promise((resolve, reject) => {
+  			setTimeout(() => {
+          if(d=='1'){
+            resolve(Object.assign([], data));
+          }else if(d=='2' && widget=='1'){
+            resolve(Object.assign([], data2));
+          }else if(d=='2' && widget=='2'){
+            resolve(Object.assign([], data2));
+          }else if(d=='2' && widget=='3'){
+            resolve(Object.assign([], data2));
+          }else if(d=='3' && widget=='1'){
+            resolve(Object.assign([], data2));
+          }else if(d=='3' && widget=='2'){
+            resolve(Object.assign([], data2));
+          }else if(d=='3' && widget=='3'){
+            resolve(Object.assign([], data2));
+          }else{
+            resolve(Object.assign([], data2));
+          }
+  			}, delay);
+  		});
+    }
 
   static getDatasources(){
     return new Promise((resolve, reject) => {

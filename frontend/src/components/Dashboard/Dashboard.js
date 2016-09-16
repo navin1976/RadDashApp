@@ -37,6 +37,13 @@ const deleteButton ={
 	border:"none"
 };
 
+const deleteButtonAlt ={
+	backgroundColor:"#CD3333",
+	color:"white",
+	border:"none",
+	visibility:"hidden"
+};
+
 class Dashboard extends React.Component{
 	constructor(props,context){
 		super(props,context);
@@ -120,7 +127,7 @@ class Dashboard extends React.Component{
 				<div className="overlayCard">
 					<p style={paraStyles}> {widget.name} </p>
 					<div className="cardOptions">
-						<button style={deleteButton} disabled={dashId == "default"} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
+						<button style={dashId == "default"?deleteButtonAlt:deleteButton} disabled={dashId == "default"} onClick={()=>{this.deleteWidget(widget.layout.i,dashId);}}>X</button>
 					</div>
 				</div>
 			</div>
@@ -140,7 +147,7 @@ class Dashboard extends React.Component{
 			<div>
 				<DashboardToolbar id={id} />
 				<Wrapper>
-					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update}>
+					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update} isResizable={false} isDraggable={id!="default"}>
 						{this.props.dashboard.widgets.map(this.widgetMap)}
 					</ReactGridLayout>
 				</Wrapper>

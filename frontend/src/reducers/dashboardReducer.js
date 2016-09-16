@@ -4,9 +4,13 @@ import initialState from './initialState';
 const widget = (state,action) => {
 	switch(action.type){
 		case types.LOAD_DATA_SUCCESS:{
-			return Object.assign({},state,{
-				data: action.payload
-			});
+			if(state.layout.i == action.widgetIndex){
+				return Object.assign({},state,{
+					data: action.payload
+				});
+			}else{
+				return state;
+			}
 		}
 		case types.ADD_WIDGET_SUCCESS:{
 			return [...state,action.widgetDetails];
@@ -19,9 +23,13 @@ const widget = (state,action) => {
 const dash = (state,action) => {
 	switch(action.type){
 		case types.LOAD_DATA_SUCCESS:{
-			return Object.assign({},state,{
-				widgets: state.widgets.map(w => widget(w,action))
-			});
+			if(state.id == action.dashboardIndex){
+				return Object.assign({},state,{
+					widgets: state.widgets.map(w => widget(w,action))
+				});
+			}else{
+				return state;
+			}
 		}
 		case types.REMOVE_WIDGET_SUCCESS:{
 			if(state.id == action.dashId){

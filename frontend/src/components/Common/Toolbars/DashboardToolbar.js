@@ -48,8 +48,10 @@ class DashboardToolbar extends React.Component{
 	}
 
 	render(){
-		return(
-			<div className="toolbar">
+		let res;
+		if(this.props.id != 'default'){
+			res = (
+				<div>
 				<button id="logout">Logout</button>
 				<div id="toolbarButtonGroup">
 					<button className="toolbarButton" onClick={this.redirect}>Add widget</button>
@@ -61,6 +63,14 @@ class DashboardToolbar extends React.Component{
 						confirm = {this.deleteHandler}
 					/>
 				</Dialog>
+				</div>
+			);
+		}else{
+			res = (<button id="logout">Logout</button>);
+		}
+		return(
+			<div className="toolbar">
+				{res}
 			</div>
 		);
 	}
