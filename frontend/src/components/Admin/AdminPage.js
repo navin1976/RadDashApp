@@ -49,10 +49,6 @@ class AdminPage extends React.Component{
 			<div>
 				<AdminToolbar />
 				<Wrapper>
-					<div id="searchBar">
-						<div id="searchIcon" className="inline noSelect">S</div>
-						<input id="searchField" className="inline" type="text" onChange={this.changeHandler}/>
-					</div>
 					<RoleForm
 						allRoles={this.props.roles}
 						delhandler={this.deleteHandler}

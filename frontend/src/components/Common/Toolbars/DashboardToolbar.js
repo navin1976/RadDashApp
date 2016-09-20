@@ -56,6 +56,7 @@ class DashboardToolbar extends React.Component{
 				<div id="toolbarButtonGroup">
 					<button className="toolbarButton" onClick={this.redirect}>Add widget</button>
 					<button className="toolbarButton" onClick={this.handleButtonTap}>Delete</button>
+					<button className="toolbarButton" onClick={this.props.trigger}>Save</button>
 				</div>
 				<Dialog open={this.state.open} title="Delete a dashboard" onRequestClose = {this.handleRequestClose}>
 					<DeleteForm

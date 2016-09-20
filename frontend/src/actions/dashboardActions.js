@@ -9,6 +9,10 @@ export function removeWidget(dashId,widgetId){
 	return {type: types.REMOVE_WIDGET_SUCCESS,dashId,widgetId};
 }
 
+export function saveNewLayout(dashId,newLayout){
+	return {type: types.SAVE_NEW_LAYOUT, dashId, newLayout};
+}
+
 export function loadDashboardSuccess(dashboards){
 	return {type: types.LOAD_DASHBOARD_SUCCESS, dashboards};
 }

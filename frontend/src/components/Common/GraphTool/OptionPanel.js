@@ -7,6 +7,7 @@ import GraphPreview from './GraphPreview';
 import {bindActionCreators} from 'redux';
 import * as manageDashboardAction from '../../../actions/manageDashboardAction';
 import * as dashboardActions from '../../../actions/dashboardActions';
+import toastr from 'toastr';
 
 const prevStyle = {
 	border:"none",
@@ -110,6 +111,7 @@ class OptionPanel extends React.Component{
 				{data:this.props.tempData}
 			)
 			this.props.dashActions.addWidgetToDashboardSuccess(this.props.dashId,res);
+			toastr.success("Widget added!");
 		}
 
 	}

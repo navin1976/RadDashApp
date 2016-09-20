@@ -87,11 +87,6 @@ class PermissionPage extends React.Component{
 					current = {this.state.currentPermissions}
 					handler = {this.handlePermissionToggle}
 				/>
-
-				<div id="searchBar">
-					<div id="searchIcon" className="inline noSelect">S</div>
-					<input id="searchField" className="inline" type="text" onChange={this.changeHandler}/>
-				</div>
 				
 				<DataSourceTable
 					sources={this.props.dataSources}

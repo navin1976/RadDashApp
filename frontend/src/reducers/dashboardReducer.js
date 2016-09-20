@@ -15,6 +15,20 @@ const widget = (state,action) => {
 		case types.ADD_WIDGET_SUCCESS:{
 			return [...state,action.widgetDetails];
 		}
+		case types.SAVE_NEW_LAYOUT:{
+			let index;
+			for(let c=0; c<action.newLayout.length;c++){
+				console.log(action[c]);
+				if(state.layout.i == action.newLayout[c].i){
+					console.log('reached');
+					index = c;
+					break;
+				}
+			}
+			return Object.assign({},state,{
+				layout:action.newLayout[index]
+			});
+		}
 		default:
 			return state;
 	}
@@ -59,6 +73,15 @@ const dash = (state,action) => {
 				return state;
 			}
 		}
+		case types.SAVE_NEW_LAYOUT:{
+			if(state.id == action.dashId){
+				return Object.assign({},state,{
+					widgets: state.widgets.map(w => widget(w,action))
+				});
+			}else{
+				return state;
+			}
+		}
 		case types.ADD_WIDGET_SUCCESS:{
 			if(state.id == action.dashId){
 				return Object.assign({},state,{
@@ -85,6 +108,9 @@ export default function dashboardReducer(state = initialState.dashboards,action)
 			return state.map(d => dash(d,action));
 		}
 		case types.ADD_WIDGET_SUCCESS:{
+			return state.map(d => dash(d,action));
+		}
+		case types.SAVE_NEW_LAYOUT:{
 			return state.map(d => dash(d,action));
 		}
 		case types.REMOVE_DASHBOARD:{

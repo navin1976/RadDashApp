@@ -53,6 +53,8 @@ class Dashboard extends React.Component{
 
 		this.editWidget = this.editWidget.bind(this);
 		this.deleteWidget = this.deleteWidget.bind(this);
+		this.update = this.update.bind(this);
+		this.uploadNewLayout = this.uploadNewLayout.bind(this);
 	}
 	
 	editWidget(id,dashId,event){
@@ -65,8 +67,18 @@ class Dashboard extends React.Component{
 		this.props.actions.removeWidget(dashId,id);
 	}
 
-	widgetMap(widget, index){
+	update(newLayout){
+		this.setState({layout:newLayout});
+	}
 
+	uploadNewLayout(event){
+		event.preventDefault();
+		console.log(this.state.layout);
+		this.props.actions.saveNewLayout(this.props.dashboardId,this.state.layout);
+	}
+
+	widgetMap(widget, index){
+		let colors = ["red","blue","yellow","green","orange","purple","brown"];
 		let x = function(d){
 			return d.date;
 		};
@@ -75,12 +87,32 @@ class Dashboard extends React.Component{
 			return +d;
 		};
 
-		let chartSeries = [
-			{
-				field:'metric',
-				name:'Metric'
+		let name = function(d){
+			return d.name;
+		};
+
+		let value = function(d){
+			return +d.value;
+		};
+
+		let chartSeries;
+		if(widget.type !== 'PIE_CHART'){
+			chartSeries = [
+				{
+					field:'metric',
+					name:'Metric'
+				}
+			];
+		}else{
+			chartSeries = [];
+			for(let i = 0; i<widget.data.length; i++){
+				chartSeries.push(Object.assign({},
+					{"field":widget.data[i].name},
+					{"name":widget.data[i].name},
+					{"color":colors[i%colors.length]}
+				));
 			}
-		];
+		}
 
 		let xScale = 'ordinal';
 		const dashId = (this.props.dashboardId || "default");
@@ -115,6 +147,19 @@ class Dashboard extends React.Component{
 				/>);
 				break;
 			}
+			case 'PIE_CHART':{
+				chartItem = (<PieChart
+					title={widget.title}
+					data={widget.data}
+					showLegend={false}
+					width={widget.layout.w*70}
+					height={widget.layout.h*47}
+					chartSeries={chartSeries}
+					value = {value}
+					name = {name}
+				/>);
+				break;
+			}
 			default:{
 				chartItem = <p>Graph could not be loaded</p>;
 				break;
@@ -145,7 +190,7 @@ class Dashboard extends React.Component{
 
 		return (
 			<div>
-				<DashboardToolbar id={id} />
+				<DashboardToolbar id={id} trigger={this.uploadNewLayout} />
 				<Wrapper>
 					<ReactGridLayout className="layout" layout={displayLayout} cols={20} rowHeight={40} width={1500} onLayoutChange={this.update} isResizable={false} isDraggable={id!="default"}>
 						{this.props.dashboard.widgets.map(this.widgetMap)}

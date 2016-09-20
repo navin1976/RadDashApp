@@ -18,7 +18,8 @@ html, body, #app{
     background-color: #aaa;
 }
  body {
-    overflow-x: hidden;
+    overflow-x: scroll;
+    min-width: 1000px;
  }
 
 
@@ -174,7 +175,6 @@ html, body, #app{
 
 .toolbar{
     width:100%;
-    margin-left: 0px;
     height: 50px;
     background-color: white;
 }
@@ -317,7 +317,8 @@ html, body, #app{
 }
 
 .optionPane{
-    height: 1200px;
+    height: 100%;
+    overflow-y:scroll;
     background-color: white;
     width:400px; 
     z-index: 5;

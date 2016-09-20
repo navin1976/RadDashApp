@@ -29,19 +29,19 @@ const dashboards = [
 		author:"Admin",
 		widgets:[
 			{
-				"name":"examCountData",
+				"name":"Expenses in 2015 (in pounds)",
 				"description":"Line chart showing the count of exam instances in a given interval",
 				"layout":{i: '1', x: 0, y: 0, w: 6, h: 8},
 				"type":"BAR_CHART",
 				"request":true
 			},{
-				"name":"Percentage monthly budget used",
+				"name":"Staff distribution in radiology (300 total)",
 				"description":"Just some random description",
-				"layout":{i: '2', x: 6, y: 0, w: 4, h: 8},
-				"type":"BAR_CHART",
+				"layout":{i: '2', x: 6, y: 0, w: 6, h: 8},
+				"type":"PIE_CHART",
 				"request":true
 			},{
-				"name":"Expenses per month in first semester of 2015",
+				"name":"Cumulative expenses in first semester of 2015 for radiology (in pounds)",
 				"description":"Just some random description",
 				"layout":{i: '3', x: 0, y: 8, w: 10, h: 7},
 				"type":"LINE_CHART",
@@ -56,22 +56,22 @@ const dashboards = [
 		author:"Admin",
 		widgets:[
 			{
-				"name":"examCountData",
+				"name":"Number of patients yet to be treated this week",
 				"description":"Line chart showing the count of exam instances in a given interval",
-				"layout":{i: '1', x: 0, y: 0, w: 4, h: 8},
+				"layout":{i: '1', x: 0, y: 0, w: 6, h: 8},
 				"type":"BAR_CHART",
 				"request":true
 			},{
-				"name":"toBeDetermined",
+				"name":"Number of patients treated this week",
 				"description":"Just some random description",
-				"layout":{i: '2', x: 4, y: 0, w: 4, h: 8},
+				"layout":{i: '2', x: 6, y: 0, w: 6, h: 8},
 				"type":"BAR_CHART",
 				"request":true
 			},{
-				"name":"toBeDetermined",
+				"name":"Patient status for this week (1600 total)",
 				"description":"Just some random description",
-				"layout":{i: '3', x: 0, y: 8, w: 5, h: 7},
-				"type":"BAR_CHART",
+				"layout":{i: '3', x: 0, y: 8, w: 6, h: 7},
+				"type":"PIE_CHART",
 				"request":true
 			}
 		]
