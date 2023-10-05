@@ -8,7 +8,7 @@
     "chai": "^3.5.0",
     "chronoshift": "^0.4.6",
     "ejs": "2.3.4",
-    "grunt": "1.0.0",
+    "grunt": "1.5.3",
     "include-all": "~0.1.6",
     "mocha": "^3.0.2",
     "plywood": "^0.11.9",
